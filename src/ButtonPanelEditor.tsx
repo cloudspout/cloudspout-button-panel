@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { FormField, Select } from '@grafana/ui';
-import { PanelEditorProps, SelectableValue} from '@grafana/data';
+import { PanelEditorProps, SelectableValue } from '@grafana/data';
 import { ButtonPanelOptions } from './types';
 import { ButtonVariant } from '@grafana/ui/components/Button/types';
 
@@ -15,7 +15,7 @@ export class ButtonPanelEditor extends PureComponent<PanelEditorProps<ButtonPane
     this.props.onOptionsChange({ ...this.props.options, key: target.value });
   };
   onMethodChanged = ({ label, value, target }: any) => {
-   const x: SelectableValue<string> = {
+    const x: SelectableValue<string> = {
       value: value,
     };
     this.props.onOptionsChange({ ...this.props.options, method: x });

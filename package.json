@@ -3,8 +3,10 @@
   "version": "1.0.1",
   "description": "Panel for a single button",
   "scripts": {
+    "clean": "rm -rf dist/",
     "build": "grafana-toolkit plugin:build",
-    "zip": "npm-build-zip --source=dist --info=true",
+    "zip": "node zip.js",
+    "dist": "npm run build && npm run zip",
     "test": "grafana-toolkit plugin:test",
     "dev": "grafana-toolkit plugin:dev",
     "watch": "grafana-toolkit plugin:dev --watch",
@@ -32,18 +34,18 @@
   },
   "release-it": {
     "github": {
-      "release": true
+      "release": true,
+      "assets": ["dist/*.zip"]
     },
     "npm": {
       "publish": false
     },
     "hooks": {
-      "after:bump": {
-        "after:bump": [
-          "npm run buil",
-          "npm run zip"
+      "before:init": ["npm run clean"],
+      "after:bump":  [
+          "npm run dist"
         ]
-      }
+      
     }
   }
 }
