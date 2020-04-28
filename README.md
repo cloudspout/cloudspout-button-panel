@@ -8,6 +8,15 @@ A simple panel that shows only one button - to integrate with any kind of HTTP/R
 
 ![Screenshot](img/screenshot.png)
 
+## Install
+
+Use [Grafana's environment variable](https://grafana.com/docs/grafana/latest/installation/docker/#build-and-run-a-docker-image-with-pre-installed-plugins) to add this plugin to your installation:
+
+```
+GF_INSTALL_PLUGINS="https://github.com/cloudspout/cloudspout-button-panel/releases/download/1.0.2/cloudspout-button-panel.zip;cloudspout-button-panel"
+```
+
+
 ## Build
 First, install dependencies:
 
@@ -26,8 +35,13 @@ This will run linting tools and apply prettier fix.
 To build the plugin run:
 
 ```BASH
-npm run build && npm run zip
+npm run dist
+```
 
+## Deploy
+
+```BASH
+GITHUB_TOKEN=... npm run release
 ```
 
 ## License

@@ -11,9 +11,9 @@ export interface ButtonPanelOptions {
 }
 
 export const defaults: ButtonPanelOptions = {
-  key: 'API Key',
+  key: 'abc1234',
   text: 'The default button label',
-  url: 'http://www.example.com',
+  url: 'http://api.example.com/',
   method: undefined,
   type: undefined,
   variant: undefined,
