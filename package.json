@@ -1,6 +1,6 @@
 {
   "name": "cloudspout-button-panel",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Panel for a single button",
   "scripts": {
     "build": "grafana-toolkit plugin:build",
@@ -38,8 +38,11 @@
       "publish": false
     },
     "hooks": {
-      "after:bump": { 
-        "after:bump": ["npm run buil", "npm run zip"]
+      "after:bump": {
+        "after:bump": [
+          "npm run buil",
+          "npm run zip"
+        ]
       }
     }
   }
