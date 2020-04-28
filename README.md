@@ -3,7 +3,10 @@
 A simple panel that shows only one button - to integrate with any kind of HTTP/REST API:
 
 * Support `GET` and `POST` HTTP verb
-* Support API key via header or query parameter
+* Support API key via header `X-API-Key` or query parameter `?api-key`
+* Custom label text & Grafana template design
+
+![Screenshot](img/screenshot.png)
 
 ## Build
 First, install dependencies:
