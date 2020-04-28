@@ -1,10 +1,10 @@
 import React, { PureComponent } from 'react';
 import { FormField, Select } from '@grafana/ui';
-import { PanelEditorProps } from '@grafana/data';
-import { SimpleOptions } from './types';
-import { SelectableValue } from '@grafana/data';
+import { PanelEditorProps, SelectableValue} from '@grafana/data';
+import { ButtonPanelOptions } from './types';
+import { ButtonVariant } from '@grafana/ui/components/Button/types';
 
-export class SimpleEditor extends PureComponent<PanelEditorProps<SimpleOptions>> {
+export class ButtonPanelEditor extends PureComponent<PanelEditorProps<ButtonPanelOptions>> {
   onTextChanged = ({ target }: any) => {
     this.props.onOptionsChange({ ...this.props.options, text: target.value });
   };
@@ -15,13 +15,13 @@ export class SimpleEditor extends PureComponent<PanelEditorProps<SimpleOptions>>
     this.props.onOptionsChange({ ...this.props.options, key: target.value });
   };
   onMethodChanged = ({ label, value, target }: any) => {
-    const x: SelectableValue<string> = {
+   const x: SelectableValue<string> = {
       value: value,
     };
     this.props.onOptionsChange({ ...this.props.options, method: x });
   };
   onVariantChanged = ({ label, value, target }: any) => {
-    const x: SelectableValue<string> = {
+    const x: SelectableValue<ButtonVariant> = {
       value: value,
     };
     this.props.onOptionsChange({ ...this.props.options, variant: x });
@@ -67,6 +67,9 @@ export class SimpleEditor extends PureComponent<PanelEditorProps<SimpleOptions>>
           options={[
             { label: 'Primary', value: 'primary' },
             { label: 'Secondary', value: 'secondary' },
+            { label: 'Danger', value: 'danger' },
+            { label: 'Inverse', value: 'inverse' },
+            { label: 'Transparent', value: 'transparent' },
             { label: 'Destructive', value: 'destructive' },
             { label: 'Link', value: 'link' },
           ]}

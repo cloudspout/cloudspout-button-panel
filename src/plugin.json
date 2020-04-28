@@ -1,12 +1,12 @@
 {
   "type": "panel",
-  "name": "button-panel",
-  "id": "derjust-button-panel",
+  "name": "Button Panel",
+  "id": "cloudspout-button-panel",
   "info": {
     "description": "Panel for a single button",
     "author": {
       "name": "Sebastian J.",
-      "url": ""
+      "url": "https://github.com/derjust"
     },
     "keywords": [],
     "logos": {
@@ -16,11 +16,11 @@
     "links": [
       {
         "name": "Website",
-        "url": "https://github.com/grafana/simple-react-panel"
+        "url": "https://github.com/cloudspout/cloudspout-button-panel"
       },
       {
         "name": "License",
-        "url": "https://github.com/grafana/simple-react-panel/blob/master/LICENSE"
+        "url": "https://github.com/cloudspout/cloudspout-button-panel/blob/master/LICENSE"
       }
     ],
     "screenshots": [],

@@ -1,5 +1,9 @@
 # Simple Button Panel
-to show how you can create a basic visualization plugin.
+
+A simple panel that shows only one button - to integrate with any kind of HTTP/REST API:
+
+* Support `GET` and `POST` HTTP verb
+* Support API key via header or query parameter
 
 ## Build
 First, install dependencies:
