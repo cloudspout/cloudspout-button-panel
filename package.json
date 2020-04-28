@@ -1,6 +1,6 @@
 {
   "name": "cloudspout-button-panel",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Panel for a single button",
   "scripts": {
     "clean": "rm -rf dist/",
@@ -35,17 +35,20 @@
   "release-it": {
     "github": {
       "release": true,
-      "assets": ["dist/*.zip"]
+      "assets": [
+        "dist/*.zip"
+      ]
     },
     "npm": {
       "publish": false
     },
     "hooks": {
-      "before:init": ["npm run clean"],
-      "after:bump":  [
-          "npm run dist"
-        ]
-      
+      "before:init": [
+        "npm run clean"
+      ],
+      "after:bump": [
+        "npm run dist"
+      ]
     }
   }
 }
