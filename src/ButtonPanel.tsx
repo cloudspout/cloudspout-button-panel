@@ -1,11 +1,11 @@
 import React, { PureComponent } from 'react';
 import { Button } from '@grafana/ui';
 import { PanelProps } from '@grafana/data';
-import { SimpleOptions, PanelState } from 'types';
+import { ButtonPanelOptions, ButtonPanelState } from 'types';
 
-interface Props extends PanelProps<SimpleOptions> {}
+interface Props extends PanelProps<ButtonPanelOptions> {}
 
-export class SimplePanel extends PureComponent<Props, PanelState> {
+export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
   constructor(props: any) {
     super(props);
     this.init();
@@ -28,7 +28,7 @@ export class SimplePanel extends PureComponent<Props, PanelState> {
     };
     const exeucte = () => {
       this.setState({ api_call: 'IN_PROGRESS' });
-      console.log(options.method, ' to ', options.url, ' with key as ', options.type);
+      console.log(options.method, ' to ', options.url, ' with key as ', options.type?.value);
 
       const url = new URL(options.url);
 
@@ -55,25 +55,22 @@ export class SimplePanel extends PureComponent<Props, PanelState> {
       }
 
       fetch(url.toString(), fetchOpts)
-        .then(data => {
-          if (data.ok) {
+        .then(response => {
+          if (response.ok) {
             this.setState({
               api_call: 'SUCCESS',
-              response: data.toString(),
+              response: response.statusText,
             });
-            console.log('Requeste successful: ', data);
+            console.log('Requeste successful: ', response);
           } else {
-            this.setState({
-              api_call: 'ERROR',
-              response: data.toString(),
-            });
-            console.log('Requeste failed: ', data);
+            console.log('Requeste failed: ', response);
+            throw new Error(response.status + response.statusText);
           }
         })
         .catch(e => {
           this.setState({
             api_call: 'ERROR',
-            response: e.toString(),
+            response: e.message,
           });
           console.error('Request error: ', e);
         })

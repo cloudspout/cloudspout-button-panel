@@ -1,12 +1,21 @@
 # Simple Button Panel
 
-Grafana plugin to have a simple button with abilities to call REST APIs with API keys.
+A simple panel that shows only one button - to integrate with any kind of HTTP/REST API:
 
-## Installation
+* Support `GET` and `POST` HTTP verb
+* Support API key via header `X-API-Key` or query parameter `?api-key`
+* Custom label text & Grafana template design
+
+![Screenshot](img/screenshot.png)
+
+## Install
+
+Use [Grafana's environment variable](https://grafana.com/docs/grafana/latest/installation/docker/#build-and-run-a-docker-image-with-pre-installed-plugins) to add this plugin to your installation:
 
 ```
-GF_INSTALL_PLUGINS=https://cloudspout.bintray.com/cloudspout-button-panel/cloudspout-button-panel_1.0.5.zip
+GF_INSTALL_PLUGINS="https://github.com/cloudspout/cloudspout-button-panel/releases/download/1.0.3/cloudspout-button-panel.zip;cloudspout-button-panel"
 ```
+
 
 ## Build
 First, install dependencies:
@@ -32,7 +41,13 @@ docker run -d -p 3000:3000 -v "$(pwd)"/dist:/var/lib/grafana/plugins/cloudspout-
 To build the plugin run:
 
 ```BASH
-npm run build && npm run zip
+npm run dist
+```
+
+## Deploy
+
+```BASH
+GITHUB_TOKEN=... npm run release
 ```
 
 ## License

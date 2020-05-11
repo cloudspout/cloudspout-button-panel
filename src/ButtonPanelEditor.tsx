@@ -1,10 +1,9 @@
 import React, { PureComponent } from 'react';
 import { FormField, Select } from '@grafana/ui';
 import { PanelEditorProps } from '@grafana/data';
-import { SimpleOptions } from './types';
-import { SelectableValue } from '@grafana/data';
+import { ButtonPanelOptions } from './types';
 
-export class SimpleEditor extends PureComponent<PanelEditorProps<SimpleOptions>> {
+export class ButtonPanelEditor extends PureComponent<PanelEditorProps<ButtonPanelOptions>> {
   onTextChanged = ({ target }: any) => {
     this.props.onOptionsChange({ ...this.props.options, text: target.value });
   };
@@ -15,22 +14,22 @@ export class SimpleEditor extends PureComponent<PanelEditorProps<SimpleOptions>>
     this.props.onOptionsChange({ ...this.props.options, key: target.value });
   };
   onMethodChanged = ({ label, value, target }: any) => {
-    const x: SelectableValue<string> = {
-      value: value,
-    };
-    this.props.onOptionsChange({ ...this.props.options, method: x });
+    this.props.onOptionsChange({ ...this.props.options, method: {
+      value,
+      label,
+    }});
   };
   onVariantChanged = ({ label, value, target }: any) => {
-    const x: SelectableValue<string> = {
-      value: value,
-    };
-    this.props.onOptionsChange({ ...this.props.options, variant: x });
+    this.props.onOptionsChange({ ...this.props.options, variant: {
+      value,
+      label
+    }});
   };
   onTypeChanged = ({ label, value, target }: any) => {
-    const x: SelectableValue<string> = {
-      value: value,
-    };
-    this.props.onOptionsChange({ ...this.props.options, type: x });
+    this.props.onOptionsChange({ ...this.props.options, type: {
+      value,
+      label
+    }});
   };
 
   render() {
@@ -41,11 +40,12 @@ export class SimpleEditor extends PureComponent<PanelEditorProps<SimpleOptions>>
         <h5 className="section-heading">Settings</h5>
 
         <Select
+        allowCustomValue
           onChange={this.onMethodChanged}
           value={options.method}
           options={[
-            { label: 'GET', value: 'GET' },
-            { label: 'POST', value: 'POST' },
+            { label: 'GET', value: 'GET'},
+            { label: 'POST', value: 'POST'},
           ]}
         />
 
@@ -55,8 +55,8 @@ export class SimpleEditor extends PureComponent<PanelEditorProps<SimpleOptions>>
           onChange={this.onTypeChanged}
           value={options.type}
           options={[
-            { label: 'Header', value: 'HEADER' },
-            { label: 'Query', value: 'QUERY' },
+            { label: 'Header', value: 'HEADER', description: 'Send the API key as `X-API-Key` request HTTP header'},
+            { label: 'Query', value: 'QUERY', description: 'Send the API key as `?api-key=...` query parameter' },
           ]}
         />
         <FormField label="API Key" labelWidth={5} inputWidth={20} type="text" onChange={this.onKeyChanged} value={options.key || ''} />
@@ -67,6 +67,9 @@ export class SimpleEditor extends PureComponent<PanelEditorProps<SimpleOptions>>
           options={[
             { label: 'Primary', value: 'primary' },
             { label: 'Secondary', value: 'secondary' },
+            { label: 'Danger', value: 'danger' },
+            { label: 'Inverse', value: 'inverse' },
+            { label: 'Transparent', value: 'transparent' },
             { label: 'Destructive', value: 'destructive' },
             { label: 'Link', value: 'link' },
           ]}

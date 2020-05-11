@@ -1,8 +1,9 @@
 import { PanelPlugin } from '@grafana/data';
-import { SimpleOptions, defaults } from './types';
-import { SimplePanel } from './SimplePanel';
-import { SimpleEditor } from './SimpleEditor';
+import { ButtonPanelOptions, defaults } from './types';
+import { ButtonPanel } from './ButtonPanel';
+import { ButtonPanelEditor } from './ButtonPanelEditor';
 
 import 'static/button-panel.css';
 
-export const plugin = new PanelPlugin<SimpleOptions>(SimplePanel).setDefaults(defaults).setEditor(SimpleEditor);
+export const plugin = new PanelPlugin<ButtonPanelOptions>(ButtonPanel).setDefaults(defaults).setEditor(ButtonPanelEditor);
+
