@@ -14,22 +14,31 @@ export class ButtonPanelEditor extends PureComponent<PanelEditorProps<ButtonPane
     this.props.onOptionsChange({ ...this.props.options, key: target.value });
   };
   onMethodChanged = ({ label, value, target }: any) => {
-    this.props.onOptionsChange({ ...this.props.options, method: {
-      value,
-      label,
-    }});
+    this.props.onOptionsChange({
+      ...this.props.options,
+      method: {
+        value,
+        label,
+      },
+    });
   };
   onVariantChanged = ({ label, value, target }: any) => {
-    this.props.onOptionsChange({ ...this.props.options, variant: {
-      value,
-      label
-    }});
+    this.props.onOptionsChange({
+      ...this.props.options,
+      variant: {
+        value,
+        label,
+      },
+    });
   };
   onTypeChanged = ({ label, value, target }: any) => {
-    this.props.onOptionsChange({ ...this.props.options, type: {
-      value,
-      label
-    }});
+    this.props.onOptionsChange({
+      ...this.props.options,
+      type: {
+        value,
+        label,
+      },
+    });
   };
 
   render() {
@@ -40,12 +49,12 @@ export class ButtonPanelEditor extends PureComponent<PanelEditorProps<ButtonPane
         <h5 className="section-heading">Settings</h5>
 
         <Select
-        allowCustomValue
+          allowCustomValue
           onChange={this.onMethodChanged}
           value={options.method}
           options={[
-            { label: 'GET', value: 'GET'},
-            { label: 'POST', value: 'POST'},
+            { label: 'GET', value: 'GET' },
+            { label: 'POST', value: 'POST' },
           ]}
         />
 
@@ -55,7 +64,7 @@ export class ButtonPanelEditor extends PureComponent<PanelEditorProps<ButtonPane
           onChange={this.onTypeChanged}
           value={options.type}
           options={[
-            { label: 'Header', value: 'HEADER', description: 'Send the API key as `X-API-Key` request HTTP header'},
+            { label: 'Header', value: 'HEADER', description: 'Send the API key as `X-API-Key` request HTTP header' },
             { label: 'Query', value: 'QUERY', description: 'Send the API key as `?api-key=...` query parameter' },
           ]}
         />
