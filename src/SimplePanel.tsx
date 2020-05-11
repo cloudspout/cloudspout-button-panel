@@ -88,7 +88,7 @@ export class SimplePanel extends PureComponent<Props, PanelState> {
     const apiStateIcon = () => {
       switch (this.state.api_call) {
         case 'IN_PROGRESS':
-          return 'fa fa-spinner';
+          return 'fa fa-spinner spinning';
         case 'SUCCESS':
           return 'fa fa-check';
         case 'ERROR':
