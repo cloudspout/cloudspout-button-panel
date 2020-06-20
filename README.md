@@ -10,10 +10,23 @@ A simple panel that shows only one button - to integrate with any kind of HTTP/R
 
 ## Install
 
+### CLI
+
+Via the [Grafana CLI](https://grafana.com/docs/grafana/latest/administration/cli/):
+
+```BASH
+$ grafana-cli --pluginUrl https://github.com/cloudspout/cloudspout-button-panel/releases/download/7.0.0/cloudspout-button-panel.zip \
+  plugins install cloudspout-button-panel
+```
+
+### Docker
+
 Use [Grafana's environment variable](https://grafana.com/docs/grafana/latest/installation/docker/#build-and-run-a-docker-image-with-pre-installed-plugins) to add this plugin to your installation:
 
-```
-GF_INSTALL_PLUGINS="https://github.com/cloudspout/cloudspout-button-panel/releases/download/1.0.3/cloudspout-button-panel.zip;cloudspout-button-panel"
+```BASH
+$ docker run -it \
+  -e "GF_INSTALL_PLUGINS=https://github.com/cloudspout/cloudspout-button-panel/releases/download/7.0.0/cloudspout-button-panel.zip;cloudspout-button-panel" \
+   grafana/grafana:7.0.3
 ```
 
 
