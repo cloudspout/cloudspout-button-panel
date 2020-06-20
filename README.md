@@ -6,7 +6,13 @@ A simple panel that shows only one button - to integrate with any kind of HTTP/R
 * Support API key via header `X-API-Key` or query parameter `?api-key`
 * Custom label text & Grafana template design
 
+## Configuration
+
 ![Screenshot](img/screenshot.png)
+
+## Usage
+
+![Screencast](img/screencast.gif)
 
 ## Install
 
@@ -15,7 +21,7 @@ A simple panel that shows only one button - to integrate with any kind of HTTP/R
 Via the [Grafana CLI](https://grafana.com/docs/grafana/latest/administration/cli/):
 
 ```BASH
-$ grafana-cli --pluginUrl https://github.com/cloudspout/cloudspout-button-panel/releases/download/7.0.0/cloudspout-button-panel.zip \
+$ grafana-cli --pluginUrl https://github.com/cloudspout/cloudspout-button-panel/releases/download/7.0.1/cloudspout-button-panel.zip \
   plugins install cloudspout-button-panel
 ```
 
@@ -24,8 +30,8 @@ $ grafana-cli --pluginUrl https://github.com/cloudspout/cloudspout-button-panel
 Use [Grafana's environment variable](https://grafana.com/docs/grafana/latest/installation/docker/#build-and-run-a-docker-image-with-pre-installed-plugins) to add this plugin to your installation:
 
 ```BASH
-$ docker run -it \
-  -e "GF_INSTALL_PLUGINS=https://github.com/cloudspout/cloudspout-button-panel/releases/download/7.0.0/cloudspout-button-panel.zip;cloudspout-button-panel" \
+$ docker run -p 3000:3000 -it \
+  -e "GF_INSTALL_PLUGINS=https://github.com/cloudspout/cloudspout-button-panel/releases/download/7.0.1/cloudspout-button-panel.zip;cloudspout-button-panel" \
    grafana/grafana:7.0.3
 ```
 
