@@ -18,16 +18,17 @@ GF_INSTALL_PLUGINS="https://github.com/cloudspout/cloudspout-button-panel/releas
 
 
 ## Build
-First, install dependencies:
+First, install dependencies.
+Node 12.x is required
 
 ```BASH
-npm install
+yarn install
 ```
 
 To work with this plugin run:
 
 ```BASH
-npm run watch
+yarn watch
 ```
 
 This will run linting tools and apply prettier fix.

@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
-import { FormField, Select } from '@grafana/ui';
+import { Select } from '@grafana/ui';
+import { Field, Input } from '@grafana/ui';
 import { PanelEditorProps } from '@grafana/data';
 import { ButtonPanelOptions } from './types';
 
@@ -58,7 +59,9 @@ export class ButtonPanelEditor extends PureComponent<PanelEditorProps<ButtonPane
           ]}
         />
 
-        <FormField label="URL" labelWidth={5} inputWidth={20} type="text" onChange={this.onURLChanged} value={options.url || ''} />
+        <Field label="URL" description="The URL to trigger">
+          <Input required onChange={this.onURLChanged} value={options.url || ''} />
+        </Field>
 
         <Select
           onChange={this.onTypeChanged}
@@ -68,7 +71,9 @@ export class ButtonPanelEditor extends PureComponent<PanelEditorProps<ButtonPane
             { label: 'Query', value: 'QUERY', description: 'Send the API key as `?api-key=...` query parameter' },
           ]}
         />
-        <FormField label="API Key" labelWidth={5} inputWidth={20} type="text" onChange={this.onKeyChanged} value={options.key || ''} />
+        <Field label="API Key" description="The API key sent with the request">
+          <Input onChange={this.onKeyChanged} value={options.key || ''} />
+        </Field>
 
         <Select
           onChange={this.onVariantChanged}
@@ -83,7 +88,9 @@ export class ButtonPanelEditor extends PureComponent<PanelEditorProps<ButtonPane
             { label: 'Link', value: 'link' },
           ]}
         />
-        <FormField label="Text" labelWidth={5} inputWidth={20} type="text" onChange={this.onTextChanged} value={options.text || ''} />
+        <Field label="Text" description="The description of the button">
+          <Input onChange={this.onTextChanged} value={options.text || ''} />
+        </Field>
       </div>
     );
   }

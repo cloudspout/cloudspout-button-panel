@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { Button } from '@grafana/ui';
 import { PanelProps } from '@grafana/data';
 import { ButtonPanelOptions, ButtonPanelState } from 'types';
+import { IconName } from '@grafana/ui';
 
 interface Props extends PanelProps<ButtonPanelOptions> {}
 
@@ -82,23 +83,29 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
         });
     };
 
-    const apiStateIcon = () => {
+    const apiStateIcon = (): IconName => {
       switch (this.state.api_call) {
         case 'IN_PROGRESS':
-          return 'fa fa-spinner spinning';
+          return 'fa fa-spinner';
         case 'SUCCESS':
-          return 'fa fa-check';
+          return 'check';
         case 'ERROR':
-          return 'fa fa-exclamation-triangle';
+          return 'exclamation-triangle';
         case 'READY':
         default:
-          return 'fa fa-cog';
+          return 'cog';
       }
     };
 
     return (
       <div style={center}>
-        <Button variant={this.props.options.variant?.value} title={this.state.response} size="lg" icon={apiStateIcon()} onClick={exeucte}>
+        <Button
+          variant={this.props.options.variant?.value}
+          title={this.state.response}
+          size="lg"
+          icon={apiStateIcon()}
+          onClick={exeucte}
+        >
           {options.text}
         </Button>
       </div>

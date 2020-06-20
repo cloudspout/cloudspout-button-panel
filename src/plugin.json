@@ -5,10 +5,12 @@
   "info": {
     "description": "Panel for a single button",
     "author": {
-      "name": "Sebastian J.",
-      "url": "https://github.com/derjust"
+      "name": "CloudSpout LLC",
+      "url": "https://github.com/cloudspout/cloudspout-button-panel/"
     },
-    "keywords": [],
+    "keywords": [
+      
+    ],
     "logos": {
       "small": "img/logo.svg",
       "large": "img/logo.svg"

@@ -1,5 +1,5 @@
 import { SelectableValue } from '@grafana/data';
-import { ButtonVariant } from '@grafana/ui/components/Button/types';
+import { ButtonVariant } from '@grafana/ui';
 
 export interface ButtonPanelOptions {
   text: string;
