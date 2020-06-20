@@ -41,9 +41,6 @@
       "publish": false
     },
     "hooks": {
-      "before:init": [
-        "npm run clean"
-      ],
       "after:bump": [
         "npm run dist"
       ]
