@@ -97,12 +97,22 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
       }
     };
 
+    const apiStateClassName = () => {
+      switch (this.state.api_call) {
+        case 'IN_PROGRESS':
+          return 'spinning';
+        default:
+          return '';
+      }
+    };
+
     return (
       <div style={center}>
         <Button
           variant={this.props.options.variant?.value}
           title={this.state.response}
           size="lg"
+          className={apiStateClassName()}
           icon={apiStateIcon()}
           onClick={exeucte}
         >

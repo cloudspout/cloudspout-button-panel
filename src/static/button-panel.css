@@ -2,6 +2,6 @@
     from { transform: scale(1) rotate(0deg); }
     to { transform: scale(1) rotate(360deg); }
 }
-.spinning {
+.spinning > * > *:first-child {
     animation: spin 1s infinite linear;
 }
