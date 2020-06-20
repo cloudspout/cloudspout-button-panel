@@ -6,7 +6,7 @@ const cwd = 'dist/'
 const folderPath = '**';
 const out = 'cloudspout-button-panel.zip';
 
-glob(folderPath, {cwd}, (err, files) => {
+glob(folderPath, {cwd, nodir:true}, (err, files) => {
 
     if (err) {
         console.error(err);
