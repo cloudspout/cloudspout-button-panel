@@ -16,7 +16,6 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
     this.state = {
       api_call: 'READY',
       response: '',
-      resetInterval: undefined,
     };
   }
 
@@ -47,6 +46,7 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
         //referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
       };
 
+      debugger;
       if (options.type?.value === 'HEADER') {
         requestHeaders.set('X-API-Key', options.key);
       } else if (options.type?.value === 'QUERY') {
@@ -74,12 +74,6 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
             response: e.message,
           });
           console.error('Request error: ', e);
-        })
-        .finally(() => {
-          /*
-          this.state.resetInterval && clearInterval(this.state.resetInterval);
-          this.setState({resetInterval: window.setInterval(() => this.init(), 1000)});
-          */
         });
     };
 
