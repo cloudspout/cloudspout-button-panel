@@ -49,45 +49,53 @@ export class ButtonPanelEditor extends PureComponent<PanelEditorProps<ButtonPane
       <div className="section gf-form-group">
         <h5 className="section-heading">Settings</h5>
 
-        <Select
-          allowCustomValue
-          onChange={this.onMethodChanged}
-          value={options.method}
-          options={[
-            { label: 'GET', value: 'GET' },
-            { label: 'POST', value: 'POST' },
-          ]}
-        />
+        <Field label="HTTP method" description="HTTP method used to communicate with the remote site">
+          <Select
+            allowCustomValue
+            onChange={this.onMethodChanged}
+            value={options.method}
+            options={[
+              { label: 'GET', value: 'GET' },
+              { label: 'POST', value: 'POST' },
+            ]}
+          />
+        </Field>
 
         <Field label="URL" description="The URL to trigger">
           <Input required onChange={this.onURLChanged} value={options.url || ''} />
         </Field>
 
-        <Select
-          onChange={this.onTypeChanged}
-          value={options.type}
-          options={[
-            { label: 'Header', value: 'HEADER', description: 'Send the API key as `X-API-Key` request HTTP header' },
-            { label: 'Query', value: 'QUERY', description: 'Send the API key as `?api-key=...` query parameter' },
-          ]}
-        />
+        <Field label="Type" description="Type defining how the options are sent to the server">
+          <Select
+            onChange={this.onTypeChanged}
+            value={options.type}
+            options={[
+              { label: 'Header', value: 'HEADER', description: 'Send the API key as `X-API-Key` request HTTP header' },
+              { label: 'Query', value: 'QUERY', description: 'Send the API key as `?api-key=...` query parameter' },
+            ]}
+          />
+        </Field>
+
         <Field label="API Key" description="The API key sent with the request">
           <Input onChange={this.onKeyChanged} value={options.key || ''} />
         </Field>
 
-        <Select
-          onChange={this.onVariantChanged}
-          value={options.variant}
-          options={[
-            { label: 'Primary', value: 'primary' },
-            { label: 'Secondary', value: 'secondary' },
-            { label: 'Danger', value: 'danger' },
-            { label: 'Inverse', value: 'inverse' },
-            { label: 'Transparent', value: 'transparent' },
-            { label: 'Destructive', value: 'destructive' },
-            { label: 'Link', value: 'link' },
-          ]}
-        />
+        <Field label="Variant" description="Button variant used to render">
+          <Select
+            onChange={this.onVariantChanged}
+            value={options.variant}
+            options={[
+              { label: 'Primary', value: 'primary' },
+              { label: 'Secondary', value: 'secondary' },
+              { label: 'Danger', value: 'danger' },
+              { label: 'Inverse', value: 'inverse' },
+              { label: 'Transparent', value: 'transparent' },
+              { label: 'Destructive', value: 'destructive' },
+              { label: 'Link', value: 'link' },
+            ]}
+          />
+        </Field>
+
         <Field label="Text" description="The description of the button">
           <Input onChange={this.onTextChanged} value={options.text || ''} />
         </Field>
