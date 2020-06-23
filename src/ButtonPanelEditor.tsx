@@ -87,9 +87,6 @@ export class ButtonPanelEditor extends PureComponent<PanelEditorProps<ButtonPane
             options={[
               { label: 'Primary', value: 'primary' },
               { label: 'Secondary', value: 'secondary' },
-              { label: 'Danger', value: 'danger' },
-              { label: 'Inverse', value: 'inverse' },
-              { label: 'Transparent', value: 'transparent' },
               { label: 'Destructive', value: 'destructive' },
               { label: 'Link', value: 'link' },
             ]}
