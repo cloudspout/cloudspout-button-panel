@@ -1,4 +1,4 @@
-# CloudSpout Button Panel
+# Button Panel
 
 It provides a simple Grafana panel that shows only one button - to integrate with any kind of HTTP/REST API:
 * Support GET and POST HTTP verb
@@ -9,11 +9,11 @@ It provides a simple Grafana panel that shows only one button - to integrate wit
 
 ## Configuration
 
-![Screenshot](img/screenshot.png)
+![Screenshot](https://github.com/cloudspout/cloudspout-button-panel/raw/main/img/screenshot.png)
 
 ## Usage
 
-![Screencast](img/screencast.gif)
+![Screencast](https://github.com/cloudspout/cloudspout-button-panel/raw/main/img/screencast.gif)
 
 ## Install
 
