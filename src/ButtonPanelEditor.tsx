@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { Field, IconButton, Input, Select, HorizontalGroup, VerticalGroup } from '@grafana/ui';
-import { DataFrame, FieldType, MutableDataFrame, PanelEditorProps } from '@grafana/data';
+import { PanelEditorProps } from '@grafana/data';
 import { ButtonPanelOptions } from './types';
 
 export class ButtonPanelEditor extends PureComponent<PanelEditorProps<ButtonPanelOptions>> {
@@ -53,15 +53,6 @@ export class ButtonPanelEditor extends PureComponent<PanelEditorProps<ButtonPane
         value,
         label,
       },
-    });
-  };
-
-  paramsModel = (): DataFrame => {
-    return new MutableDataFrame({
-      fields: [
-        { name: 'Name', type: FieldType.string, values: Array.from(this.props.options.params.keys()) },
-        { name: 'Value', type: FieldType.string, values: Array.from(this.props.options.params.values()) },
-      ],
     });
   };
 
