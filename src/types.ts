@@ -4,18 +4,23 @@ import { ButtonVariant } from '@grafana/ui';
 export interface ButtonPanelOptions {
   text: string;
   url: string;
-  key: string;
+  params: Array<[string, string]>;
+  newParamName: string;
+  newParamValue: string;
+
   method?: SelectableValue<string>;
   type?: SelectableValue<string>;
   variant?: SelectableValue<ButtonVariant>;
 }
 
 export const defaults: ButtonPanelOptions = {
-  key: 'abc1234',
   text: 'The default button label',
   url: 'http://api.example.com/',
   method: undefined,
   type: undefined,
+  params: [],
+  newParamName: '',
+  newParamValue: '',
   variant: undefined,
 };
 

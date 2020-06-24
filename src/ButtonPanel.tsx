@@ -1,8 +1,7 @@
 import React, { PureComponent } from 'react';
-import { Button } from '@grafana/ui';
+import { Button, IconName } from '@grafana/ui';
 import { PanelProps } from '@grafana/data';
 import { ButtonPanelOptions, ButtonPanelState } from 'types';
-import { IconName } from '@grafana/ui';
 
 interface Props extends PanelProps<ButtonPanelOptions> {}
 
@@ -28,7 +27,7 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
     };
     const exeucte = () => {
       this.setState({ api_call: 'IN_PROGRESS' });
-      console.log(options.method, ' to ', options.url, ' with key as ', options.type?.value);
+      console.log(options.method?.value, ' to ', options.url, ' with key as ', options.type?.value);
 
       const url = new URL(options.url);
 
@@ -46,11 +45,14 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
         //referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
       };
 
-      debugger;
       if (options.type?.value === 'HEADER') {
-        requestHeaders.set('X-API-Key', options.key);
+        options.params.forEach(e => {
+          requestHeaders.set(e[0], e[1]);
+        });
       } else if (options.type?.value === 'QUERY') {
-        url.searchParams.append('api-key', options.key);
+        options.params.forEach(e => {
+          url.searchParams.append(e[0], e[1]);
+        });
       } else {
         console.error('Unknown api key type', options.type);
       }
