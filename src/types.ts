@@ -23,7 +23,7 @@ export const defaults: ButtonPanelOptions = {
   newParamName: '',
   newParamValue: '',
   variant: undefined,
-  orientation: { value: 'center', label: 'Center'},
+  orientation: { value: 'center', label: 'Center' },
 };
 
 export type ButtonPanelState = {

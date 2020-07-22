@@ -107,7 +107,7 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
         default:
           return 'center';
       }
-    }
+    };
 
     return (
       <div className={getOrientation()}>
