@@ -46,6 +46,15 @@ export class ButtonPanelEditor extends PureComponent<PanelEditorProps<ButtonPane
       },
     });
   };
+  onOrientationChanged = ({ label, value, target }: any) => {
+    this.props.onOptionsChange({
+      ...this.props.options,
+      orientation: {
+        value,
+        label,
+      },
+    });
+  };
   onTypeChanged = ({ label, value, target }: any) => {
     this.props.onOptionsChange({
       ...this.props.options,
@@ -118,6 +127,18 @@ export class ButtonPanelEditor extends PureComponent<PanelEditorProps<ButtonPane
               { label: 'Secondary', value: 'secondary' },
               { label: 'Destructive', value: 'destructive' },
               { label: 'Link', value: 'link' },
+            ]}
+          />
+        </Field>
+
+        <Field label="Orientation" description="Button orientation used to render">
+          <Select
+            onChange={this.onOrientationChanged}
+            value={options.orientation}
+            options={[
+              { label: 'Left', value: 'left' },
+              { label: 'Center', value: 'center' },
+              { label: 'Right', value: 'right' },
             ]}
           />
         </Field>

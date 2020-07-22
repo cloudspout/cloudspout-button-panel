@@ -20,11 +20,7 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
 
   render() {
     const { options } = this.props;
-    const center = {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-    };
+
     const exeucte = () => {
       this.setState({ api_call: 'IN_PROGRESS' });
       console.log(options.method?.value, ' to ', options.url, ' with key as ', options.type?.value);
@@ -101,9 +97,20 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
           return '';
       }
     };
+    const getOrientation = () => {
+      switch (this.props.options.orientation.value) {
+        case 'left':
+          return 'left';
+        case 'right':
+          return 'right';
+        case 'center':
+        default:
+          return 'center';
+      }
+    }
 
     return (
-      <div style={center}>
+      <div className={getOrientation()}>
         <Button
           variant={this.props.options.variant?.value}
           title={this.state.response}

@@ -11,6 +11,7 @@ export interface ButtonPanelOptions {
   method?: SelectableValue<string>;
   type?: SelectableValue<string>;
   variant?: SelectableValue<ButtonVariant>;
+  orientation: SelectableValue<string>;
 }
 
 export const defaults: ButtonPanelOptions = {
@@ -22,6 +23,7 @@ export const defaults: ButtonPanelOptions = {
   newParamName: '',
   newParamValue: '',
   variant: undefined,
+  orientation: { value: 'center', label: 'Center'},
 };
 
 export type ButtonPanelState = {

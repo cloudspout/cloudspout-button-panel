@@ -5,3 +5,15 @@
 .spinning > * > *:first-child {
     animation: spin 1s infinite linear;
 }
+
+.center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.left {
+    float: left;
+}
+.right {
+    float: right;
+}
