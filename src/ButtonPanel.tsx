@@ -29,6 +29,7 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
         const resolvedVariables = []
         if (variablesProtected.length > 1) {
             const datasource = variablesProtected[0];
+            console.log('Found ', datasource.filters)
             datasource.filters.map(filter => {
                 resolvedVariables.push({
                     name: filter.key,
@@ -39,25 +40,37 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
         return resolvedVariables;
     }
 
-    replaceVariableValue(variableName){
+    replaceVariableValue(variableName) {
         const variable = this.state.resolvedVariables.find(function ({name}) {
             return name === variableName
         })
         return variable?.value
     }
 
-    replaceVariableInText(text){
+    replaceVariableInText(text) {
         const regex = /\$\w+/i;
         const foundMatch = text.match(regex);
         foundMatch?.map(match => {
-            const varName = match.replace('$','')
-            text = text.replace(match,this.replaceVariableValue(varName))
+            const varName = match.replace('$', '')
+            text = text.replace(match, this.replaceVariableValue(varName))
         })
         return text
     }
 
     componentDidMount() {
-        this.setState({resolvedVariables: this.resolveFilterVariables()})
+        this.setState({
+            resolvedVariables: this.resolveFilterVariables()
+        });
+    }
+
+    componentDidUpdate(previousProps, previousState) {
+        const resolvedVariables = this.resolveFilterVariables();
+        const condition = resolvedVariables.length === previousState.resolvedVariables.length && resolvedVariables.every((value, index) => value.value === previousState.resolvedVariables[index].value)
+        if (!condition) {
+            this.setState({
+                resolvedVariables: resolvedVariables
+            });
+        }
     }
 
     render() {
@@ -91,7 +104,7 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
                 options.variableParams.forEach(e => {
                     const value = this.replaceVariableValue(e[1])
                     if (value !== undefined) {
-                        requestHeaders.set(e[0],value);
+                        requestHeaders.set(e[0], value);
                     }
                 });
             } else if (options.type?.value === 'QUERY') {

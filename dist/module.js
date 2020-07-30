@@ -1022,6 +1022,7 @@ function (_super) {
 
     if (variablesProtected.length > 1) {
       var datasource = variablesProtected[0];
+      console.log('Found ', datasource.filters);
       datasource.filters.map(function (filter) {
         resolvedVariables.push({
           name: filter.key,
@@ -1061,6 +1062,19 @@ function (_super) {
     this.setState({
       resolvedVariables: this.resolveFilterVariables()
     });
+  };
+
+  ButtonPanel.prototype.componentDidUpdate = function (previousProps, previousState) {
+    var resolvedVariables = this.resolveFilterVariables();
+    var condition = resolvedVariables.length === previousState.resolvedVariables.length && resolvedVariables.every(function (value, index) {
+      return value.value === previousState.resolvedVariables[index].value;
+    });
+
+    if (!condition) {
+      this.setState({
+        resolvedVariables: resolvedVariables
+      });
+    }
   };
 
   ButtonPanel.prototype.render = function () {
