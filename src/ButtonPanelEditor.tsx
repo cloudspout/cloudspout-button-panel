@@ -2,7 +2,6 @@ import React, {PureComponent} from 'react';
 import {Field, IconButton, Input, Select, HorizontalGroup, VerticalGroup} from '@grafana/ui';
 import {PanelEditorProps} from '@grafana/data';
 import {ButtonPanelOptions} from './types';
-import {getTemplateSrv} from '@grafana/runtime';
 
 export class ButtonPanelEditor extends PureComponent<PanelEditorProps<ButtonPanelOptions>> {
     onParamRemove = (key: string) => ({target}: any) => {
@@ -23,23 +22,23 @@ export class ButtonPanelEditor extends PureComponent<PanelEditorProps<ButtonPane
     onNewParamValueChanged = ({target}: any) => {
         this.props.onOptionsChange({...this.props.options, newParamValue: target.value});
     };
-    onFilterParamAdd = ({target}: any) => {
-        const key = this.props.options.newFilterParamName;
-        let newParams = this.props.options.filterParams.filter(e => e[0] !== key);
-        newParams.push([key, this.props.options.newFilterParamValue]);
+    onVariableParamRemove = (key: string) => ({target}: any) => {
+        let newParams = this.props.options.variableParams.filter(e => e[0] !== key);
+        this.props.onOptionsChange({...this.props.options, variableParams: newParams});
+    };
+    onVariableParamAdd = ({target}: any) => {
+        const key = this.props.options.newVariableParamName;
+        let newParams = this.props.options.variableParams.filter(e => e[0] !== key);
+        newParams.push([key, this.props.options.newVariableParamValue]);
         newParams.sort((a, b) => a[0].localeCompare(b[0]));
-        const msg = {...this.props.options, newFilterParamName: '', newFilterParamValue: '', filterParams: newParams};
+        const msg = {...this.props.options, newVariableParamName: '', newVariableParamValue: '', variableParams: newParams};
         this.props.onOptionsChange(msg);
     };
-    onFilterParamRemove = (key: string) => ({target}: any) => {
-        let newParams = this.props.options.filterParams.filter(e => e[0] !== key);
-        this.props.onOptionsChange({...this.props.options, filterParams: newParams});
+    onNewVariableParamNameChanged = ({target}: any) => {
+        this.props.onOptionsChange({...this.props.options, newVariableParamName: target.value});
     };
-    onNewFilterParamNameChanged = ({target}: any) => {
-        this.props.onOptionsChange({...this.props.options, newFilterParamName: target.value});
-    };
-    onNewFilterParamValueChanged = ({label, value, target}: any) => {
-        this.props.onOptionsChange({...this.props.options, newFilterParamValue: value});
+    onNewVariableParamValueChanged = ({target}: any) => {
+        this.props.onOptionsChange({...this.props.options, newVariableParamValue: target.value});
     };
     onTextChanged = ({target}: any) => {
         this.props.onOptionsChange({...this.props.options, text: target.value});
@@ -84,25 +83,8 @@ export class ButtonPanelEditor extends PureComponent<PanelEditorProps<ButtonPane
         });
     };
 
-    getDatasourceFilters() {
-        const templateSrv = getTemplateSrv();
-        const variablesProtected = templateSrv.getVariables();
-        if (variablesProtected.length > 1) {
-            const datasource = variablesProtected[0];
-            // @ts-ignore
-            return datasource.filters.map(filter => (
-                {
-                    "label": filter.key,
-                    "value": filter.value
-                }
-            ));
-        }
-        return []
-    }
-
     render() {
         const {options} = this.props;
-        console.log(this.getDatasourceFilters())
 
         return (
             <div className="section gf-form-group">
@@ -164,25 +146,22 @@ export class ButtonPanelEditor extends PureComponent<PanelEditorProps<ButtonPane
                     </div>
                 </Field>
 
-                <Field label="Filter parameters" description="Parameters from datasource filters">
+                <Field label="Variable parameters"
+                       description="Parameters resolved before sending the request">
                     <div className="panel-container" style={{width: 'auto'}}>
                         <HorizontalGroup>
-                            <Input placeholder="Name" onChange={this.onNewFilterParamNameChanged}
-                                   value={options.newFilterParamName || ''}/>
-                            <Select
-                                placeholder={"Filter Value"}
-                                onChange={this.onNewFilterParamValueChanged}
-                                value={options.newFilterParamValue}
-                                options={this.getDatasourceFilters()}
-                            />
-                            <IconButton onClick={this.onFilterParamAdd} name="plus"/>
+                            <Input placeholder="Name" onChange={this.onNewVariableParamNameChanged}
+                                   value={options.newVariableParamName || ''}/>
+                            <Input placeholder="Value" onChange={this.onNewVariableParamValueChanged}
+                                   value={options.newVariableParamValue || ''}/>
+                            <IconButton onClick={this.onVariableParamAdd} name="plus"/>
                         </HorizontalGroup>
                         <VerticalGroup>
-                            {Array.from(options.filterParams.entries()).map(entry => (
+                            {Array.from(options.variableParams.entries()).map(entry => (
                                 <HorizontalGroup>
                                     <Input disabled value={entry[1][0]}/>
-                                    <Input disabled value={entry[1][1]}/>
-                                    <IconButton onClick={this.onFilterParamRemove(entry[1][0])} name="minus"/>
+                                    <Input disabled value={"$"+entry[1][1]}/>
+                                    <IconButton onClick={this.onVariableParamRemove(entry[1][0])} name="minus"/>
                                 </HorizontalGroup>
                             ))}
                         </VerticalGroup>
@@ -214,7 +193,7 @@ export class ButtonPanelEditor extends PureComponent<PanelEditorProps<ButtonPane
                     />
                 </Field>
 
-                <Field label="Text" description="The description of the button">
+                <Field label="Text" description="The description of the button. Variables accepted.">
                     <Input onChange={this.onTextChanged} value={options.text || ''}/>
                 </Field>
             </div>

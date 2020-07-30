@@ -4,13 +4,14 @@ import { ButtonVariant } from '@grafana/ui';
 export interface ButtonPanelOptions {
   text: string;
   url: string;
+
   params: Array<[string, string]>;
   newParamName: string;
   newParamValue: string;
 
-  filterParams: Array<[string, string]>;
-  newFilterParamName: string;
-  newFilterParamValue: string;
+  variableParams: Array<[string, string]>;
+  newVariableParamName: string;
+  newVariableParamValue: string;
 
   method?: SelectableValue<string>;
   type?: SelectableValue<string>;
@@ -26,9 +27,9 @@ export const defaults: ButtonPanelOptions = {
   params: [],
   newParamName: '',
   newParamValue: '',
-  filterParams: [],
-  newFilterParamName: '',
-  newFilterParamValue: '',
+  variableParams: [],
+  newVariableParamName: '',
+  newVariableParamValue: '',
   variant: undefined,
   orientation: { value: 'center', label: 'Center' },
 };
@@ -36,4 +37,5 @@ export const defaults: ButtonPanelOptions = {
 export type ButtonPanelState = {
   api_call: 'READY' | 'IN_PROGRESS' | 'SUCCESS' | 'ERROR';
   response: string;
+  resolvedVariables: Array<{name:string, value:string}>;
 };

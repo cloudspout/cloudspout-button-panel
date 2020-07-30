@@ -987,6 +987,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _grafana_ui__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @grafana/ui */ "@grafana/ui");
 /* harmony import */ var _grafana_ui__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _grafana_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @grafana/runtime */ "@grafana/runtime");
+/* harmony import */ var _grafana_runtime__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_grafana_runtime__WEBPACK_IMPORTED_MODULE_3__);
+
 
 
 
@@ -1007,8 +1010,57 @@ function (_super) {
   ButtonPanel.prototype.init = function () {
     this.state = {
       api_call: 'READY',
-      response: ''
+      response: '',
+      resolvedVariables: []
     };
+  };
+
+  ButtonPanel.prototype.resolveFilterVariables = function () {
+    var templateSrv = Object(_grafana_runtime__WEBPACK_IMPORTED_MODULE_3__["getTemplateSrv"])();
+    var variablesProtected = templateSrv.getVariables();
+    var resolvedVariables = [];
+
+    if (variablesProtected.length > 1) {
+      var datasource = variablesProtected[0];
+      datasource.filters.map(function (filter) {
+        resolvedVariables.push({
+          name: filter.key,
+          value: filter.value
+        });
+      });
+    }
+
+    return resolvedVariables;
+  };
+
+  ButtonPanel.prototype.replaceVariableValue = function (variableName) {
+    var _a;
+
+    var variable = this.state.resolvedVariables.find(function (_a) {
+      var name = _a.name;
+      return name === variableName;
+    });
+    return (_a = variable) === null || _a === void 0 ? void 0 : _a.value;
+  };
+
+  ButtonPanel.prototype.replaceVariableInText = function (text) {
+    var _this = this;
+
+    var _a;
+
+    var regex = /\$\w+/i;
+    var foundMatch = text.match(regex);
+    (_a = foundMatch) === null || _a === void 0 ? void 0 : _a.map(function (match) {
+      var varName = match.replace('$', '');
+      text = text.replace(match, _this.replaceVariableValue(varName));
+    });
+    return text;
+  };
+
+  ButtonPanel.prototype.componentDidMount = function () {
+    this.setState({
+      resolvedVariables: this.resolveFilterVariables()
+    });
   };
 
   ButtonPanel.prototype.render = function () {
@@ -1043,15 +1095,23 @@ function (_super) {
         options.params.forEach(function (e) {
           requestHeaders.set(e[0], e[1]);
         });
-        options.filterParams.forEach(function (e) {
-          requestHeaders.set(e[0], e[1]);
+        options.variableParams.forEach(function (e) {
+          var value = _this.replaceVariableValue(e[1]);
+
+          if (value !== undefined) {
+            requestHeaders.set(e[0], value);
+          }
         });
       } else if (((_e = options.type) === null || _e === void 0 ? void 0 : _e.value) === 'QUERY') {
         options.params.forEach(function (e) {
           url.searchParams.append(e[0], e[1]);
         });
-        options.filterParams.forEach(function (e) {
-          url.searchParams.append(e[0], e[1]);
+        options.variableParams.forEach(function (e) {
+          var value = _this.replaceVariableValue(e[1]);
+
+          if (value !== undefined) {
+            url.searchParams.append(e[0], value);
+          }
         });
       } else {
         console.error('Unknown api key type', options.type);
@@ -1061,7 +1121,8 @@ function (_super) {
         if (response.ok) {
           _this.setState({
             api_call: 'SUCCESS',
-            response: response.statusText
+            response: response.statusText,
+            resolvedVariables: _this.resolveFilterVariables()
           });
 
           console.log('Requeste successful: ', response);
@@ -1072,7 +1133,8 @@ function (_super) {
       })["catch"](function (e) {
         _this.setState({
           api_call: 'ERROR',
-          response: e.message
+          response: e.message,
+          resolvedVariables: _this.resolveFilterVariables()
         });
 
         console.error('Request error: ', e);
@@ -1129,7 +1191,7 @@ function (_super) {
       className: apiStateClassName(),
       icon: apiStateIcon(),
       onClick: exeucte
-    }, options.text));
+    }, this.replaceVariableInText(options.text)));
   };
 
   return ButtonPanel;
@@ -1154,9 +1216,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _grafana_ui__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @grafana/ui */ "@grafana/ui");
 /* harmony import */ var _grafana_ui__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _grafana_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @grafana/runtime */ "@grafana/runtime");
-/* harmony import */ var _grafana_runtime__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_grafana_runtime__WEBPACK_IMPORTED_MODULE_3__);
-
 
 
 
@@ -1221,57 +1280,55 @@ function (_super) {
       }));
     };
 
-    _this.onFilterParamAdd = function (_a) {
-      var target = _a.target;
-      var key = _this.props.options.newFilterParamName;
+    _this.onVariableParamRemove = function (key) {
+      return function (_a) {
+        var target = _a.target;
 
-      var newParams = _this.props.options.filterParams.filter(function (e) {
+        var newParams = _this.props.options.variableParams.filter(function (e) {
+          return e[0] !== key;
+        });
+
+        _this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, _this.props.options), {
+          variableParams: newParams
+        }));
+      };
+    };
+
+    _this.onVariableParamAdd = function (_a) {
+      var target = _a.target;
+      var key = _this.props.options.newVariableParamName;
+
+      var newParams = _this.props.options.variableParams.filter(function (e) {
         return e[0] !== key;
       });
 
-      newParams.push([key, _this.props.options.newFilterParamValue]);
+      newParams.push([key, _this.props.options.newVariableParamValue]);
       newParams.sort(function (a, b) {
         return a[0].localeCompare(b[0]);
       });
 
       var msg = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, _this.props.options), {
-        newFilterParamName: '',
-        newFilterParamValue: '',
-        filterParams: newParams
+        newVariableParamName: '',
+        newVariableParamValue: '',
+        variableParams: newParams
       });
 
       _this.props.onOptionsChange(msg);
     };
 
-    _this.onFilterParamRemove = function (key) {
-      return function (_a) {
-        var target = _a.target;
-
-        var newParams = _this.props.options.filterParams.filter(function (e) {
-          return e[0] !== key;
-        });
-
-        _this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, _this.props.options), {
-          filterParams: newParams
-        }));
-      };
-    };
-
-    _this.onNewFilterParamNameChanged = function (_a) {
+    _this.onNewVariableParamNameChanged = function (_a) {
       var target = _a.target;
 
       _this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, _this.props.options), {
-        newFilterParamName: target.value
+        newVariableParamName: target.value
       }));
     };
 
-    _this.onNewFilterParamValueChanged = function (_a) {
-      var label = _a.label,
-          value = _a.value,
-          target = _a.target;
+    _this.onNewVariableParamValueChanged = function (_a) {
+      var target = _a.target;
 
       _this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, _this.props.options), {
-        newFilterParamValue: value
+        newVariableParamValue: target.value
       }));
     };
 
@@ -1346,29 +1403,10 @@ function (_super) {
     return _this;
   }
 
-  ButtonPanelEditor.prototype.getDatasourceFilters = function () {
-    var templateSrv = Object(_grafana_runtime__WEBPACK_IMPORTED_MODULE_3__["getTemplateSrv"])();
-    var variablesProtected = templateSrv.getVariables();
-
-    if (variablesProtected.length > 1) {
-      var datasource = variablesProtected[0]; // @ts-ignore
-
-      return datasource.filters.map(function (filter) {
-        return {
-          "label": filter.key,
-          "value": filter.value
-        };
-      });
-    }
-
-    return [];
-  };
-
   ButtonPanelEditor.prototype.render = function () {
     var _this = this;
 
     var options = this.props.options;
-    console.log(this.getDatasourceFilters());
     return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
       className: "section gf-form-group"
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", {
@@ -1440,8 +1478,8 @@ function (_super) {
         name: "minus"
       }));
     })))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Field"], {
-      label: "Filter parameters",
-      description: "Parameters from datasource filters"
+      label: "Variable parameters",
+      description: "Parameters resolved before sending the request"
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
       className: "panel-container",
       style: {
@@ -1449,25 +1487,24 @@ function (_super) {
       }
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["HorizontalGroup"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Input"], {
       placeholder: "Name",
-      onChange: this.onNewFilterParamNameChanged,
-      value: options.newFilterParamName || ''
-    }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Select"], {
-      placeholder: "Filter Value",
-      onChange: this.onNewFilterParamValueChanged,
-      value: options.newFilterParamValue,
-      options: this.getDatasourceFilters()
+      onChange: this.onNewVariableParamNameChanged,
+      value: options.newVariableParamName || ''
+    }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Input"], {
+      placeholder: "Value",
+      onChange: this.onNewVariableParamValueChanged,
+      value: options.newVariableParamValue || ''
     }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["IconButton"], {
-      onClick: this.onFilterParamAdd,
+      onClick: this.onVariableParamAdd,
       name: "plus"
-    })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["VerticalGroup"], null, Array.from(options.filterParams.entries()).map(function (entry) {
+    })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["VerticalGroup"], null, Array.from(options.variableParams.entries()).map(function (entry) {
       return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["HorizontalGroup"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Input"], {
         disabled: true,
         value: entry[1][0]
       }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Input"], {
         disabled: true,
-        value: entry[1][1]
+        value: "$" + entry[1][1]
       }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["IconButton"], {
-        onClick: _this.onFilterParamRemove(entry[1][0]),
+        onClick: _this.onVariableParamRemove(entry[1][0]),
         name: "minus"
       }));
     })))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Field"], {
@@ -1507,7 +1544,7 @@ function (_super) {
       }]
     })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Field"], {
       label: "Text",
-      description: "The description of the button"
+      description: "The description of the button. Variables accepted."
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Input"], {
       onChange: this.onTextChanged,
       value: options.text || ''
@@ -1595,9 +1632,9 @@ var defaults = {
   params: [],
   newParamName: '',
   newParamValue: '',
-  filterParams: [],
-  newFilterParamName: '',
-  newFilterParamValue: '',
+  variableParams: [],
+  newVariableParamName: '',
+  newVariableParamValue: '',
   variant: undefined,
   orientation: {
     value: 'center',
