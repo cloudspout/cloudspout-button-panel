@@ -8,6 +8,10 @@ export interface ButtonPanelOptions {
   newParamName: string;
   newParamValue: string;
 
+  filterParams: Array<[string, string]>;
+  newFilterParamName: string;
+  newFilterParamValue: string;
+
   method?: SelectableValue<string>;
   type?: SelectableValue<string>;
   variant?: SelectableValue<ButtonVariant>;
@@ -22,6 +26,9 @@ export const defaults: ButtonPanelOptions = {
   params: [],
   newParamName: '',
   newParamValue: '',
+  filterParams: [],
+  newFilterParamName: '',
+  newFilterParamValue: '',
   variant: undefined,
   orientation: { value: 'center', label: 'Center' },
 };

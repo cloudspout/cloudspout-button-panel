@@ -1,152 +1,223 @@
-import React, { PureComponent } from 'react';
-import { Field, IconButton, Input, Select, HorizontalGroup, VerticalGroup } from '@grafana/ui';
-import { PanelEditorProps } from '@grafana/data';
-import { ButtonPanelOptions } from './types';
+import React, {PureComponent} from 'react';
+import {Field, IconButton, Input, Select, HorizontalGroup, VerticalGroup} from '@grafana/ui';
+import {PanelEditorProps} from '@grafana/data';
+import {ButtonPanelOptions} from './types';
+import {getTemplateSrv} from '@grafana/runtime';
 
 export class ButtonPanelEditor extends PureComponent<PanelEditorProps<ButtonPanelOptions>> {
-  onParamRemove = (key: string) => ({ target }: any) => {
-    let newParams = this.props.options.params.filter(e => e[0] !== key);
-    this.props.onOptionsChange({ ...this.props.options, params: newParams });
-  };
-  onParamAdd = ({ target }: any) => {
-    const key = this.props.options.newParamName;
-    let newParams = this.props.options.params.filter(e => e[0] !== key);
-    newParams.push([key, this.props.options.newParamValue]);
-    newParams.sort((a, b) => a[0].localeCompare(b[0]));
-    const msg = { ...this.props.options, newParamName: '', newParamValue: '', params: newParams };
-    this.props.onOptionsChange(msg);
-  };
-  onNewParamNameChanged = ({ target }: any) => {
-    this.props.onOptionsChange({ ...this.props.options, newParamName: target.value });
-  };
-  onNewParamValueChanged = ({ target }: any) => {
-    this.props.onOptionsChange({ ...this.props.options, newParamValue: target.value });
-  };
-  onTextChanged = ({ target }: any) => {
-    this.props.onOptionsChange({ ...this.props.options, text: target.value });
-  };
-  onURLChanged = ({ target }: any) => {
-    this.props.onOptionsChange({ ...this.props.options, url: target.value });
-  };
-  onMethodChanged = ({ label, value, target }: any) => {
-    this.props.onOptionsChange({
-      ...this.props.options,
-      method: {
-        value,
-        label,
-      },
-    });
-  };
-  onVariantChanged = ({ label, value, target }: any) => {
-    this.props.onOptionsChange({
-      ...this.props.options,
-      variant: {
-        value,
-        label,
-      },
-    });
-  };
-  onOrientationChanged = ({ label, value, target }: any) => {
-    this.props.onOptionsChange({
-      ...this.props.options,
-      orientation: {
-        value,
-        label,
-      },
-    });
-  };
-  onTypeChanged = ({ label, value, target }: any) => {
-    this.props.onOptionsChange({
-      ...this.props.options,
-      type: {
-        value,
-        label,
-      },
-    });
-  };
+    onParamRemove = (key: string) => ({target}: any) => {
+        let newParams = this.props.options.params.filter(e => e[0] !== key);
+        this.props.onOptionsChange({...this.props.options, params: newParams});
+    };
+    onParamAdd = ({target}: any) => {
+        const key = this.props.options.newParamName;
+        let newParams = this.props.options.params.filter(e => e[0] !== key);
+        newParams.push([key, this.props.options.newParamValue]);
+        newParams.sort((a, b) => a[0].localeCompare(b[0]));
+        const msg = {...this.props.options, newParamName: '', newParamValue: '', params: newParams};
+        this.props.onOptionsChange(msg);
+    };
+    onNewParamNameChanged = ({target}: any) => {
+        this.props.onOptionsChange({...this.props.options, newParamName: target.value});
+    };
+    onNewParamValueChanged = ({target}: any) => {
+        this.props.onOptionsChange({...this.props.options, newParamValue: target.value});
+    };
+    onFilterParamAdd = ({target}: any) => {
+        const key = this.props.options.newFilterParamName;
+        let newParams = this.props.options.filterParams.filter(e => e[0] !== key);
+        newParams.push([key, this.props.options.newFilterParamValue]);
+        newParams.sort((a, b) => a[0].localeCompare(b[0]));
+        const msg = {...this.props.options, newFilterParamName: '', newFilterParamValue: '', filterParams: newParams};
+        this.props.onOptionsChange(msg);
+    };
+    onFilterParamRemove = (key: string) => ({target}: any) => {
+        let newParams = this.props.options.filterParams.filter(e => e[0] !== key);
+        this.props.onOptionsChange({...this.props.options, filterParams: newParams});
+    };
+    onNewFilterParamNameChanged = ({target}: any) => {
+        this.props.onOptionsChange({...this.props.options, newFilterParamName: target.value});
+    };
+    onNewFilterParamValueChanged = ({label, value, target}: any) => {
+        this.props.onOptionsChange({...this.props.options, newFilterParamValue: value});
+    };
+    onTextChanged = ({target}: any) => {
+        this.props.onOptionsChange({...this.props.options, text: target.value});
+    };
+    onURLChanged = ({target}: any) => {
+        this.props.onOptionsChange({...this.props.options, url: target.value});
+    };
+    onMethodChanged = ({label, value, target}: any) => {
+        this.props.onOptionsChange({
+            ...this.props.options,
+            method: {
+                value,
+                label,
+            },
+        });
+    };
+    onVariantChanged = ({label, value, target}: any) => {
+        this.props.onOptionsChange({
+            ...this.props.options,
+            variant: {
+                value,
+                label,
+            },
+        });
+    };
+    onOrientationChanged = ({label, value, target}: any) => {
+        this.props.onOptionsChange({
+            ...this.props.options,
+            orientation: {
+                value,
+                label,
+            },
+        });
+    };
+    onTypeChanged = ({label, value, target}: any) => {
+        this.props.onOptionsChange({
+            ...this.props.options,
+            type: {
+                value,
+                label,
+            },
+        });
+    };
 
-  render() {
-    const { options } = this.props;
+    getDatasourceFilters() {
+        const templateSrv = getTemplateSrv();
+        const variablesProtected = templateSrv.getVariables();
+        if (variablesProtected.length > 1) {
+            const datasource = variablesProtected[0];
+            // @ts-ignore
+            return datasource.filters.map(filter => (
+                {
+                    "label": filter.key,
+                    "value": filter.value
+                }
+            ));
+        }
+        return []
+    }
 
-    return (
-      <div className="section gf-form-group">
-        <h5 className="section-heading">Settings</h5>
+    render() {
+        const {options} = this.props;
+        console.log(this.getDatasourceFilters())
 
-        <Field label="Method" description="HTTP method used to communicate with the remote site">
-          <Select
-            allowCustomValue
-            onChange={this.onMethodChanged}
-            value={options.method}
-            options={[
-              { label: 'GET', value: 'GET' },
-              { label: 'POST', value: 'POST' },
-            ]}
-          />
-        </Field>
+        return (
+            <div className="section gf-form-group">
+                <h5 className="section-heading">Settings</h5>
 
-        <Field label="URL" description="The URL to call">
-          <Input required onChange={this.onURLChanged} value={options.url || ''} />
-        </Field>
+                <Field label="Method" description="HTTP method used to communicate with the remote site">
+                    <Select
+                        allowCustomValue
+                        onChange={this.onMethodChanged}
+                        value={options.method}
+                        options={[
+                            {label: 'GET', value: 'GET'},
+                            {label: 'POST', value: 'POST'},
+                        ]}
+                    />
+                </Field>
 
-        <Field label="Type" description="Defines how the parameters are sent to the server">
-          <Select
-            onChange={this.onTypeChanged}
-            value={options.type}
-            options={[
-              { label: 'Header', value: 'HEADER', description: 'Send the parameters as request HTTP headers' },
-              { label: 'Query', value: 'QUERY', description: 'Send the parameters as `key=value` query parameter' },
-            ]}
-          />
-        </Field>
+                <Field label="URL" description="The URL to call">
+                    <Input required onChange={this.onURLChanged} value={options.url || ''}/>
+                </Field>
 
-        <Field label="Parameters" description="The parameters sent with the request">
-          <div className="panel-container" style={{ width: 'auto' }}>
-            <HorizontalGroup>
-              <Input placeholder="Name" onChange={this.onNewParamNameChanged} value={options.newParamName || ''} />
-              <Input placeholder="Value" onChange={this.onNewParamValueChanged} value={options.newParamValue || ''} />
-              <IconButton onClick={this.onParamAdd} name="plus" />
-            </HorizontalGroup>
-            <VerticalGroup>
-              {Array.from(options.params.entries()).map(entry => (
-                <HorizontalGroup>
-                  <Input disabled value={entry[1][0]} />
-                  <Input disabled value={entry[1][1]} />
-                  <IconButton onClick={this.onParamRemove(entry[1][0])} name="minus" />
-                </HorizontalGroup>
-              ))}
-            </VerticalGroup>
-          </div>
-        </Field>
+                <Field label="Type" description="Defines how the parameters are sent to the server">
+                    <Select
+                        onChange={this.onTypeChanged}
+                        value={options.type}
+                        options={[
+                            {
+                                label: 'Header',
+                                value: 'HEADER',
+                                description: 'Send the parameters as request HTTP headers'
+                            },
+                            {
+                                label: 'Query',
+                                value: 'QUERY',
+                                description: 'Send the parameters as `key=value` query parameter'
+                            },
+                        ]}
+                    />
+                </Field>
 
-        <Field label="Variant" description="Button variant used to render">
-          <Select
-            onChange={this.onVariantChanged}
-            value={options.variant}
-            options={[
-              { label: 'Primary', value: 'primary' },
-              { label: 'Secondary', value: 'secondary' },
-              { label: 'Destructive', value: 'destructive' },
-              { label: 'Link', value: 'link' },
-            ]}
-          />
-        </Field>
+                <Field label="Parameters" description="The parameters sent with the request">
+                    <div className="panel-container" style={{width: 'auto'}}>
+                        <HorizontalGroup>
+                            <Input placeholder="Name" onChange={this.onNewParamNameChanged}
+                                   value={options.newParamName || ''}/>
+                            <Input placeholder="Value" onChange={this.onNewParamValueChanged}
+                                   value={options.newParamValue || ''}/>
+                            <IconButton onClick={this.onParamAdd} name="plus"/>
+                        </HorizontalGroup>
+                        <VerticalGroup>
+                            {Array.from(options.params.entries()).map(entry => (
+                                <HorizontalGroup>
+                                    <Input disabled value={entry[1][0]}/>
+                                    <Input disabled value={entry[1][1]}/>
+                                    <IconButton onClick={this.onParamRemove(entry[1][0])} name="minus"/>
+                                </HorizontalGroup>
+                            ))}
+                        </VerticalGroup>
+                    </div>
+                </Field>
 
-        <Field label="Orientation" description="Button orientation used to render">
-          <Select
-            onChange={this.onOrientationChanged}
-            value={options.orientation}
-            options={[
-              { label: 'Left', value: 'left' },
-              { label: 'Center', value: 'center' },
-              { label: 'Right', value: 'right' },
-            ]}
-          />
-        </Field>
+                <Field label="Filter parameters" description="Parameters from datasource filters">
+                    <div className="panel-container" style={{width: 'auto'}}>
+                        <HorizontalGroup>
+                            <Input placeholder="Name" onChange={this.onNewFilterParamNameChanged}
+                                   value={options.newFilterParamName || ''}/>
+                            <Select
+                                placeholder={"Filter Value"}
+                                onChange={this.onNewFilterParamValueChanged}
+                                value={options.newFilterParamValue}
+                                options={this.getDatasourceFilters()}
+                            />
+                            <IconButton onClick={this.onFilterParamAdd} name="plus"/>
+                        </HorizontalGroup>
+                        <VerticalGroup>
+                            {Array.from(options.filterParams.entries()).map(entry => (
+                                <HorizontalGroup>
+                                    <Input disabled value={entry[1][0]}/>
+                                    <Input disabled value={entry[1][1]}/>
+                                    <IconButton onClick={this.onFilterParamRemove(entry[1][0])} name="minus"/>
+                                </HorizontalGroup>
+                            ))}
+                        </VerticalGroup>
+                    </div>
+                </Field>
 
-        <Field label="Text" description="The description of the button">
-          <Input onChange={this.onTextChanged} value={options.text || ''} />
-        </Field>
-      </div>
-    );
-  }
+                <Field label="Variant" description="Button variant used to render">
+                    <Select
+                        onChange={this.onVariantChanged}
+                        value={options.variant}
+                        options={[
+                            {label: 'Primary', value: 'primary'},
+                            {label: 'Secondary', value: 'secondary'},
+                            {label: 'Destructive', value: 'destructive'},
+                            {label: 'Link', value: 'link'},
+                        ]}
+                    />
+                </Field>
+
+                <Field label="Orientation" description="Button orientation used to render">
+                    <Select
+                        onChange={this.onOrientationChanged}
+                        value={options.orientation}
+                        options={[
+                            {label: 'Left', value: 'left'},
+                            {label: 'Center', value: 'center'},
+                            {label: 'Right', value: 'right'},
+                        ]}
+                    />
+                </Field>
+
+                <Field label="Text" description="The description of the button">
+                    <Input onChange={this.onTextChanged} value={options.text || ''}/>
+                </Field>
+            </div>
+        );
+    }
 }

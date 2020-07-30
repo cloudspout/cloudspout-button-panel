@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react';
 import { Button, IconName } from '@grafana/ui';
 import { PanelProps } from '@grafana/data';
+
+
 import { ButtonPanelOptions, ButtonPanelState } from 'types';
 
 interface Props extends PanelProps<ButtonPanelOptions> {}
@@ -45,8 +47,14 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
         options.params.forEach(e => {
           requestHeaders.set(e[0], e[1]);
         });
+        options.filterParams.forEach(e => {
+          requestHeaders.set(e[0], e[1]);
+        });
       } else if (options.type?.value === 'QUERY') {
         options.params.forEach(e => {
+          url.searchParams.append(e[0], e[1]);
+        });
+        options.filterParams.forEach(e => {
           url.searchParams.append(e[0], e[1]);
         });
       } else {
