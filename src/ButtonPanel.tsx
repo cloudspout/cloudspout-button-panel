@@ -29,7 +29,6 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
         const resolvedVariables = []
         if (variablesProtected.length > 1) {
             const datasource = variablesProtected[0];
-            console.log('Found ', datasource.filters)
             datasource.filters.map(filter => {
                 resolvedVariables.push({
                     name: filter.key,
@@ -44,15 +43,21 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
         const variable = this.state.resolvedVariables.find(function ({name}) {
             return name === variableName
         })
+        if (variable?.value === undefined) {
+            const normalGrafanaVariable = this.props.replaceVariables("$"+variableName)
+            if (!(normalGrafanaVariable === "$"+variableName)){
+                return normalGrafanaVariable
+            }
+        }
         return variable?.value
     }
 
     replaceVariableInText(text) {
-        const regex = /\$\w+/i;
-        const foundMatch = text.match(regex);
+        const regex = /\$\w+/ig;
+        const foundMatch = [...text.matchAll(regex)];
         foundMatch?.map(match => {
-            const varName = match.replace('$', '')
-            text = text.replace(match, this.replaceVariableValue(varName))
+            const varName = match[0].replace('$', '')
+            text = text.replace(match[0], this.replaceVariableValue(varName))
         })
         return text
     }

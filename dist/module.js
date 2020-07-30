@@ -1022,7 +1022,6 @@ function (_super) {
 
     if (variablesProtected.length > 1) {
       var datasource = variablesProtected[0];
-      console.log('Found ', datasource.filters);
       datasource.filters.map(function (filter) {
         resolvedVariables.push({
           name: filter.key,
@@ -1035,13 +1034,22 @@ function (_super) {
   };
 
   ButtonPanel.prototype.replaceVariableValue = function (variableName) {
-    var _a;
+    var _a, _b;
 
     var variable = this.state.resolvedVariables.find(function (_a) {
       var name = _a.name;
       return name === variableName;
     });
-    return (_a = variable) === null || _a === void 0 ? void 0 : _a.value;
+
+    if (((_a = variable) === null || _a === void 0 ? void 0 : _a.value) === undefined) {
+      var normalGrafanaVariable = this.props.replaceVariables("$" + variableName);
+
+      if (!(normalGrafanaVariable === "$" + variableName)) {
+        return normalGrafanaVariable;
+      }
+    }
+
+    return (_b = variable) === null || _b === void 0 ? void 0 : _b.value;
   };
 
   ButtonPanel.prototype.replaceVariableInText = function (text) {
@@ -1049,11 +1057,13 @@ function (_super) {
 
     var _a;
 
-    var regex = /\$\w+/i;
-    var foundMatch = text.match(regex);
+    var regex = /\$\w+/ig;
+
+    var foundMatch = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__spread"])(text.matchAll(regex));
+
     (_a = foundMatch) === null || _a === void 0 ? void 0 : _a.map(function (match) {
-      var varName = match.replace('$', '');
-      text = text.replace(match, _this.replaceVariableValue(varName));
+      var varName = match[0].replace('$', '');
+      text = text.replace(match[0], _this.replaceVariableValue(varName));
     });
     return text;
   };
