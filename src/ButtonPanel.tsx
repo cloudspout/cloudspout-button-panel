@@ -4,7 +4,7 @@ import { PanelProps } from '@grafana/data';
 import { getTemplateSrv } from '@grafana/runtime';
 
 import { ButtonPanelOptions, ButtonPanelState } from 'types';
-import { VariableType } from "@grafana/data/types/templateVars";
+import { VariableType } from '@grafana/data/types/templateVars';
 
 interface Props extends PanelProps<ButtonPanelOptions> {}
 
@@ -24,8 +24,6 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
 
   resolveFilterVariables() {
     const templateSrv = getTemplateSrv();
-    const variablesProtected = templateSrv.getVariables();
-    console.log(variablesProtected)
     const resolvedVariables: Array<{ name: any; value: any; type: VariableType }> = [];
     templateSrv.getVariables().map(variable => {
       if (variable.type === 'adhoc') {
@@ -34,16 +32,15 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
           resolvedVariables.push({
             name: filter.key,
             value: filter.value,
-            type: variable.type
+            type: variable.type,
           });
-      });
-    } else if (variable.type === 'textbox'){
-
+        });
+      } else if (variable.type === 'textbox') {
         resolvedVariables.push({
           name: variable.name,
           // @ts-ignore
           value: variable.query,
-          type: variable.type
+          type: variable.type,
         });
       }
     });
