@@ -1,4 +1,4 @@
-import { SelectableValue } from '@grafana/data';
+import {SelectableValue, VariableType} from '@grafana/data';
 import { ButtonVariant } from '@grafana/ui';
 
 export interface ButtonPanelOptions {
@@ -37,5 +37,5 @@ export const defaults: ButtonPanelOptions = {
 export type ButtonPanelState = {
   api_call: 'READY' | 'IN_PROGRESS' | 'SUCCESS' | 'ERROR';
   response: string;
-  resolvedVariables: Array<{ name: string; value: string }>;
+  resolvedVariables: Array<{ name: string; value: string; type:VariableType }>;
 };
