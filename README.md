@@ -56,7 +56,7 @@ This will run linting tools and apply prettier fix.
 Use an actual Docker container in parallel to test:
 
 ```BASH
-docker run -d -p 3000:3000 -v "$(pwd)"/dist:/var/lib/grafana/plugins/cloudspout-button-panel --name=grafana grafana/grafana
+docker run --rm -p 3000:3000 -v "$(pwd)"/dist:/var/lib/grafana/plugins/cloudspout-button-panel --name=grafana grafana/grafana:7.0.2
 ```
 
 To build the plugin run:
