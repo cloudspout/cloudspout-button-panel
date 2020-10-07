@@ -1,10 +1,12 @@
-import { SelectableValue } from '@grafana/data';
 import { ButtonVariant } from '@grafana/ui';
 
 export interface ButtonPanelOptions {
-  text: string;
   url: string;
 
+  method?: string;
+  type?: string;
+
+  isAuth: boolean;
   username: string;
   password: string;
 
@@ -12,15 +14,15 @@ export interface ButtonPanelOptions {
   newParamName: string;
   newParamValue: string;
 
-  method?: SelectableValue<string>;
-  type?: SelectableValue<string>;
-  variant?: SelectableValue<ButtonVariant>;
-  orientation: SelectableValue<string>;
+  text: string;
+  variant?: ButtonVariant;
+  orientation: string;
 }
 
 export const defaults: ButtonPanelOptions = {
   text: 'The default button label',
   url: 'http://api.example.com/',
+  isAuth: false,
   username: '',
   password: '',
   method: undefined,
@@ -29,7 +31,7 @@ export const defaults: ButtonPanelOptions = {
   newParamName: '',
   newParamValue: '',
   variant: undefined,
-  orientation: { value: 'center', label: 'Center' },
+  orientation: 'center',
 };
 
 export type ButtonPanelState = {
