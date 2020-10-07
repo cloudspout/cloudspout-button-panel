@@ -28,7 +28,6 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
       const url = new URL(options.url);
 
       const requestHeaders: HeadersInit = new Headers();
-      requestHeaders.set('Content-Type', 'application/json');
       requestHeaders.set('Accept', 'application/json');
 
       let fetchOpts: RequestInit = {
@@ -41,7 +40,14 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
         //referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
       };
 
-      if (options.username != ''){
+      if (options.method === 'POST') {
+        requestHeaders.set('Content-Type', options.contentType);
+        if (options.payload) {
+          fetchOpts.body = options.payload;
+        }
+      }
+
+      if (options.isAuth){
         requestHeaders.set('Authorization', btoa(options.username + ':' + options.password));
       }
 
