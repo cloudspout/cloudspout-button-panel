@@ -28,6 +28,12 @@ export class ButtonPanelEditor extends PureComponent<PanelEditorProps<ButtonPane
   onURLChanged = ({ target }: any) => {
     this.props.onOptionsChange({ ...this.props.options, url: target.value });
   };
+  onUsernameChanged = ({ target }: any) => {
+    this.props.onOptionsChange({ ...this.props.options, username: target.value });
+  };
+  onPasswordChanged = ({ target }: any) => {
+    this.props.onOptionsChange({ ...this.props.options, password: target.value });
+  };
   onMethodChanged = ({ label, value, target }: any) => {
     this.props.onOptionsChange({
       ...this.props.options,
@@ -86,6 +92,15 @@ export class ButtonPanelEditor extends PureComponent<PanelEditorProps<ButtonPane
 
         <Field label="URL" description="The URL to call">
           <Input required onChange={this.onURLChanged} value={options.url || ''} />
+        </Field>
+
+        <Field label="Basic Authentication" description="Requires CORS compliant server!">
+          <div className="panel-container" style={{ width: 'auto' }}>
+            <HorizontalGroup>
+              <Input placeholder="Username" onChange={this.onUsernameChanged} value={options.username || ''} />
+              <Input placeholder="Password" onChange={this.onPasswordChanged} value={options.password || ''} />
+            </HorizontalGroup>
+          </div>
         </Field>
 
         <Field label="Type" description="Defines how the parameters are sent to the server">
