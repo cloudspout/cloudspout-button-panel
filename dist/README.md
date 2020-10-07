@@ -22,7 +22,7 @@ It provides a simple Grafana panel that shows only one button - to integrate wit
 Via the [Grafana CLI](https://grafana.com/docs/grafana/latest/administration/cli/):
 
 ```BASH
-$ grafana-cli --pluginUrl https://github.com/cloudspout/cloudspout-button-panel/releases/download/7.0.2/cloudspout-button-panel.zip \
+$ grafana-cli --pluginUrl https://github.com/cloudspout/cloudspout-button-panel/releases/download/7.0.4/cloudspout-button-panel.zip \
   plugins install cloudspout-button-panel
 ```
 
@@ -32,7 +32,7 @@ Use [Grafana's environment variable](https://grafana.com/docs/grafana/latest/ins
 
 ```BASH
 $ docker run -p 3000:3000 -it \
-  -e "GF_INSTALL_PLUGINS=https://github.com/cloudspout/cloudspout-button-panel/releases/download/7.0.2/cloudspout-button-panel.zip;cloudspout-button-panel" \
+  -e "GF_INSTALL_PLUGINS=https://github.com/cloudspout/cloudspout-button-panel/releases/download/7.0.4/cloudspout-button-panel.zip;cloudspout-button-panel" \
    grafana/grafana:7.0.3
 ```
 
@@ -56,7 +56,7 @@ This will run linting tools and apply prettier fix.
 Use an actual Docker container in parallel to test:
 
 ```BASH
-docker run -d -p 3000:3000 -v "$(pwd)"/dist:/var/lib/grafana/plugins/cloudspout-button-panel --name=grafana grafana/grafana
+docker run --rm -p 3000:3000 -v "$(pwd)"/dist:/var/lib/grafana/plugins/cloudspout-button-panel --name=grafana grafana/grafana:7.0.2
 ```
 
 To build the plugin run:

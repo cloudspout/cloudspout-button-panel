@@ -4,6 +4,10 @@ import { ButtonVariant } from '@grafana/ui';
 export interface ButtonPanelOptions {
   text: string;
   url: string;
+
+  username: string;
+  password: string;
+
   params: Array<[string, string]>;
   newParamName: string;
   newParamValue: string;
@@ -17,6 +21,8 @@ export interface ButtonPanelOptions {
 export const defaults: ButtonPanelOptions = {
   text: 'The default button label',
   url: 'http://api.example.com/',
+  username: '',
+  password: '',
   method: undefined,
   type: undefined,
   params: [],

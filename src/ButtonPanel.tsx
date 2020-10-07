@@ -31,15 +31,19 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
       requestHeaders.set('Content-Type', 'application/json');
       requestHeaders.set('Accept', 'application/json');
 
-      const fetchOpts: RequestInit = {
+      let fetchOpts: RequestInit = {
         method: options.method?.value, // *GET, POST, PUT, DELETE, etc.
         mode: 'cors', // no-cors, *cors, same-origin
+        credentials: 'include', // include, *same-origin, omit
         cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-        //credentials: 'same-origin', // include, *same-origin, omit
         headers: requestHeaders,
         redirect: 'follow', // manual, *follow, error
         //referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
       };
+
+      if (options.username != ''){
+        requestHeaders.set('Authorization', btoa(options.username + ':' + options.password));
+      }
 
       if (options.type?.value === 'HEADER') {
         options.params.forEach(e => {
@@ -55,7 +59,13 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
 
       fetch(url.toString(), fetchOpts)
         .then(response => {
-          if (response.ok) {
+          if (response.type == 'opaque') {
+            // CORS prevents us from knowing what's up - so be it
+            this.setState({
+              api_call: 'READY',
+              response: 'CORS prevents access to the response',
+            });
+          } else if (response.ok) {
             this.setState({
               api_call: 'SUCCESS',
               response: response.statusText,
