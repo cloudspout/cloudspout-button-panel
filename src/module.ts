@@ -23,7 +23,7 @@ export const plugin = new PanelPlugin<ButtonPanelOptions>(ButtonPanel).setPanelO
           },
         ],
       },
-      defaultValue: 'POST'
+      defaultValue: 'GET',
     })
     .addTextInput({
       path: 'url',
@@ -51,7 +51,6 @@ export const plugin = new PanelPlugin<ButtonPanelOptions>(ButtonPanel).setPanelO
           },
         ],
       },
-      
       defaultValue: 'header',
     })
     .addCustomEditor({
@@ -61,6 +60,25 @@ export const plugin = new PanelPlugin<ButtonPanelOptions>(ButtonPanel).setPanelO
       category: ['REST Integration'],
       description: 'The parameters sent with the request',
       editor: ButtonParamsEditor,
+    })
+    .addTextInput({
+      path: 'contentType',
+      name: 'Content-Type',
+      category: ['REST Integration'],
+      description: 'Content-Type of the payload',
+      defaultValue: 'application/json',
+      showIf: config => config.method === 'POST',
+    })
+    .addTextInput({
+      path: 'payload',
+      name: 'Payload',
+      category: ['REST Integration'],
+      description: 'Optional payload to send with the request',
+      settings: {
+        useTextarea: true,
+        rows: 5
+      },
+      showIf: config => config.method === 'POST',
     })
     .addSelect({
       path: 'variant',
@@ -121,20 +139,19 @@ export const plugin = new PanelPlugin<ButtonPanelOptions>(ButtonPanel).setPanelO
       name: 'Authentication',
       category: ['Authentication'],
       description: 'Should basic authentication be used?',
-      defaultValue: false
+      defaultValue: false,
     })
     .addTextInput({
       path: 'username',
       name: 'Username',
       category: ['Authentication'],
-      showIf: config => config.isAuth
+      showIf: config => config.isAuth,
     })
     .addTextInput({
       path: 'password',
       name: 'Password',
       category: ['Authentication'],
-
-      showIf: config => config.isAuth
+      showIf: config => config.isAuth,
     })
     ;
 });

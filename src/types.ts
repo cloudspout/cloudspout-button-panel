@@ -4,21 +4,21 @@ export interface ButtonPanelOptions {
   url: string;
 
   method?: string;
-  type?: string;
+  type: string;
+  contentType: string;
+  payload?: string
 
   isAuth: boolean;
-  username: string;
-  password: string;
+  username?: string;
+  password?: string;
 
   params: Array<[string, string]>;
-  newParamName: string;
-  newParamValue: string;
 
   text: string;
-  variant?: ButtonVariant;
+  variant: ButtonVariant;
   orientation: string;
 }
-
+/*
 export const defaults: ButtonPanelOptions = {
   text: 'The default button label',
   url: 'http://api.example.com/',
@@ -28,11 +28,9 @@ export const defaults: ButtonPanelOptions = {
   method: undefined,
   type: undefined,
   params: [],
-  newParamName: '',
-  newParamValue: '',
   variant: undefined,
   orientation: 'center',
-};
+};*/
 
 export type ButtonPanelState = {
   api_call: 'READY' | 'IN_PROGRESS' | 'SUCCESS' | 'ERROR';
