@@ -1,4 +1,4 @@
-import { ButtonVariant } from '@grafana/ui';
+import { ButtonVariant, IconName } from '@grafana/ui';
 
 export interface ButtonPanelOptions {
   url: string;
@@ -6,7 +6,7 @@ export interface ButtonPanelOptions {
   method?: string;
   type: string;
   contentType: string;
-  payload?: string
+  payload?: string;
 
   isAuth: boolean;
   username?: string;
@@ -16,21 +16,9 @@ export interface ButtonPanelOptions {
 
   text: string;
   variant: ButtonVariant;
+  icon?: IconName;
   orientation: string;
 }
-/*
-export const defaults: ButtonPanelOptions = {
-  text: 'The default button label',
-  url: 'http://api.example.com/',
-  isAuth: false,
-  username: '',
-  password: '',
-  method: undefined,
-  type: undefined,
-  params: [],
-  variant: undefined,
-  orientation: 'center',
-};*/
 
 export type ButtonPanelState = {
   api_call: 'READY' | 'IN_PROGRESS' | 'SUCCESS' | 'ERROR';

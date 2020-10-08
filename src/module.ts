@@ -1,8 +1,9 @@
-import { PanelPlugin } from '@grafana/data';
+import { PanelPlugin, SelectableValue } from '@grafana/data';
 import { ButtonPanelOptions } from './types';
 import { ButtonPanel } from './ButtonPanel';
 import { ButtonParamsEditor } from './ButtonParamsEditor';
 import 'static/button-panel.css';
+import { getAvailableIcons } from '@grafana/ui';
 
 export const plugin = new PanelPlugin<ButtonPanelOptions>(ButtonPanel).setPanelOptions(builder => {
   return builder
@@ -76,7 +77,7 @@ export const plugin = new PanelPlugin<ButtonPanelOptions>(ButtonPanel).setPanelO
       description: 'Optional payload to send with the request',
       settings: {
         useTextarea: true,
-        rows: 5
+        rows: 5,
       },
       showIf: config => config.method === 'POST',
     })
@@ -128,6 +129,22 @@ export const plugin = new PanelPlugin<ButtonPanelOptions>(ButtonPanel).setPanelO
       },
       defaultValue: 'center',
     })
+    .addSelect({
+      path: 'icon',
+      name: 'Icon',
+      description: '',
+      settings: {
+        options: getAvailableIcons().map(
+          (icon): SelectableValue => {
+            return {
+              value: icon,
+              label: icon,
+            };
+          }
+        ),
+      },
+      defaultValue: 'cog',
+    })
     .addTextInput({
       path: 'text',
       name: 'Text',
@@ -152,6 +169,5 @@ export const plugin = new PanelPlugin<ButtonPanelOptions>(ButtonPanel).setPanelO
       name: 'Password',
       category: ['Authentication'],
       showIf: config => config.isAuth,
-    })
-    ;
+    });
 });
