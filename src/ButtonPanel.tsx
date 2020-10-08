@@ -47,7 +47,7 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
         }
       }
 
-      if (options.isAuth){
+      if (options.isAuth) {
         requestHeaders.set('Authorization', btoa(options.username + ':' + options.password));
       }
 
@@ -65,7 +65,7 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
 
       fetch(url.toString(), fetchOpts)
         .then(response => {
-          if (response.type == 'opaque') {
+          if (response.type === 'opaque') {
             // CORS prevents us from knowing what's up - so be it
             this.setState({
               api_call: 'READY',
@@ -91,7 +91,7 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
         });
     };
 
-    const apiStateIcon = (): IconName => {
+    const apiStateIcon = (): IconName | undefined => {
       switch (this.state.api_call) {
         case 'IN_PROGRESS':
           return 'fa fa-spinner';
@@ -101,7 +101,7 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
           return 'exclamation-triangle';
         case 'READY':
         default:
-          return 'cog';
+          return options.icon;
       }
     };
 
