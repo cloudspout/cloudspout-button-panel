@@ -127,6 +127,20 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
           return 'center';
       }
     };
+    const customStyle = () => {
+      if (this.props.options.variant === undefined) {
+        return {
+          // Resaet Grafana defaults
+          background: 'none',
+          border: 'none',
+          // Set custom styles
+          backgroundColor: this.props.options.backgroundColor,
+          color: this.props.options.foregroundColor,
+        };
+      } else {
+        return {};
+      }
+    };
 
     return (
       <div className={getOrientation()}>
@@ -137,6 +151,7 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
           className={apiStateClassName()}
           icon={apiStateIcon()}
           onClick={exeucte}
+          style={customStyle()}
         >
           {options.text}
         </Button>
