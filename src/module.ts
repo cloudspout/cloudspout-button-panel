@@ -103,9 +103,31 @@ export const plugin = new PanelPlugin<ButtonPanelOptions>(ButtonPanel).setPanelO
             value: 'link',
             label: 'Link',
           },
+          {
+            value: undefined,
+            label: 'Custom',
+          },
         ],
       },
       defaultValue: 'primary',
+    })
+    .addColorPicker({
+      path: 'foregroundColor',
+      name: 'Fackground Color',
+      description: 'Foreground color of the button',
+      settings: {
+        disableNamedColors: true,
+      },
+      showIf: config => config.variant === undefined,
+    })
+    .addColorPicker({
+      path: 'backgroundColor',
+      name: 'Background Color',
+      description: 'Background color of the button',
+      settings: {
+        disableNamedColors: true,
+      },
+      showIf: config => config.variant === undefined,
     })
     .addRadio({
       path: 'orientation',
@@ -168,6 +190,7 @@ export const plugin = new PanelPlugin<ButtonPanelOptions>(ButtonPanel).setPanelO
       path: 'password',
       name: 'Password',
       category: ['Authentication'],
+      description: '⚠️ The password is NOT stored encrypted in Grafana ⚠️',
       showIf: config => config.isAuth,
     });
 });

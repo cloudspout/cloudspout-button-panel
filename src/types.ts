@@ -15,7 +15,9 @@ export interface ButtonPanelOptions {
   params: Array<[string, string]>;
 
   text: string;
-  variant: ButtonVariant;
+  variant: ButtonVariant | undefined;
+  foregroundColor?: string;
+  backgroundColor?: string;
   icon?: IconName;
   orientation: string;
 }
