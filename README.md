@@ -1,15 +1,36 @@
 # Button Panel
 
-It provides a simple Grafana panel that shows only one button - to integrate with any kind of HTTP/REST API:
+It provides a simple Grafana 7.x panel that shows only one button - to integrate with any kind of HTTP/REST API:
 * Support GET and POST HTTP verb
     * Adds no new javascript dependencies
     * Uses standard browser APIs and respects CORS
 * Support API key via header `X-API-Key` or query parameter `?api-key`
+* Support for HTTP Basic Auth
 * Custom label text & Grafana template design
+    * Customize icon & button colors
 
 ## Configuration
 
 ![Screenshot](https://github.com/cloudspout/cloudspout-button-panel/raw/main/img/screenshot.png)
+
+### Basic Auth
+⚠️ Please note: ⚠️
+
+Due to the Grafana API & security restrictions in modern browsers the following must be considered before using Basic Auth:
+
+![Basic Auth Configuration](https://github.com/cloudspout/cloudspout-button-panel/raw/main/img/authentication.png)
+
+* Neither username nor password are stored encryted in Grafana. 
+  The password is there to everyone with access to the dashboard in Grafana! 
+* The *server* at the URL _must_ provide proper resposne to the [CORS pre-flight request](https://developer.mozilla.org/en-US/docs/Glossary/Preflight_request). That is:
+    * Provide a proper response to the `OPTIONS` request performed by the browser before the actual `GET`/`POST` requiest is issued
+    * Provide a [`Access-Control-Allow-Credentials: true`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials) header 
+    * Provide a proper [`Access-Control-Allow-Origin`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin) header.
+      _No wildcards_ are allowed if credentials are used!
+
+These limitations are inherent and canot be fixed or addressed by the plugin!
+
+Use Basic Auth only if these limitations are acceptable!
 
 ## Usage
 
