@@ -184,13 +184,14 @@ export const plugin = new PanelPlugin<ButtonPanelOptions>(ButtonPanel).setPanelO
       path: 'username',
       name: 'Username',
       category: ['Authentication'],
+      description: 'ℹ️ The server MUST provide proper CORS Access-Control-Allow-* headers!',
       showIf: config => config.isAuth,
     })
     .addTextInput({
       path: 'password',
       name: 'Password',
       category: ['Authentication'],
-      description: '⚠️ The password is NOT stored encrypted in Grafana ⚠️',
+      description: '⚠️ The password is NOT stored encrypted in Grafana!',
       showIf: config => config.isAuth,
     });
 });

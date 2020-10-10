@@ -1,9 +1,10 @@
 # Button Panel
 
 It provides a simple Grafana 7.x panel that shows only one button - to integrate with any kind of HTTP/REST API:
-* Support GET and POST HTTP verb
+* Support `GET` and `POST` HTTP verb
     * Adds no new javascript dependencies
     * Uses standard browser APIs and respects CORS
+    * Optional payload for `POST` requests
 * Support API key via header `X-API-Key` or query parameter `?api-key`
 * Support for HTTP Basic Auth
 * Custom label text & Grafana template design
@@ -43,7 +44,7 @@ Use Basic Auth only if these limitations are acceptable!
 Via the [Grafana CLI](https://grafana.com/docs/grafana/latest/administration/cli/):
 
 ```BASH
-$ grafana-cli --pluginUrl https://github.com/cloudspout/cloudspout-button-panel/releases/download/7.0.4/cloudspout-button-panel.zip \
+$ grafana-cli --pluginUrl https://github.com/cloudspout/cloudspout-button-panel/releases/download/7.0.5/cloudspout-button-panel.zip \
   plugins install cloudspout-button-panel
 ```
 
@@ -53,8 +54,8 @@ Use [Grafana's environment variable](https://grafana.com/docs/grafana/latest/ins
 
 ```BASH
 $ docker run -p 3000:3000 -it \
-  -e "GF_INSTALL_PLUGINS=https://github.com/cloudspout/cloudspout-button-panel/releases/download/7.0.4/cloudspout-button-panel.zip;cloudspout-button-panel" \
-   grafana/grafana:7.0.3
+  -e "GF_INSTALL_PLUGINS=https://github.com/cloudspout/cloudspout-button-panel/releases/download/7.0.5/cloudspout-button-panel.zip;cloudspout-button-panel" \
+   grafana/grafana:7.2.0
 ```
 
 
@@ -77,7 +78,7 @@ This will run linting tools and apply prettier fix.
 Use an actual Docker container in parallel to test:
 
 ```BASH
-docker run --rm -p 3000:3000 -v "$(pwd)"/dist:/var/lib/grafana/plugins/cloudspout-button-panel --name=grafana grafana/grafana:7.0.2
+docker run --rm -p 3000:3000 -v "$(pwd)"/dist:/var/lib/grafana/plugins/cloudspout-button-panel --name=grafana grafana/grafana:7.2.0
 ```
 
 To build the plugin run:
