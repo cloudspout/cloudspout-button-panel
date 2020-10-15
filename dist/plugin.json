@@ -27,12 +27,12 @@
     ],
     "screenshots": [
         {
-          "path": "https://github.com/cloudspout/cloudspout-button-panel/blob/main/img/screenshot.png",
+          "path": "img/screenshot.png",
           "name": "Settings"
         }
     ],
-    "version": "7.0.4",
-    "updated": "2020-10-10"
+    "version": "7.0.6",
+    "updated": "2020-10-15"
   },
   "dependencies": {
     "grafanaVersion": "7.x.x",
