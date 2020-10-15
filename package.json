@@ -1,6 +1,6 @@
 {
   "name": "cloudspout-button-panel",
-  "version": "7.0.6",
+  "version": "7.0.7",
   "description": "Panel for a single button",
   "scripts": {
     "clean": "rm -rf dist/",
