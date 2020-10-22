@@ -1000,6 +1000,16 @@
   resolved "https://registry.yarnpkg.com/@grafana/eslint-config/-/eslint-config-2.0.0.tgz#6e2b03e6d9f2afe3a0afa68560184be4e47abcd8"
   integrity sha512-AktBgoo/WzaPgjITkemP/ItcAc5E7Ga0mgjflP/fUGsHnx+d4C2Lxxxpf9BjhNgqj3G82Db8tjXDFHEqWW19hQ==
 
+"@grafana/runtime@^7.2.0":
+  version "7.2.2"
+  resolved "https://registry.yarnpkg.com/@grafana/runtime/-/runtime-7.2.2.tgz#0150aceb9915975a5e794ddf5b076819ed54555e"
+  integrity sha512-+xkexBeGwUV+/5Vuq3CjmnYAUxSCbeWHgWg9xIGDmhq/x3A8fNR2YzCJIm9s+YEUFQtT7ognnrnAxrwi/xRbSA==
+  dependencies:
+    "@grafana/data" "7.2.2"
+    "@grafana/ui" "7.2.2"
+    systemjs "0.20.19"
+    systemjs-plugin-css "0.1.37"
+
 "@grafana/slate-react@0.22.9-grafana":
   version "0.22.9-grafana"
   resolved "https://registry.yarnpkg.com/@grafana/slate-react/-/slate-react-0.22.9-grafana.tgz#07f35f0ffc018f616b9f82fa6e5ba65fae75c6a0"
@@ -1116,7 +1126,7 @@
   resolved "https://registry.yarnpkg.com/@grafana/tsconfig/-/tsconfig-1.0.0-rc1.tgz#d07ea16755a50cae21000113f30546b61647a200"
   integrity sha512-nucKPGyzlSKYSiJk5RA8GzMdVWhdYNdF+Hh65AXxjD9PlY69JKr5wANj8bVdQboag6dgg0BFKqgKPyY+YtV4Iw==
 
-"@grafana/ui@^7.2.0":
+"@grafana/ui@7.2.2", "@grafana/ui@^7.2.0":
   version "7.2.2"
   resolved "https://registry.yarnpkg.com/@grafana/ui/-/ui-7.2.2.tgz#a11bdabba9b54fa2a782da998477a3027f6287dd"
   integrity sha512-ayrDbWO13B6v2BiEL2f4Z4phCWAeWScmewGSrzB12GBc9nisTEhpWwYDR2l5CpEYQEjsUr5gbvxKLK6H3m/Fiw==
@@ -12264,6 +12274,16 @@ symbol-tree@^3.2.2:
   version "3.2.4"
   resolved "https://registry.yarnpkg.com/symbol-tree/-/symbol-tree-3.2.4.tgz#430637d248ba77e078883951fb9aa0eed7c63fa2"
   integrity sha512-9QNk5KwDF+Bvz+PyObkmSYjI5ksVUYtjW7AU22r2NKcfLJcXp96hkDWU3+XndOsUb+AQ9QhfzfCT2O+CNWT5Tw==
+
+systemjs-plugin-css@0.1.37:
+  version "0.1.37"
+  resolved "https://registry.yarnpkg.com/systemjs-plugin-css/-/systemjs-plugin-css-0.1.37.tgz#684847252ca69b7da24a1201094c86274324e82f"
+  integrity sha512-wCGG62zYXuOlNji5FlBjeMFAnLeAO/HQmFg+8UBX/mlHoAKLHlGFYRstlhGKibRU2oxk/BH9DaihOuhhNLi7Kg==
+
+systemjs@0.20.19:
+  version "0.20.19"
+  resolved "https://registry.yarnpkg.com/systemjs/-/systemjs-0.20.19.tgz#c2b9e79c19f4bea53a19b1ed3f974ffb463be949"
+  integrity sha512-H/rKwNEEyej/+IhkmFNmKFyJul8tbH/muiPq5TyNoVTwsGhUjRsN3NlFnFQUvFXA3+GQmsXkCNXU6QKPl779aw==
 
 table-layout@^0.4.3:
   version "0.4.5"

@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { Button, IconName } from '@grafana/ui';
 import { PanelProps } from '@grafana/data';
 import { ButtonPanelOptions, ButtonPanelState } from 'types';
+import { getTemplateSrv } from '@grafana/runtime';
 
 interface Props extends PanelProps<ButtonPanelOptions> {}
 
@@ -11,10 +12,41 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
     this.init();
   }
 
+  // @ts-ignore
+  getVariables = () => {
+    const templateSrv = getTemplateSrv();
+    const variables = templateSrv.getVariables();
+
+    const common_variables = variables
+      .filter(variable => variable.type !== 'adhoc')
+      .map(variable => ({
+        label: '$' + variable.name,
+        text: variable.current.text,
+        value: variable.current.value,
+        type: variable.type,
+      }));
+
+    const adhoc_variables = variables
+      .filter(variable => variable.type === 'adhoc')
+      .map(variable => variable.filters.map(filter => ({
+            label: '$' + variable.id + '.' + filter.key,
+            text: filter.key,
+            value: filter.value,
+            type: 'adhoc',
+          }))).flat(1);
+
+    return common_variables.concat(adhoc_variables);
+  };
+  ifVariableChangeValue = variableName => {
+    const found = this.state.variables.find(variable => variable.label === variableName);
+    return found ? found.value: variableName;
+  };
+
   init() {
     this.state = {
       api_call: 'READY',
       response: '',
+      variables: this.getVariables(),
     };
   }
 
@@ -22,7 +54,7 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
     const { options } = this.props;
 
     const exeucte = () => {
-      this.setState({ api_call: 'IN_PROGRESS' });
+      this.setState({ api_call: 'IN_PROGRESS', variables: this.getVariables() });
       console.log(options.method, ' to ', options.url, ' with params as ', options.type);
 
       const url = new URL(options.url);
@@ -53,11 +85,11 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
 
       if (options.type === 'header') {
         options.params.forEach(e => {
-          requestHeaders.set(e[0], e[1]);
+          requestHeaders.set(this.ifVariableChangeValue(e[0]), this.ifVariableChangeValue(e[1]));
         });
       } else if (options.type === 'query') {
         options.params.forEach(e => {
-          url.searchParams.append(e[0], e[1]);
+          url.searchParams.append(this.ifVariableChangeValue(e[0]), this.ifVariableChangeValue(e[1]));
         });
       } else {
         console.error('Unknown params type', options.type);

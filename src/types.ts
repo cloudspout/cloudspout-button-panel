@@ -1,4 +1,5 @@
 import { ButtonVariant, IconName } from '@grafana/ui';
+import { VariableType } from '@grafana/data';
 
 export interface ButtonPanelOptions {
   url: string;
@@ -13,6 +14,12 @@ export interface ButtonPanelOptions {
   password?: string;
 
   params: Array<[string, string]>;
+  newParamName: string;
+  newParamValue: string;
+
+  variableParams: Array<[string, string]>;
+  newVariableParamName: string;
+  newVariableParamValue: string;
 
   text: string;
   variant: ButtonVariant | undefined;
@@ -25,4 +32,5 @@ export interface ButtonPanelOptions {
 export type ButtonPanelState = {
   api_call: 'READY' | 'IN_PROGRESS' | 'SUCCESS' | 'ERROR';
   response: string;
+  variables: Array<{ label: string; text: string; value: string; type: VariableType }>;
 };
