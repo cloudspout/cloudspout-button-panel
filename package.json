@@ -1,6 +1,6 @@
 {
   "name": "cloudspout-button-panel",
-  "version": "7.0.4",
+  "version": "7.0.7",
   "description": "Panel for a single button",
   "scripts": {
     "clean": "rm -rf dist/",
@@ -20,9 +20,9 @@
     "email": "info@cloudspout.io"
   },
   "devDependencies": {
-    "@grafana/data": "7.0.1",
-    "@grafana/toolkit": "7.0.1",
-    "@grafana/ui": "^7.1.0",
+    "@grafana/data": "^7.2.0",
+    "@grafana/toolkit": "^7.2.0",
+    "@grafana/ui": "^7.2.0",
     "emotion": "10.0.27",
     "npm-build-zip": "^1.0.2",
     "release-it": "^13.6.5"

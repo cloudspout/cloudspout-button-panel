@@ -9,7 +9,7 @@
       "url": "https://github.com/cloudspout/cloudspout-button-panel/"
     },
     "keywords": [
-      
+      "panel", "rest", "button", "integration"
     ],
     "logos": {
       "small": "img/logo.svg",
@@ -25,12 +25,18 @@
         "url": "https://github.com/cloudspout/cloudspout-button-panel/blob/master/LICENSE"
       }
     ],
-    "screenshots": [],
+    "screenshots": [
+        {
+          "path": "img/screenshot.png",
+          "name": "Settings"
+        }
+    ],
     "version": "%VERSION%",
     "updated": "%TODAY%"
   },
   "dependencies": {
-    "grafanaVersion": "6.3.x",
+    "grafanaVersion": "7.x.x",
+    "grafanaDependency": ">=7.0.0", 
     "plugins": []
   }
 }

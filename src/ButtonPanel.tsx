@@ -23,39 +23,55 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
 
     const exeucte = () => {
       this.setState({ api_call: 'IN_PROGRESS' });
-      console.log(options.method?.value, ' to ', options.url, ' with key as ', options.type?.value);
+      console.log(options.method, ' to ', options.url, ' with params as ', options.type);
 
       const url = new URL(options.url);
 
       const requestHeaders: HeadersInit = new Headers();
-      requestHeaders.set('Content-Type', 'application/json');
       requestHeaders.set('Accept', 'application/json');
 
-      const fetchOpts: RequestInit = {
-        method: options.method?.value, // *GET, POST, PUT, DELETE, etc.
+      let fetchOpts: RequestInit = {
+        method: options.method, // *GET, POST, PUT, DELETE, etc.
         mode: 'cors', // no-cors, *cors, same-origin
+        credentials: 'include', // include, *same-origin, omit
         cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-        //credentials: 'same-origin', // include, *same-origin, omit
         headers: requestHeaders,
         redirect: 'follow', // manual, *follow, error
         //referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
       };
 
-      if (options.type?.value === 'HEADER') {
+      if (options.method === 'POST') {
+        requestHeaders.set('Content-Type', options.contentType);
+        if (options.payload) {
+          fetchOpts.body = options.payload;
+        }
+      }
+
+      if (options.isAuth) {
+        requestHeaders.set('Authorization', btoa(options.username + ':' + options.password));
+      }
+
+      if (options.type === 'header') {
         options.params.forEach(e => {
           requestHeaders.set(e[0], e[1]);
         });
-      } else if (options.type?.value === 'QUERY') {
+      } else if (options.type === 'query') {
         options.params.forEach(e => {
           url.searchParams.append(e[0], e[1]);
         });
       } else {
-        console.error('Unknown api key type', options.type);
+        console.error('Unknown params type', options.type);
       }
 
       fetch(url.toString(), fetchOpts)
         .then(response => {
-          if (response.ok) {
+          if (response.type === 'opaque') {
+            // CORS prevents us from knowing what's up - so be it
+            this.setState({
+              api_call: 'READY',
+              response: 'CORS prevents access to the response',
+            });
+          } else if (response.ok) {
             this.setState({
               api_call: 'SUCCESS',
               response: response.statusText,
@@ -75,7 +91,7 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
         });
     };
 
-    const apiStateIcon = (): IconName => {
+    const apiStateIcon = (): IconName | undefined => {
       switch (this.state.api_call) {
         case 'IN_PROGRESS':
           return 'fa fa-spinner';
@@ -85,7 +101,7 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
           return 'exclamation-triangle';
         case 'READY':
         default:
-          return 'cog';
+          return options.icon;
       }
     };
 
@@ -98,7 +114,10 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
       }
     };
     const getOrientation = () => {
-      switch (this.props.options.orientation.value) {
+      if (!this.props.options.orientation) {
+        return 'center';
+      }
+      switch (this.props.options.orientation) {
         case 'left':
           return 'left';
         case 'right':
@@ -108,16 +127,31 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
           return 'center';
       }
     };
+    const customStyle = () => {
+      if (this.props.options.variant === undefined) {
+        return {
+          // Resaet Grafana defaults
+          background: 'none',
+          border: 'none',
+          // Set custom styles
+          backgroundColor: this.props.options.backgroundColor,
+          color: this.props.options.foregroundColor,
+        };
+      } else {
+        return {};
+      }
+    };
 
     return (
       <div className={getOrientation()}>
         <Button
-          variant={this.props.options.variant?.value}
+          variant={this.props.options.variant}
           title={this.state.response}
           size="lg"
           className={apiStateClassName()}
           icon={apiStateIcon()}
           onClick={exeucte}
+          style={customStyle()}
         >
           {options.text}
         </Button>

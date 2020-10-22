@@ -1,15 +1,37 @@
 # Button Panel
 
-It provides a simple Grafana panel that shows only one button - to integrate with any kind of HTTP/REST API:
-* Support GET and POST HTTP verb
+It provides a simple Grafana 7.x panel that shows only one button - to integrate with any kind of HTTP/REST API:
+* Support `GET` and `POST` HTTP verb
     * Adds no new javascript dependencies
     * Uses standard browser APIs and respects CORS
+    * Optional payload for `POST` requests
 * Support API key via header `X-API-Key` or query parameter `?api-key`
+* Support for HTTP Basic Auth
 * Custom label text & Grafana template design
+    * Customize icon & button colors
 
 ## Configuration
 
 ![Screenshot](https://github.com/cloudspout/cloudspout-button-panel/raw/main/img/screenshot.png)
+
+### Basic Auth
+⚠️ Please note: ⚠️
+
+Due to the Grafana API & security restrictions in modern browsers the following must be considered before using Basic Auth:
+
+![Basic Auth Configuration](https://github.com/cloudspout/cloudspout-button-panel/raw/main/img/authentication.png)
+
+* Neither username nor password are stored encryted in Grafana. 
+  The password is there to everyone with access to the dashboard in Grafana! 
+* The *server* at the URL _must_ provide proper resposne to the [CORS pre-flight request](https://developer.mozilla.org/en-US/docs/Glossary/Preflight_request). That is:
+    * Provide a proper response to the `OPTIONS` request performed by the browser before the actual `GET`/`POST` requiest is issued
+    * Provide a [`Access-Control-Allow-Credentials: true`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials) header 
+    * Provide a proper [`Access-Control-Allow-Origin`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin) header.
+      _No wildcards_ are allowed if credentials are used!
+
+These limitations are inherent and canot be fixed or addressed by the plugin!
+
+Use Basic Auth only if these limitations are acceptable!
 
 ## Usage
 
@@ -22,7 +44,7 @@ It provides a simple Grafana panel that shows only one button - to integrate wit
 Via the [Grafana CLI](https://grafana.com/docs/grafana/latest/administration/cli/):
 
 ```BASH
-$ grafana-cli --pluginUrl https://github.com/cloudspout/cloudspout-button-panel/releases/download/7.0.2/cloudspout-button-panel.zip \
+$ grafana-cli --pluginUrl https://github.com/cloudspout/cloudspout-button-panel/releases/download/7.0.5/cloudspout-button-panel.zip \
   plugins install cloudspout-button-panel
 ```
 
@@ -32,8 +54,8 @@ Use [Grafana's environment variable](https://grafana.com/docs/grafana/latest/ins
 
 ```BASH
 $ docker run -p 3000:3000 -it \
-  -e "GF_INSTALL_PLUGINS=https://github.com/cloudspout/cloudspout-button-panel/releases/download/7.0.2/cloudspout-button-panel.zip;cloudspout-button-panel" \
-   grafana/grafana:7.0.3
+  -e "GF_INSTALL_PLUGINS=https://github.com/cloudspout/cloudspout-button-panel/releases/download/7.0.5/cloudspout-button-panel.zip;cloudspout-button-panel" \
+   grafana/grafana:7.2.0
 ```
 
 
@@ -56,7 +78,7 @@ This will run linting tools and apply prettier fix.
 Use an actual Docker container in parallel to test:
 
 ```BASH
-docker run -d -p 3000:3000 -v "$(pwd)"/dist:/var/lib/grafana/plugins/cloudspout-button-panel --name=grafana grafana/grafana
+docker run --rm -p 3000:3000 -v "$(pwd)"/dist:/var/lib/grafana/plugins/cloudspout-button-panel --name=grafana grafana/grafana:7.2.0
 ```
 
 To build the plugin run:
