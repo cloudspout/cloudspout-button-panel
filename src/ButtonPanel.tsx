@@ -51,16 +51,18 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
         requestHeaders.set('Authorization', btoa(options.username + ':' + options.password));
       }
 
-      if (options.type === 'header') {
-        options.params.forEach(e => {
-          requestHeaders.set(e[0], e[1]);
-        });
-      } else if (options.type === 'query') {
-        options.params.forEach(e => {
-          url.searchParams.append(e[0], e[1]);
-        });
-      } else {
-        console.error('Unknown params type', options.type);
+      if (options.params) {
+        if (options.type === 'header') {
+          options.params.forEach(e => {
+            requestHeaders.set(e[0], e[1]);
+          });
+        } else if (options.type === 'query') {
+          options.params.forEach(e => {
+            url.searchParams.append(e[0], e[1]);
+          });
+        } else {
+          console.error('Unknown params type', options.type);
+        }
       }
 
       fetch(url.toString(), fetchOpts)
