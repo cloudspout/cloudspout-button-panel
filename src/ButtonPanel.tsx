@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { Button, IconName } from '@grafana/ui';
 import { PanelProps } from '@grafana/data';
+import { getTemplateSrv } from '@grafana/runtime';
 import { ButtonPanelOptions, ButtonPanelState } from 'types';
 
 interface Props extends PanelProps<ButtonPanelOptions> {}
@@ -8,6 +9,7 @@ interface Props extends PanelProps<ButtonPanelOptions> {}
 export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
   constructor(props: any) {
     super(props);
+    console.log("props", props);
     this.init();
   }
 
@@ -15,6 +17,7 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
     this.state = {
       api_call: 'READY',
       response: '',
+      scopedVars: {},
     };
   }
 
@@ -23,9 +26,9 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
 
     const exeucte = () => {
       this.setState({ api_call: 'IN_PROGRESS' });
-      console.log(options.method, ' to ', options.url, ' with params as ', options.type);
 
-      const url = new URL(options.url);
+      const url = new URL(interpolateVariables(options.url));
+      console.log(options.method, ' to ', url, ' with params as ', options.type);
 
       const requestHeaders: HeadersInit = new Headers();
       requestHeaders.set('Accept', 'application/json');
@@ -43,7 +46,7 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
       if (options.method === 'POST') {
         requestHeaders.set('Content-Type', options.contentType);
         if (options.payload) {
-          fetchOpts.body = options.payload;
+          fetchOpts.body = interpolateVariables(options.payload);
         }
       }
 
@@ -54,11 +57,11 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
       if (options.params) {
         if (options.type === 'header') {
           options.params.forEach(e => {
-            requestHeaders.set(e[0], e[1]);
+            requestHeaders.set(interpolateVariables(e[0]), interpolateVariables(e[1]));
           });
         } else if (options.type === 'query') {
           options.params.forEach(e => {
-            url.searchParams.append(e[0], e[1]);
+            url.searchParams.append(interpolateVariables(e[0]), interpolateVariables(e[1]));
           });
         } else {
           console.error('Unknown params type', options.type);
@@ -143,6 +146,13 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
         return {};
       }
     };
+    const buttonText = () => {
+      return interpolateVariables(this.props.options.text);
+    }
+
+    const interpolateVariables = (text: string) => {
+      return getTemplateSrv().replace(text, this.props.data.request?.scopedVars);
+    }
 
     return (
       <div className={getOrientation()}>
@@ -155,7 +165,7 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
           onClick={exeucte}
           style={customStyle()}
         >
-          {options.text}
+          {buttonText()}
         </Button>
       </div>
     );
