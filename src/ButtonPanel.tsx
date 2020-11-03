@@ -9,7 +9,6 @@ interface Props extends PanelProps<ButtonPanelOptions> {}
 export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
   constructor(props: any) {
     super(props);
-    console.log("props", props);
     this.init();
   }
 
@@ -17,7 +16,6 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
     this.state = {
       api_call: 'READY',
       response: '',
-      scopedVars: {},
     };
   }
 
