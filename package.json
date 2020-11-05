@@ -4,6 +4,7 @@
   "description": "Panel for a single button",
   "scripts": {
     "clean": "rm -rf dist/",
+    "grafana-sign": "node grafana-sign.js",
     "zip": "node zip.js",
     "dist": "npm run build && npm run zip",
     "build": "grafana-toolkit plugin:build",
@@ -25,7 +26,10 @@
     "@grafana/toolkit": "^7.2.0",
     "@grafana/ui": "^7.2.0",
     "emotion": "10.0.27",
+    "js-sha256": "^0.9.0",
+    "js-sha512": "^0.8.0",
     "npm-build-zip": "^1.0.2",
+    "openpgp": "^4.10.8",
     "release-it": "^13.6.5"
   },
   "engines": {

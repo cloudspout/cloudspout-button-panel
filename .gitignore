@@ -28,3 +28,5 @@ e2e-results/
 # Editors
 .idea
 
+ssl/localhost.key
+ssl/localhost.crt

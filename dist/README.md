@@ -4,15 +4,23 @@ It provides a simple Grafana 7.x panel that shows only one button - to integrate
 * Support `GET` and `POST` HTTP verb
     * Adds no new javascript dependencies
     * Uses standard browser APIs and respects CORS
-    * Optional payload for `POST` requests
-* Support API key via header `X-API-Key` or query parameter `?api-key`
+    * Optional text payload for `POST` requests
+* Support for custom header parameter or query parameter
+* Variable support via `$variableName` in
+    * URL
+    * parameter name & value
+    * Button label
 * Support for HTTP Basic Auth
 * Custom label text & Grafana template design
     * Customize icon & button colors
 
+## Usage
+
+![Screencast](https://github.com/cloudspout/cloudspout-button-panel/raw/main/img/screencast.gif)
+
 ## Configuration
 
-![Screenshot](https://github.com/cloudspout/cloudspout-button-panel/raw/main/img/screenshot.png)
+![Screenshot](https://github.com/cloudspout/cloudspout-button-panel/raw/main/src/img/screenshot.png)
 
 ### Basic Auth
 ⚠️ Please note: ⚠️
@@ -32,10 +40,6 @@ Due to the Grafana API & security restrictions in modern browsers the following 
 These limitations are inherent and canot be fixed or addressed by the plugin!
 
 Use Basic Auth only if these limitations are acceptable!
-
-## Usage
-
-![Screencast](https://github.com/cloudspout/cloudspout-button-panel/raw/main/img/screencast.gif)
 
 ## Install
 
