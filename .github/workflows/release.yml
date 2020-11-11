@@ -19,6 +19,8 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
+    - run: git config --global user.name GitHub Action CI 
+    - run: git config --global user.email user@example.org    
     - run: npm install
     - run: npm run release -- patch --ci
       env:
