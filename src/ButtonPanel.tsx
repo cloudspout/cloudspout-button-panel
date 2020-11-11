@@ -146,11 +146,11 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
     };
     const buttonText = () => {
       return interpolateVariables(this.props.options.text);
-    }
+    };
 
     const interpolateVariables = (text: string) => {
       return getTemplateSrv().replace(text, this.props.data.request?.scopedVars);
-    }
+    };
 
     return (
       <div className={getOrientation()}>

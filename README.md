@@ -1,5 +1,8 @@
 # Button Panel
 
+![Node.js CI](https://github.com/cloudspout/cloudspout-button-panel/workflows/Node.js%20CI/badge.svg)
+![GitHub release)](https://img.shields.io/github/v/release/cloudspout/cloudspout-button-panel)
+
 It provides a simple Grafana 7.x panel that shows only one button - to integrate with any kind of HTTP/REST API:
 * Support `GET` and `POST` HTTP verb
     * Adds no new javascript dependencies
