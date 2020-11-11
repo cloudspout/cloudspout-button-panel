@@ -26,4 +26,8 @@ jobs:
       env:
         CI: true
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
- 
+    - name: Archive artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: cloudspout-button-panel.zip
+        path: dist/cloudspout-button-panel.zip
