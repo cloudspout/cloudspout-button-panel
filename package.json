@@ -6,12 +6,13 @@
     "clean": "rm -rf dist/",
     "grafana-sign": "node grafana-sign.js",
     "zip": "node zip.js",
-    "dist": "npm run build && npm run zip",
+    "dist": "npm run build && npm run sign && npm run zip",
     "build": "grafana-toolkit plugin:build",
     "test": "grafana-toolkit plugin:test",
     "dev": "grafana-toolkit plugin:dev",
     "watch": "grafana-toolkit plugin:dev --watch",
-    "release": "release-it"
+    "release": "release-it",
+    "sign": "npx @grafana/toolkit plugin:sign"
   },
   "repository": "github:cloudspout/cloudspout-button-panel",
   "author": "CloudSpout LLC",
