@@ -26,6 +26,7 @@ jobs:
       env:
         CI: true
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GRAFANA_API_KEY: ${{ secrets.GRAFANA_API_KEY }}
     - name: Archive artifact
       uses: actions/upload-artifact@v2
       with:
