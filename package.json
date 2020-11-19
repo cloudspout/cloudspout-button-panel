@@ -6,7 +6,9 @@
     "clean": "rm -rf dist/",
     "grafana-sign": "node grafana-sign.js",
     "zip": "node zip.js",
-    "distx": "npm run build && npm run sign && npm run zip",
+    "predist": "npm run build ",
+    "dist": "npm run sign",
+    "postdist": "npm run zip",
     "build": "grafana-toolkit plugin:build",
     "test": "grafana-toolkit plugin:test",
     "dev": "grafana-toolkit plugin:dev",
@@ -48,7 +50,7 @@
     },
     "hooks": {
       "after:bump": [
-        "npm run distx"
+        "npm run dist"
       ]
     }
   }
