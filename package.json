@@ -1,12 +1,12 @@
 {
   "name": "cloudspout-button-panel",
-  "version": "7.0.10",
+  "version": "7.0.11",
   "description": "Panel for a single button",
   "scripts": {
     "clean": "rm -rf dist/",
     "grafana-sign": "node grafana-sign.js",
     "zip": "node zip.js",
-    "dist": "npm run build && npm run sign && npm run zip",
+    "distx": "npm run build && npm run sign && npm run zip",
     "build": "grafana-toolkit plugin:build",
     "test": "grafana-toolkit plugin:test",
     "dev": "grafana-toolkit plugin:dev",
@@ -48,7 +48,7 @@
     },
     "hooks": {
       "after:bump": [
-        "npm run dist"
+        "npm run distx"
       ]
     }
   }
