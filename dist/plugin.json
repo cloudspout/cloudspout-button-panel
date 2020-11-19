@@ -31,8 +31,8 @@
           "name": "Settings"
         }
     ],
-    "version": "7.0.9",
-    "updated": "2020-11-11"
+    "version": "7.0.10",
+    "updated": "2020-11-19"
   },
   "dependencies": {
     "grafanaVersion": "7.x.x",
