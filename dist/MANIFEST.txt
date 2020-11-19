@@ -1,0 +1,37 @@
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+{
+  "manifestVersion": "2.0.0",
+  "signatureType": "community",
+  "signedByOrg": "cloudspout",
+  "signedByOrgName": "CloudSpout LLC",
+  "plugin": "cloudspout-button-panel",
+  "version": "7.0.19",
+  "time": 1605763276927,
+  "keyId": "7e4d0c6a708866e7",
+  "files": {
+    "module.js.LICENSE.txt": "0d8f66cd4afb566cb5b7e1540c68f43b939d3eba12ace290f18abc4f4cb53ed0",
+    "plugin.json": "05d940d0edf8cb268eb8d1393191c50c9bf6355d20e0ef75c83391aaba490aa9",
+    "module.js.map": "7538a3065927d10fc1ef772dea488b70395563f58df55923f2b0ce7e89422ea8",
+    "module.js": "8141df6c25b516e7e538f0b8a40de883c1734b5b7134a1b558c8b3d28eba2d26",
+    "static/button-panel.css": "d6debc015aff67c2ccde580cd00ce497ef1f1c7c001e6af400e802de8c77abb4",
+    "README.md": "3dd869ab2238fb05db5c11dcfc6e7130c51cf3854f23ff05a7483e018f9122a2",
+    "index.html": "2fa2c4168c5bb7b8502989f437e4a1a71e663702b0ec9c01530215c8c026dcaf",
+    "LICENSE": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+    "img/logo.svg": "16218334a5cacbc1e2ebc175e1210b8b0e42b8ccc659f3f734e9836a1051f26c",
+    "img/screenshot.png": "2a7005af1f4e9e803fd6f9e3fa21766706084a8c702de7b3c05713ba50a0642c",
+    "img/method-draw-image.svg": "16218334a5cacbc1e2ebc175e1210b8b0e42b8ccc659f3f734e9836a1051f26c"
+  }
+}
+-----BEGIN PGP SIGNATURE-----
+Version: OpenPGP.js v4.10.1
+Comment: https://openpgpjs.org
+
+wqAEARMKAAYFAl+2AM0ACgkQfk0ManCIZuf16AIIiadoWEpFTftFszc/+KIu
+ke7AyMNATXL09lMTTJlXvJBlcuC2LhW80oN4cf2EMYsgN6I9+INElfaRTqcL
+hcF0kwUCBiBKJxLmgl6px+GGZon0PlR7Q87/cwvd5igGLuqDzEGIJox99sZB
+V0OT8XNV+6Fv6sPIu9U7pmN37iwKZODUcQO1
+=ioaS
+-----END PGP SIGNATURE-----
