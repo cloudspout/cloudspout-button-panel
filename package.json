@@ -42,7 +42,7 @@
     "github": {
       "release": true,
       "assets": [
-        "cloudspout-button-panel.zipp"
+        "cloudspout-button-panel.zip"
       ]
     },
     "npm": {
