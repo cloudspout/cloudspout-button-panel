@@ -51,17 +51,9 @@ Use Basic Auth only if these limitations are acceptable!
 Via the [Grafana CLI](https://grafana.com/docs/grafana/latest/administration/cli/):
 
 ```BASH
-$ grafana-cli --pluginUrl https://github.com/cloudspout/cloudspout-button-panel/releases/download/7.0.7/cloudspout-button-panel.zip \
+$ grafana-cli --pluginUrl https://github.com/cloudspout/cloudspout-button-panel/releases/download/7.0.18/cloudspout-button-panel.zip \
   plugins install cloudspout-button-panel
 ```
-
-For Grafna >= 7.3.0 you must also set either
-* the environment variable `GF_PLUGINS_ALLOW_LOADING_UNSIGNED_PLUGINS=cloudspout-button-panel`
-* update the Grafana configuration to include 
-   ```
-   [plugins]
-   allow_loading_unsigned_plugins=cloudspout-button-panel
-   ``` 
 
 ### Docker
 
@@ -69,8 +61,7 @@ Use [Grafana's environment variable](https://grafana.com/docs/grafana/latest/ins
 
 ```BASH
 $ docker run -p 3000:3000 -it \
-  -e GF_PLUGINS_ALLOW_LOADING_UNSIGNED_PLUGINS=cloudspout-button-panel \
-  -e "GF_INSTALL_PLUGINS=https://github.com/cloudspout/cloudspout-button-panel/releases/download/7.0.7/cloudspout-button-panel.zip;cloudspout-button-panel" \
+  -e "GF_INSTALL_PLUGINS=https://github.com/cloudspout/cloudspout-button-panel/releases/download/7.0.18/cloudspout-button-panel.zip;cloudspout-button-panel" \
   grafana/grafana:7.3.1
 ```
 

@@ -13,7 +13,7 @@ glob(folderPath, {cwd}, (err, files) => {
         return err;
     }
 
-    const output = fs.createWriteStream('dist/' + out);
+    const output = fs.createWriteStream('./' + out);
     const archive = archiver('zip', {zlib:{level: 9}});
     archive.pipe(output);
 
