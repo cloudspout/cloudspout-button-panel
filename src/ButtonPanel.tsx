@@ -1,3 +1,4 @@
+import "isomorphic-fetch";
 import React, { PureComponent } from 'react';
 import { Button, IconName, ButtonVariant } from '@grafana/ui';
 import { PanelProps } from '@grafana/data';
@@ -19,52 +20,129 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
     };
   }
 
+  apiStateIcon(): IconName | undefined {
+    switch (this.state.api_call) {
+      case 'IN_PROGRESS':
+        return 'fa fa-spinner';
+      case 'SUCCESS':
+        return 'check';
+      case 'ERROR':
+        return 'exclamation-triangle';
+      case 'READY':
+      default:
+        return this.props.options.icon;// options.icon;
+    }
+  }
+
+  apiStateClassName() {
+    switch (this.state.api_call) {
+      case 'IN_PROGRESS':
+        return 'spinning';
+      default:
+        return '';
+    }
+  };
+
+  getOrientation() {
+    if (!this.props.options.orientation) {
+      return 'center';
+    }
+    switch (this.props.options.orientation) {
+      case 'left':
+        return 'left';
+      case 'right':
+        return 'right';
+      case 'center':
+      default:
+        return 'center';
+    }
+  };
+
+  customStyle() {
+    if (this.props.options.variant === 'custom') {
+      return {
+        // Resaet Grafana defaults
+        background: 'none',
+        border: 'none',
+        // Set custom styles
+        backgroundColor: this.props.options.backgroundColor,
+        color: this.props.options.foregroundColor,
+      };
+    } else {
+      return {};
+    }
+  }
+
+  variant() : ButtonVariant | undefined {
+    if (this.props.options.variant === 'custom') {
+      return undefined;
+    } else {
+      return this.props.options.variant as ButtonVariant;
+    }
+  }
+
+  buttonText() {
+    return this.interpolateVariables(this.props.options.text);
+  }
+
+  interpolateVariables(text: string){
+    return getTemplateSrv().replace(text, this.props.data.request?.scopedVars);
+  }
+
+  prepareFetchOpts(url: URL) : RequestInit {    
+    const { options } = this.props;
+
+    const requestHeaders: HeadersInit = new Headers();
+    requestHeaders.set('Accept', 'application/json');
+
+    let fetchOpts: RequestInit = {
+      method: options.method, // *GET, POST, PUT, DELETE, etc.
+      mode: 'cors', // no-cors, *cors, same-origin
+      credentials: 'include', // include, *same-origin, omit
+      cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+      headers: requestHeaders,
+      redirect: 'follow', // manual, *follow, error
+      //referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+    };
+
+    if (options.method === 'POST') {
+      requestHeaders.set('Content-Type', options.contentType);
+      if (options.payload) {
+        fetchOpts.body = this.interpolateVariables(options.payload);
+      }
+    }
+
+    if (options.isAuth) {
+      requestHeaders.set('Authorization', btoa(options.username + ':' + options.password));
+    }
+
+    if (options.params) {
+      if (options.type === 'header') {
+        options.params.forEach(e => {
+          requestHeaders.set(this.interpolateVariables(e[0]), this.interpolateVariables(e[1]));
+        });
+      } else if (options.type === 'query') {
+        options.params.forEach(e => {
+          url.searchParams.append(this.interpolateVariables(e[0]), this.interpolateVariables(e[1]));
+        });
+      } else {
+        console.error('Unknown params type', options.type);
+      }
+    }
+
+    return fetchOpts;
+  }
+
   render() {
     const { options } = this.props;
 
     const exeucte = () => {
       this.setState({ api_call: 'IN_PROGRESS' });
 
-      const url = new URL(interpolateVariables(options.url));
+      const url = new URL(this.interpolateVariables(options.url));
       console.log(options.method, ' to ', url, ' with params as ', options.type);
 
-      const requestHeaders: HeadersInit = new Headers();
-      requestHeaders.set('Accept', 'application/json');
-
-      let fetchOpts: RequestInit = {
-        method: options.method, // *GET, POST, PUT, DELETE, etc.
-        mode: 'cors', // no-cors, *cors, same-origin
-        credentials: 'include', // include, *same-origin, omit
-        cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-        headers: requestHeaders,
-        redirect: 'follow', // manual, *follow, error
-        //referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-      };
-
-      if (options.method === 'POST') {
-        requestHeaders.set('Content-Type', options.contentType);
-        if (options.payload) {
-          fetchOpts.body = interpolateVariables(options.payload);
-        }
-      }
-
-      if (options.isAuth) {
-        requestHeaders.set('Authorization', btoa(options.username + ':' + options.password));
-      }
-
-      if (options.params) {
-        if (options.type === 'header') {
-          options.params.forEach(e => {
-            requestHeaders.set(interpolateVariables(e[0]), interpolateVariables(e[1]));
-          });
-        } else if (options.type === 'query') {
-          options.params.forEach(e => {
-            url.searchParams.append(interpolateVariables(e[0]), interpolateVariables(e[1]));
-          });
-        } else {
-          console.error('Unknown params type', options.type);
-        }
-      }
+      let fetchOpts = this.prepareFetchOpts(url);
 
       fetch(url.toString(), fetchOpts)
         .then(response => {
@@ -94,83 +172,18 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
         });
     };
 
-    const apiStateIcon = (): IconName | undefined => {
-      switch (this.state.api_call) {
-        case 'IN_PROGRESS':
-          return 'fa fa-spinner';
-        case 'SUCCESS':
-          return 'check';
-        case 'ERROR':
-          return 'exclamation-triangle';
-        case 'READY':
-        default:
-          return options.icon;
-      }
-    };
-
-    const apiStateClassName = () => {
-      switch (this.state.api_call) {
-        case 'IN_PROGRESS':
-          return 'spinning';
-        default:
-          return '';
-      }
-    };
-    const getOrientation = () => {
-      if (!this.props.options.orientation) {
-        return 'center';
-      }
-      switch (this.props.options.orientation) {
-        case 'left':
-          return 'left';
-        case 'right':
-          return 'right';
-        case 'center':
-        default:
-          return 'center';
-      }
-    };
-    const customStyle = () => {
-      if (this.props.options.variant === 'custom') {
-        return {
-          // Resaet Grafana defaults
-          background: 'none',
-          border: 'none',
-          // Set custom styles
-          backgroundColor: this.props.options.backgroundColor,
-          color: this.props.options.foregroundColor,
-        };
-      } else {
-        return {};
-      }
-    };
-    const variant = () : ButtonVariant | undefined => {
-      if (this.props.options.variant === 'custom') {
-        return undefined;
-      } else {
-        return this.props.options.variant as ButtonVariant;
-      }
-    }
-    const buttonText = () => {
-      return interpolateVariables(this.props.options.text);
-    };
-
-    const interpolateVariables = (text: string) => {
-      return getTemplateSrv().replace(text, this.props.data.request?.scopedVars);
-    };
-
     return (
-      <div className={getOrientation()}>
+      <div className={this.getOrientation()}>
         <Button
-          variant={variant()}
+          variant={this.variant()}
           title={this.state.response}
           size="lg"
-          className={apiStateClassName()}
-          icon={apiStateIcon()}
+          className={this.apiStateClassName()}
+          icon={this.apiStateIcon()}
           onClick={exeucte}
-          style={customStyle()}
+          style={this.customStyle()}
         >
-          {buttonText()}
+          {this.buttonText()}
         </Button>
       </div>
     );
