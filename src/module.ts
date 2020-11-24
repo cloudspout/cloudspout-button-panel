@@ -118,7 +118,7 @@ export const plugin = new PanelPlugin<ButtonPanelOptions>(ButtonPanel).setPanelO
       settings: {
         disableNamedColors: true,
       },
-      showIf: config => config.variant == 'custom',
+      showIf: config => config.variant === 'custom',
     })
     .addColorPicker({
       path: 'backgroundColor',
@@ -127,7 +127,7 @@ export const plugin = new PanelPlugin<ButtonPanelOptions>(ButtonPanel).setPanelO
       settings: {
         disableNamedColors: true,
       },
-      showIf: config => config.variant == 'custom',
+      showIf: config => config.variant === 'custom',
     })
     .addRadio({
       path: 'orientation',

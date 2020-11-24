@@ -1,4 +1,4 @@
-import "isomorphic-fetch";
+import 'isomorphic-fetch';
 import React, { PureComponent } from 'react';
 import { Button, IconName, ButtonVariant } from '@grafana/ui';
 import { PanelProps } from '@grafana/data';
@@ -30,7 +30,7 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
         return 'exclamation-triangle';
       case 'READY':
       default:
-        return this.props.options.icon;// options.icon;
+        return this.props.options.icon;
     }
   }
 
@@ -41,7 +41,7 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
       default:
         return '';
     }
-  };
+  }
 
   getOrientation() {
     if (!this.props.options.orientation) {
@@ -56,7 +56,7 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
       default:
         return 'center';
     }
-  };
+  }
 
   customStyle() {
     if (this.props.options.variant === 'custom') {
@@ -73,7 +73,7 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
     }
   }
 
-  variant() : ButtonVariant | undefined {
+  variant(): ButtonVariant | undefined {
     if (this.props.options.variant === 'custom') {
       return undefined;
     } else {
@@ -85,11 +85,11 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
     return this.interpolateVariables(this.props.options.text);
   }
 
-  interpolateVariables(text: string){
+  interpolateVariables(text: string) {
     return getTemplateSrv().replace(text, this.props.data.request?.scopedVars);
   }
 
-  prepareFetchOpts(url: URL) : RequestInit {    
+  prepareFetchOpts(url: URL): RequestInit {
     const { options } = this.props;
 
     const requestHeaders: HeadersInit = new Headers();
@@ -113,7 +113,7 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
     }
 
     if (options.isAuth) {
-      requestHeaders.set('Authorization', btoa(options.username + ':' + options.password));
+      requestHeaders.set('Authorization', 'Basic ' + btoa(options.username + ':' + options.password));
     }
 
     if (options.params) {
