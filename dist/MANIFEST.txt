@@ -8,19 +8,19 @@ Hash: SHA512
   "signedByOrg": "cloudspout",
   "signedByOrgName": "CloudSpout LLC",
   "plugin": "cloudspout-button-panel",
-  "version": "7.0.22",
-  "time": 1605991856838,
+  "version": "7.0.23",
+  "time": 1606194032443,
   "keyId": "7e4d0c6a708866e7",
   "files": {
-    "module.js": "8141df6c25b516e7e538f0b8a40de883c1734b5b7134a1b558c8b3d28eba2d26",
+    "module.js": "9da2e97bac0bcef136519fe53e2dbe3b8413e563c41ae754fc369d5085021126",
     "img/logo.svg": "16218334a5cacbc1e2ebc175e1210b8b0e42b8ccc659f3f734e9836a1051f26c",
     "img/method-draw-image.svg": "16218334a5cacbc1e2ebc175e1210b8b0e42b8ccc659f3f734e9836a1051f26c",
     "img/screenshot.png": "2a7005af1f4e9e803fd6f9e3fa21766706084a8c702de7b3c05713ba50a0642c",
-    "plugin.json": "0951d3e300033a7d77c1badfcd0fa8804a3ecc5c24c7a826ec6f0f26042f06ff",
-    "README.md": "d51fb3c85fcc012d3609e4d03e65d4e5433a479cd50c340880d8c37f13b2bb1b",
+    "plugin.json": "a37f14eb37cd3ddbf295b928f6811f0ed38cc484ce82fd8812d58ac4ae7c9070",
+    "README.md": "4b8e563e6100c1a346aa2ec6809daca8471c78d1d6c1850c6aa667a464fc31d3",
     "LICENSE": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
     "index.html": "2fa2c4168c5bb7b8502989f437e4a1a71e663702b0ec9c01530215c8c026dcaf",
-    "module.js.map": "7538a3065927d10fc1ef772dea488b70395563f58df55923f2b0ce7e89422ea8",
+    "module.js.map": "a5c68264e4177463772c6d66e9877b1a05a262d68a5e97d3692805c66fe2117f",
     "static/button-panel.css": "d6debc015aff67c2ccde580cd00ce497ef1f1c7c001e6af400e802de8c77abb4",
     "module.js.LICENSE.txt": "0d8f66cd4afb566cb5b7e1540c68f43b939d3eba12ace290f18abc4f4cb53ed0"
   }
@@ -29,9 +29,9 @@ Hash: SHA512
 Version: OpenPGP.js v4.10.1
 Comment: https://openpgpjs.org
 
-wqAEARMKAAYFAl+5fbEACgkQfk0ManCIZudwjQIJASKbDL7kp4/iOimdDGbG
-lgkvuYSUbm7J9lehvlROytXCuwcZiMb+Ugti45KEfsyTD/LIOqsudFUkYEhY
-WwDIWIieAgCBTjqll0s3X/nJCJq4KA96sIMKZ7ens3ZGkcLtfRisrUleltKW
-5fQ4iMXH/9ELgZn7hWBWZdDBtWc7ijwOz9Jd
-=uSee
+wqIEARMKAAYFAl+8k3AACgkQfk0ManCIZufbTgIJAevJKwLMiwtuZul9Y/IJ
+cWxDiWmemmcs78eypJvNWn1lWd/N8YE5nFQs3DAkIFlHWv3XxEmONO8pCZ0r
+yfG7u1NQAgkBI+IdAsq8bFINzsfqqn7r1VuBcCn6pvGY6tVvSN4ynL0JfNVi
+ABjMfkAbeJzcxiJor9aBEP/QO7rgtPeevuqmflo=
+=atjS
 -----END PGP SIGNATURE-----
