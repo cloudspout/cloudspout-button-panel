@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Button, IconName } from '@grafana/ui';
+import { Button, IconName, ButtonVariant } from '@grafana/ui';
 import { PanelProps } from '@grafana/data';
 import { getTemplateSrv } from '@grafana/runtime';
 import { ButtonPanelOptions, ButtonPanelState } from 'types';
@@ -131,7 +131,7 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
       }
     };
     const customStyle = () => {
-      if (this.props.options.variant === undefined) {
+      if (this.props.options.variant === 'custom') {
         return {
           // Resaet Grafana defaults
           background: 'none',
@@ -144,6 +144,13 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
         return {};
       }
     };
+    const variant = () : ButtonVariant | undefined => {
+      if (this.props.options.variant === 'custom') {
+        return undefined;
+      } else {
+        return this.props.options.variant as ButtonVariant;
+      }
+    }
     const buttonText = () => {
       return interpolateVariables(this.props.options.text);
     };
@@ -155,7 +162,7 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
     return (
       <div className={getOrientation()}>
         <Button
-          variant={this.props.options.variant}
+          variant={variant()}
           title={this.state.response}
           size="lg"
           className={apiStateClassName()}
