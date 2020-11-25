@@ -20,6 +20,13 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
     };
   }
 
+  resetState() {
+    this.setState({
+      api_call: 'READY',
+      response: '',
+    });
+  }
+
   apiStateIcon(): IconName | undefined {
     switch (this.state.api_call) {
       case 'IN_PROGRESS':
@@ -169,6 +176,9 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
             response: e.message,
           });
           console.error('Request error: ', e);
+        })
+        .finally(() => {
+          setTimeout(this.resetState.bind(this), 2500);
         });
     };
 
