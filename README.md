@@ -11,7 +11,8 @@ It provides a simple Grafana 7.x panel that shows only one button - to integrate
 * Support for custom header parameter or query parameter
 * Variable support via `$variableName` in
     * URL
-    * parameter name & value
+    * Header/Query parameter name & value
+    * POST body payload
     * Button label
 * Support for HTTP Basic Auth
 * Custom label text & Grafana template design
