@@ -1,9 +1,9 @@
 # Button Panel
+[![Node.js CI](https://github.com/cloudspout/cloudspout-button-panel/workflows/Node.js%20CI/badge.svg)](https://github.com/cloudspout/cloudspout-button-panel/actions?query=workflow%3A%22Node.js+CI%22)
+[![GitHub release)](https://img.shields.io/github/v/release/cloudspout/cloudspout-button-panel)](https://github.com/cloudspout/cloudspout-button-panel/releases)
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
-[![Node.js CI](https://github.com/cloudspout/cloudspout-button-panel/workflows/Node.js%20CI/badge.svg)](https://github.com/cloudspout/cloudspout-button-panel/actions?query=workflow%3A%22Node.js+CI%22)
-[![GitHub release)](https://img.shields.io/github/v/release/cloudspout/cloudspout-button-panel)](https://github.com/cloudspout/cloudspout-button-panel/releases)
 
 It provides a simple Grafana 7.x panel that shows only one button - to integrate with any kind of HTTP/REST API:
 * Support `GET` and `POST` HTTP verb
@@ -68,12 +68,6 @@ $ docker run -p 3000:3000 -it \
   grafana/grafana:7.3.1
 ```
 
-## License
-
-GPL v3
-
-Icons made by [Pixel perfect](https://www.flaticon.com/authors/pixel-perfect) from [www.flaticon.com](https://www.flaticon.com/)
-
 ## Contributors ✨
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
@@ -92,3 +86,9 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+
+## License
+
+GPL v3
+
+Icons made by [Pixel perfect](https://www.flaticon.com/authors/pixel-perfect) from [www.flaticon.com](https://www.flaticon.com/)
