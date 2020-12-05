@@ -89,6 +89,6 @@ This project follows the [all-contributors](https://github.com/all-contributors/
 
 ## License
 
-GPL v3
+MIT
 
 Icons made by [Pixel perfect](https://www.flaticon.com/authors/pixel-perfect) from [www.flaticon.com](https://www.flaticon.com/)
