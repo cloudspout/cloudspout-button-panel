@@ -9,7 +9,7 @@ It provides a simple Grafana 7.x panel that shows only one button - to integrate
 * Support `GET` and `POST` HTTP verb
     * Adds no new javascript dependencies
     * Uses standard browser APIs and respects CORS
-    * Optional text payload for `POST` requests
+    * Optional text payload for `POST` requests via syntax-highlighiting editor
 * Support for custom header parameter or query parameter
 * Variable support via `$variableName` in
     * URL
