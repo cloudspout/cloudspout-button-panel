@@ -1,5 +1,8 @@
 import { ButtonVariant, IconName } from '@grafana/ui';
 
+export type EditorCodeType = string | undefined;
+export type EditorLanguageType = 'text' | 'html' | 'json' | undefined;
+
 export interface ButtonPanelOptions {
   url: string;
 

@@ -91,4 +91,6 @@ This project follows the [all-contributors](https://github.com/all-contributors/
 
 MIT
 
-Icons made by [Pixel perfect](https://www.flaticon.com/authors/pixel-perfect) from [www.flaticon.com](https://www.flaticon.com/)
+Icons made by [Pixel perfect](https://www.flaticon.com/authors/pixel-perfect) from [www.flaticon.com](https://www.flaticon.com/).
+
+`ButtonPayloadEditor` highly influenced from [gapitio/gapit-htmlgraphics-panel](https://github.com/gapitio/gapit-htmlgraphics-panel).

@@ -1,9 +1,11 @@
 import { PanelPlugin, SelectableValue } from '@grafana/data';
+import { getAvailableIcons } from '@grafana/ui';
 import { ButtonPanelOptions } from './types';
 import { ButtonPanel } from './ButtonPanel';
 import { ButtonParamsEditor } from './ButtonParamsEditor';
+import { ButtonPayloadEditor } from './ButtonPayloadEditor';
+
 import 'static/button-panel.css';
-import { getAvailableIcons } from '@grafana/ui';
 
 export const plugin = new PanelPlugin<ButtonPanelOptions>(ButtonPanel).setPanelOptions(builder => {
   return builder
@@ -61,25 +63,46 @@ export const plugin = new PanelPlugin<ButtonPanelOptions>(ButtonPanel).setPanelO
       category: ['REST Integration'],
       description: 'The parameters sent with the request',
       editor: ButtonParamsEditor,
+
     })
-    .addTextInput({
+    .addSelect({
       path: 'contentType',
       name: 'Content-Type',
       category: ['REST Integration'],
       description: 'Content-Type of the payload',
       defaultValue: 'application/json',
+      settings: {
+        allowCustomValue: true,
+        options: [
+          { label: 'application/json' , value: 'application/json' },
+          { label: 'text/html' , value: 'text/html' },
+          { label: 'text/plain' , value: 'text/plain' },
+        ]
+      },
       showIf: config => config.method === 'POST',
     })
-    .addTextInput({
+    .addCustomEditor({
+      id: 'payload',
       path: 'payload',
       name: 'Payload',
       category: ['REST Integration'],
       description: 'Optional payload to send with the request',
       settings: {
-        useTextarea: true,
-        rows: 5,
+        language: (contentType: string) => {
+          debugger;
+          switch (contentType) {
+            case 'application/json':
+              return 'json';
+            case 'text/html':
+              return 'html';
+            case 'text/plain':
+            default:
+              return 'text';
+          }
+        }
       },
       showIf: config => config.method === 'POST',
+      editor: ButtonPayloadEditor,
     })
     .addSelect({
       path: 'variant',
