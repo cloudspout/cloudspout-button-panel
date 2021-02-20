@@ -118,7 +118,7 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
     }
 
     if (options.isAuth) {
-      fetchOpts.credentials= 'include';
+      fetchOpts.credentials = 'include';
       requestHeaders.set('Authorization', 'Basic ' + btoa(options.username + ':' + options.password));
     }
 
