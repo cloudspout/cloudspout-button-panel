@@ -9,8 +9,14 @@ interface Settings {
   language: (contentType: string | undefined) => EditorLanguageType | undefined;
 }
 
-interface Props extends StandardEditorProps<EditorCodeType, Settings, ButtonPanelOptions> {} 
+interface Props extends StandardEditorProps<EditorCodeType, Settings, ButtonPanelOptions> {}
 
 export const ButtonPayloadEditor: React.FC<Props> = ({ value, item, onChange, context }) => {
-  return <TextPanelEditor language={item.settings?.language(context.options?.contentType)} value={value} onChange={code => onChange(code)} />;
+  return (
+    <TextPanelEditor
+      language={item.settings?.language(context.options?.contentType)}
+      value={value}
+      onChange={code => onChange(code)}
+    />
+  );
 };

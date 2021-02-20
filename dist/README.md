@@ -2,7 +2,7 @@
 [![Node.js CI](https://github.com/cloudspout/cloudspout-button-panel/workflows/Node.js%20CI/badge.svg)](https://github.com/cloudspout/cloudspout-button-panel/actions?query=workflow%3A%22Node.js+CI%22)
 [![GitHub release)](https://img.shields.io/github/v/release/cloudspout/cloudspout-button-panel)](https://github.com/cloudspout/cloudspout-button-panel/releases)
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 It provides a simple Grafana 7.x panel that shows only one button - to integrate with any kind of HTTP/REST API:
@@ -77,12 +77,14 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- markdownlint-disable -->
 <table>
   <tr>
-    <td align="center"><a href="https://github.com/raulsperoni"><img src="https://avatars1.githubusercontent.com/u/8474238?v=4" width="100px;" alt=""/><br /><sub><b>raúl</b></sub></a><br /><a href="#ideas-raulsperoni" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/cloudspout/cloudspout-button-panel/commits?author=raulsperoni" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/raulsperoni"><img src="https://avatars1.githubusercontent.com/u/8474238?v=4?s=100" width="100px;" alt=""/><br /><sub><b>raúl</b></sub></a><br /><a href="#ideas-raulsperoni" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/cloudspout/cloudspout-button-panel/commits?author=raulsperoni" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/Jorgevillada"><img src="https://avatars.githubusercontent.com/u/8599697?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Jorge Villada</b></sub></a><br /><a href="https://github.com/cloudspout/cloudspout-button-panel/issues?q=author%3AJorgevillada" title="Bug reports">🐛</a></td>
   </tr>
 </table>
 
-<!-- markdownlint-enable -->
+<!-- markdownlint-restore -->
 <!-- prettier-ignore-end -->
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!

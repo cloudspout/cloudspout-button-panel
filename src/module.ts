@@ -63,7 +63,6 @@ export const plugin = new PanelPlugin<ButtonPanelOptions>(ButtonPanel).setPanelO
       category: ['REST Integration'],
       description: 'The parameters sent with the request',
       editor: ButtonParamsEditor,
-
     })
     .addSelect({
       path: 'contentType',
@@ -74,10 +73,10 @@ export const plugin = new PanelPlugin<ButtonPanelOptions>(ButtonPanel).setPanelO
       settings: {
         allowCustomValue: true,
         options: [
-          { label: 'application/json' , value: 'application/json' },
-          { label: 'text/html' , value: 'text/html' },
-          { label: 'text/plain' , value: 'text/plain' },
-        ]
+          { label: 'application/json', value: 'application/json' },
+          { label: 'text/html', value: 'text/html' },
+          { label: 'text/plain', value: 'text/plain' },
+        ],
       },
       showIf: config => config.method === 'POST',
     })
@@ -89,7 +88,6 @@ export const plugin = new PanelPlugin<ButtonPanelOptions>(ButtonPanel).setPanelO
       description: 'Optional payload to send with the request',
       settings: {
         language: (contentType: string) => {
-          debugger;
           switch (contentType) {
             case 'application/json':
               return 'json';
@@ -99,7 +97,7 @@ export const plugin = new PanelPlugin<ButtonPanelOptions>(ButtonPanel).setPanelO
             default:
               return 'text';
           }
-        }
+        },
       },
       showIf: config => config.method === 'POST',
       editor: ButtonPayloadEditor,

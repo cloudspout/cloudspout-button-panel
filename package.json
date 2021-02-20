@@ -1,6 +1,6 @@
 {
   "name": "cloudspout-button-panel",
-  "version": "7.0.23",
+  "version": "7.0.24",
   "description": "Panel for a single button",
   "scripts": {
     "clean": "rm -rf dist/",
@@ -50,5 +50,8 @@
         "npm run dist"
       ]
     }
+  },
+  "dependencies": {
+    "archiver": "^5.2.0"
   }
 }
