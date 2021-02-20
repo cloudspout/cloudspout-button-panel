@@ -14,7 +14,7 @@
     "dev": "grafana-toolkit plugin:dev",
     "watch": "grafana-toolkit plugin:dev --watch",
     "release": "release-it",
-    "sign": "npx @grafana/toolkit plugin:sign"
+    "sign": "npx @grafana/toolkit plugin:sign && git add dist/MANIFEST.txt && git commit -m Sign"
   },
   "repository": "github:cloudspout/cloudspout-button-panel",
   "author": "CloudSpout LLC",
