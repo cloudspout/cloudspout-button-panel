@@ -33,6 +33,7 @@ npm run dist
 1. Update `README.md` for the correct, upcomming version.
 
 2. ```BASH
+   GRAFANA_API_KEY=... npx @grafana/toolkit plugin:sign
    GITHUB_TOKEN=... GRAFANA_API_KEY=... npm run release
    ```
    or [GitHub action](https://github.com/cloudspout/cloudspout-button-panel/actions?query=workflow%3A%22Node.js+Release%22)
