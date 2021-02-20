@@ -9,7 +9,7 @@ Hash: SHA512
   "signedByOrgName": "CloudSpout LLC",
   "plugin": "cloudspout-button-panel",
   "version": "7.0.25",
-  "time": 1613865204719,
+  "time": 1613865517064,
   "keyId": "7e4d0c6a708866e7",
   "files": {
     "index.html": "2fa2c4168c5bb7b8502989f437e4a1a71e663702b0ec9c01530215c8c026dcaf",
@@ -114,9 +114,9 @@ Hash: SHA512
 Version: OpenPGP.js v4.10.1
 Comment: https://openpgpjs.org
 
-wqIEARMKAAYFAmAxoPQACgkQfk0ManCIZufn2QIJAWLp/90ULWAeqMLJVByI
-DnzQcdwHKvu5/neuO+1ULwjK6nG8FNnE/Z2U+Rw1K7B/ZcAmrI71NXiV2+bw
-ZDs+dnxQAgkBJ9M4k6gs8GFtjZ4a/f+VW0iDEMOdqEM8hr5E5ChsS68+eARy
-obCRrdnU6tUvYorzimMRg52EIyRUydF6xCMboJs=
-=s5Ca
+wqIEARMKAAYFAmAxoi0ACgkQfk0ManCIZuckzgIJAYlneYlUFfEPFDSbeXLf
+z2Xr8yQ4qp0Wmno7TrT2Z1ieICPTjq120NReNrM3dEjBFu9/gCRrHwr5A8F+
+8vjxzpAGAgkBXSch61jEmQlSxW/j+96bZCVD4L+IJnjg5J0j4dTf81XHxLGr
+sGM+OOdIyQHU5twgUNtAMJQ0UYWoS9n+u809zuw=
+=IL5P
 -----END PGP SIGNATURE-----
