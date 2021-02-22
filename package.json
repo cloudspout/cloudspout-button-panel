@@ -24,13 +24,13 @@
     "email": "info@cloudspout.io"
   },
   "devDependencies": {
-    "@grafana/data": "7.3.3",
-    "@grafana/runtime": "^7.3.3",
-    "@grafana/toolkit": "7.3.3",
-    "@grafana/ui": "7.3.3",
+    "@grafana/data": "7.4.2",
+    "@grafana/runtime": "^7.4.2",
+    "@grafana/toolkit": "7.4.2",
+    "@grafana/ui": "7.4.2",
     "@monaco-editor/react": "^3.7.0",
-    "release-it": "^13.6.5",
-    "copy-webpack-plugin": "^6.3.1"
+    "release-it": "^14.4.1",
+    "copy-webpack-plugin": "^7.0.0"
   },
   "engines": {
     "node": ">=12 <13"
