@@ -48,8 +48,8 @@ export const ButtonParamsEditor: React.FC<Props> = ({ item, value, onChange, con
         <IconButton onClick={(e) => onParamAdd(e)} name="plus" />
       </HorizontalGroup>
       <VerticalGroup>
-        {Array.from(value || []).map((entry, key) => (
-          <HorizontalGroup>
+        {Array.from(value || []).map((entry) => (
+          <HorizontalGroup key={entry[0]}>
             <Input css="" disabled value={entry[0]} />
             <Input css="" disabled value={entry[1]} />
             <IconButton onClick={onParamRemove(entry[0])} name="minus" />
