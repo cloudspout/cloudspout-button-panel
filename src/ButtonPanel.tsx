@@ -13,10 +13,10 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
   }
 
   init() {
-    this.setState({
+    this.state = {
       api_call: 'READY',
       response: '',
-    });
+    };
   }
 
   resetState() {
