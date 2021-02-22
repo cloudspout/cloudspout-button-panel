@@ -17,7 +17,7 @@ export const ButtonParamsEditor: React.FC<Props> = ({ item, value, onChange, con
   const onParamRemove = (key: string) => ({ target }: any) => {
     console.log('Removing ' + key);
 
-    const newParams = value.filter(e => e[0] !== key);
+    const newParams = value.filter((e) => e[0] !== key);
     console.log('Removed ' + key + ': ', newParams);
 
     onChange(newParams);
@@ -26,7 +26,7 @@ export const ButtonParamsEditor: React.FC<Props> = ({ item, value, onChange, con
     const key = newParamName;
     let newParams: Array<[string, string]>;
     if (value) {
-      newParams = value.filter(e => e[0] !== key);
+      newParams = value.filter((e) => e[0] !== key);
     } else {
       newParams = [];
     }
@@ -45,10 +45,10 @@ export const ButtonParamsEditor: React.FC<Props> = ({ item, value, onChange, con
       <HorizontalGroup>
         <Input css="" placeholder="Name" onChange={onNewParamNameChanged} value={newParamName} />
         <Input css="" placeholder="Value" onChange={onNewParamValueChanged} value={newParamValue} />
-        <IconButton onClick={e => onParamAdd(e)} name="plus" />
+        <IconButton onClick={(e) => onParamAdd(e)} name="plus" />
       </HorizontalGroup>
       <VerticalGroup>
-        {Array.from(value || []).map(entry => (
+        {Array.from(value || []).map((entry, key) => (
           <HorizontalGroup>
             <Input css="" disabled value={entry[0]} />
             <Input css="" disabled value={entry[1]} />

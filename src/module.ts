@@ -7,7 +7,7 @@ import { ButtonPayloadEditor } from './ButtonPayloadEditor';
 
 import 'static/button-panel.css';
 
-export const plugin = new PanelPlugin<ButtonPanelOptions>(ButtonPanel).setPanelOptions(builder => {
+export const plugin = new PanelPlugin<ButtonPanelOptions>(ButtonPanel).setPanelOptions((builder) => {
   return builder
     .addRadio({
       path: 'method',
@@ -78,7 +78,7 @@ export const plugin = new PanelPlugin<ButtonPanelOptions>(ButtonPanel).setPanelO
           { label: 'text/plain', value: 'text/plain' },
         ],
       },
-      showIf: config => config.method === 'POST',
+      showIf: (config) => config.method === 'POST',
     })
     .addCustomEditor({
       id: 'payload',
@@ -99,7 +99,7 @@ export const plugin = new PanelPlugin<ButtonPanelOptions>(ButtonPanel).setPanelO
           }
         },
       },
-      showIf: config => config.method === 'POST',
+      showIf: (config) => config.method === 'POST',
       editor: ButtonPayloadEditor,
     })
     .addSelect({
@@ -139,7 +139,7 @@ export const plugin = new PanelPlugin<ButtonPanelOptions>(ButtonPanel).setPanelO
       settings: {
         disableNamedColors: true,
       },
-      showIf: config => config.variant === 'custom',
+      showIf: (config) => config.variant === 'custom',
     })
     .addColorPicker({
       path: 'backgroundColor',
@@ -148,7 +148,7 @@ export const plugin = new PanelPlugin<ButtonPanelOptions>(ButtonPanel).setPanelO
       settings: {
         disableNamedColors: true,
       },
-      showIf: config => config.variant === 'custom',
+      showIf: (config) => config.variant === 'custom',
     })
     .addRadio({
       path: 'orientation',
@@ -206,13 +206,13 @@ export const plugin = new PanelPlugin<ButtonPanelOptions>(ButtonPanel).setPanelO
       name: 'Username',
       category: ['Authentication'],
       description: 'ℹ️ The server MUST provide proper CORS Access-Control-Allow-* headers!',
-      showIf: config => config.isAuth,
+      showIf: (config) => config.isAuth,
     })
     .addTextInput({
       path: 'password',
       name: 'Password',
       category: ['Authentication'],
       description: '⚠️ The password is NOT stored encrypted in Grafana!',
-      showIf: config => config.isAuth,
+      showIf: (config) => config.isAuth,
     });
 });

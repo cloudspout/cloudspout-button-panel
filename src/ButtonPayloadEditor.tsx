@@ -16,7 +16,7 @@ export const ButtonPayloadEditor: React.FC<Props> = ({ value, item, onChange, co
     <TextPanelEditor
       language={item.settings?.language(context.options?.contentType)}
       value={value}
-      onChange={code => onChange(code)}
+      onChange={(code) => onChange(code)}
     />
   );
 };

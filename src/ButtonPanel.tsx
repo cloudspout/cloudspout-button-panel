@@ -13,10 +13,10 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
   }
 
   init() {
-    this.state = {
+    this.setState({
       api_call: 'READY',
       response: '',
-    };
+    });
   }
 
   resetState() {
@@ -124,11 +124,11 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
 
     if (options.params) {
       if (options.type === 'header') {
-        options.params.forEach(e => {
+        options.params.forEach((e) => {
           requestHeaders.set(this.interpolateVariables(e[0]), this.interpolateVariables(e[1]));
         });
       } else if (options.type === 'query') {
-        options.params.forEach(e => {
+        options.params.forEach((e) => {
           url.searchParams.append(this.interpolateVariables(e[0]), this.interpolateVariables(e[1]));
         });
       } else {
@@ -151,7 +151,7 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
       let fetchOpts = this.prepareFetchOpts(url);
 
       fetch(url.toString(), fetchOpts)
-        .then(response => {
+        .then((response) => {
           if (response.type === 'opaque') {
             // CORS prevents us from knowing what's up - so be it
             this.setState({
@@ -169,7 +169,7 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
             throw new Error(response.status + response.statusText);
           }
         })
-        .catch(e => {
+        .catch((e) => {
           this.setState({
             api_call: 'ERROR',
             response: e.message,
