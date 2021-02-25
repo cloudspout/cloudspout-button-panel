@@ -30,7 +30,7 @@
     "@grafana/ui": "7.4.2",
     "@monaco-editor/react": "^3.7.0",
     "release-it": "^14.4.1",
-    "copy-webpack-plugin": "^7.0.0"
+    "copy-webpack-plugin": "^6.3.2"
   },
   "engines": {
     "node": ">=12 <13"
