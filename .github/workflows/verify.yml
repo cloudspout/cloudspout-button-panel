@@ -17,7 +17,7 @@ jobs:
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         name: NPM test
-        conclusion: neutral
+#        conclusion: neutral
         status: queued
         output: |
           {"summary": "Preparing the test" }
@@ -30,7 +30,7 @@ jobs:
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         name: NPM test
-        conclusion: neutral
+#        conclusion: neutral
         status: in_progress
         output: |
           {"summary": "Running the test" }
@@ -46,4 +46,4 @@ jobs:
         name: NPM test
         conclusion: ${{ job.status }}
         output: |
-          {"summary": ${{ steps.test.outputs.summary }} }
+          {"summary": "${{ steps.test.outputs.summary }}" }
