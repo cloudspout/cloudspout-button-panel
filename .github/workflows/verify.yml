@@ -46,4 +46,4 @@ jobs:
         name: NPM test
         conclusion: ${{ job.status }}
         output: |
-          {"summary": ${{ steps.test.outputs.summary }} }
+          {"summary": "${{ steps.test.outputs.summary }}" }
