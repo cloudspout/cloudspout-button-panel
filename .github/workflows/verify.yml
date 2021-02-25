@@ -35,7 +35,8 @@ jobs:
         output: |
           {"summary": "Running the test" }
     - run: npm run build --if-present
-    - run: npm test
+    - id: test
+      run: npm test
       env:
         CI: true
     - uses: LouisBrunner/checks-action@v1.1.1
@@ -46,4 +47,3 @@ jobs:
         conclusion: ${{ job.status }}
         output: |
           {"summary":${{ steps.test.outputs.summary }}}
-          
