@@ -38,7 +38,6 @@ describe('ButtonPanel', () => {
 
   it('should send a proper basic auth header', () => {
     let url = new URL('http://example.com');
-asdf
     props.options.isAuth = true;
     props.options.username = 'username';
     props.options.password = 'password';
