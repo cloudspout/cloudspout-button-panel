@@ -5,6 +5,7 @@ import { IconButton, Input, HorizontalGroup, VerticalGroup } from '@grafana/ui';
 interface Props extends StandardEditorProps<Array<[string, string]>> {}
 
 export const ButtonParamsEditor: React.FC<Props> = ({ item, value, onChange, context }) => {
+  
   const [newParamName, setNewParamName] = useState('');
   const [newParamValue, setNewParamValue] = useState('');
 
