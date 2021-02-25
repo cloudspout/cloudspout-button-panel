@@ -7,7 +7,6 @@ import { ButtonPanelOptions, ButtonPanelState } from 'types';
 interface Props extends PanelProps<ButtonPanelOptions> {}
 
 export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
-  
   constructor(props: any) {
     super(props);
     this.state = {
