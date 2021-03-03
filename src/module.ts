@@ -24,6 +24,10 @@ export const plugin = new PanelPlugin<ButtonPanelOptions>(ButtonPanel).setPanelO
             value: 'POST',
             label: 'POST',
           },
+          {
+            value: 'DELETE',
+            label: 'DELETE',
+          },
         ],
       },
       defaultValue: 'GET',
