@@ -138,7 +138,7 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
   render() {
     const { options } = this.props;
 
-    const exeucte = () => {
+    const execute = () => {
       this.setState({ api_call: 'IN_PROGRESS' });
 
       const url = new URL(this.interpolateVariables(options.url));
@@ -159,9 +159,9 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
               api_call: 'SUCCESS',
               response: response.statusText,
             });
-            console.log('Requeste successful: ', response);
+            console.log('Request successful: ', response);
           } else {
-            console.log('Requeste failed: ', response);
+            console.log('Request failed: ', response);
             throw new Error(response.status + response.statusText);
           }
         })
@@ -185,11 +185,14 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
           size="lg"
           className={this.apiStateClassName()}
           icon={this.apiStateIcon()}
-          onClick={exeucte}
+          onClick={execute}
           style={this.customStyle()}
         >
           {this.buttonText()}
         </Button>
+        <div className="api_response">
+        <p className="response_text"></p>
+        </div>
       </div>
     );
   }

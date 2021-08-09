@@ -15,6 +15,9 @@ export interface ButtonPanelOptions {
   username?: string;
   password?: string;
 
+  printResponse: boolean;
+  response: string;
+
   params: Array<[string, string]>;
 
   text: string;

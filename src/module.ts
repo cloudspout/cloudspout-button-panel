@@ -218,5 +218,11 @@ export const plugin = new PanelPlugin<ButtonPanelOptions>(ButtonPanel).setPanelO
       category: ['Authentication'],
       description: '⚠️ The password is NOT stored encrypted in Grafana!',
       showIf: (config) => config.isAuth,
-    });
+    })
+    .addBooleanSwitch({
+      path: 'showResponse',
+      name: 'showResponse',
+      description: "Use this to toggle showing API response below the button.", 
+      defaultValue: true, 
+    })
 });
