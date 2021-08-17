@@ -63,7 +63,7 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
   customStyle() {
     if (this.props.options.variant === 'custom') {
       return {
-        // Resaet Grafana defaults
+        // Reset Grafana defaults
         background: 'none',
         border: 'none',
         // Set custom styles
@@ -135,6 +135,22 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
     return fetchOpts;
   }
 
+  returnRespBox() {
+    // const { options } = this.props;
+    
+    // Inject paragraph for adding API response
+    if (this.props.options.printResponse === true) {
+      return (
+        <div>
+          <p className="returnText"></p>
+        </div>
+      )
+    } else {
+      return ""
+    }
+
+  }
+
   render() {
     const { options } = this.props;
 
@@ -148,6 +164,9 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
 
       fetch(url.toString(), fetchOpts)
         .then((response) => {
+          
+          const reader = response.body?.getReader();
+          
           if (response.type === 'opaque') {
             // CORS prevents us from knowing what's up - so be it
             this.setState({
@@ -160,8 +179,20 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
               response: response.statusText,
             });
             console.log('Request successful: ', response);
+
+            if (response.bodyUsed) {
+              let elem = document.getElementById("returnText")
+              elem?.textContent == reader?.read()
+            }
+
           } else {
             console.log('Request failed: ', response);
+
+            if (response.bodyUsed) {
+              let elem = document.getElementById("returnText")
+              elem?.textContent == reader?.read()
+            }
+
             throw new Error(response.status + response.statusText);
           }
         })
@@ -190,10 +221,8 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
         >
           {this.buttonText()}
         </Button>
-        <div className="api_response">
-        <p className="response_text"></p>
+          {this.returnRespBox}
         </div>
-      </div>
     );
   }
 }
