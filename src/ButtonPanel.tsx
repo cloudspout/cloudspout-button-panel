@@ -137,16 +137,26 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
 
   returnRespBox() {
     // const { options } = this.props;
-    
-    // Inject paragraph for adding API response
-    if (this.props.options.printResponse === true) {
+    let test: boolean = true
+
+    if (test === true) {
+      // Inject paragraph for adding API response
+      if (this.props.options.printResponse === true) {
+        return (
+          <div>
+            <p className="returnText"></p>
+          </div>
+        )
+      } else {
+        return ""
+      }
+
+    } else {
       return (
         <div>
           <p className="returnText"></p>
         </div>
       )
-    } else {
-      return ""
     }
 
   }

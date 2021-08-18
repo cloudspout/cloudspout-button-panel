@@ -17,3 +17,13 @@
 .right {
     float: right;
 }
+
+.returnText {
+    inline-size: 250px;
+    overflow-wrap: break-word;
+    align-items: center;
+    display: flex;
+    background-color: black;
+    border-radius: 5%;
+    color: honeydew;
+}

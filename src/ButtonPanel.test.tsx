@@ -11,6 +11,8 @@ class TestProps {
     text: '',
     variant: 'primary',
     orientation: '',
+    printResponse: true,
+    response: 'test response',
   };
 }
 

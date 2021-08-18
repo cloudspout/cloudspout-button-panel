@@ -33,7 +33,6 @@
     "copy-webpack-plugin": "^6.3.2"
   },
   "engines": {
-    "node": ">=12 <13"
   },
   "release-it": {
     "github": {

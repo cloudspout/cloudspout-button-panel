@@ -221,7 +221,7 @@ export const plugin = new PanelPlugin<ButtonPanelOptions>(ButtonPanel).setPanelO
     })
     .addBooleanSwitch({
       path: 'showResponse',
-      name: 'showResponse',
+      name: 'Show Response',
       description: "Use this to toggle showing API response below the button.", 
       defaultValue: true, 
     })
