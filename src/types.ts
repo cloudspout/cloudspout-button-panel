@@ -31,4 +31,5 @@ export interface ButtonPanelOptions {
 export type ButtonPanelState = {
   api_call: 'READY' | 'IN_PROGRESS' | 'SUCCESS' | 'ERROR';
   response: string;
+  responseData: Response;
 };

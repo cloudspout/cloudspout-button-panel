@@ -10,20 +10,31 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 }
 .left {
     float: left;
+    flex-direction: column;
+    align-items: left,
 }
 .right {
     float: right;
+    flex-direction: column;
+    align-items: right,
 }
 
 .returnText {
-    inline-size: 250px;
-    overflow-wrap: break-word;
-    align-items: center;
+    width: 95%;
+    word-wrap: anywhere;
     display: flex;
     background-color: black;
-    border-radius: 5%;
+    border-radius: 5px;
     color: honeydew;
+    overflow-x: inherit;
+    overflow-y: scroll;
+    height: calc(100% - 100px);
+    font-style: italic;
+    font-size: small;
+    padding: 5px;
+    position: absolute;
 }

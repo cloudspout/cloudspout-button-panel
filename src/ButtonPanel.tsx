@@ -12,6 +12,7 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
     this.state = {
       api_call: 'READY',
       response: '',
+      responseData: new Response,
     };
   }
 
@@ -143,20 +144,24 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
       // Inject paragraph for adding API response
       if (this.props.options.printResponse === true) {
         return (
-          <div>
-            <p className="returnText"></p>
+          <div className="panel-content">
+            <p className="returnText"> </p>
           </div>
-        )
+        );
       } else {
-        return ""
+        return (
+          <div className="panel-content">
+            <p className="returnText"> </p>
+          </div>
+        );
       }
 
     } else {
       return (
-        <div>
-          <p className="returnText"></p>
+        <div className="panel-content">
+          <p className="returnText"> </p>
         </div>
-      )
+      );
     }
 
   }
@@ -184,23 +189,31 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
               response: 'CORS prevents access to the response',
             });
           } else if (response.ok) {
+            
             this.setState({
               api_call: 'SUCCESS',
               response: response.statusText,
+              responseData: response
             });
             console.log('Request successful: ', response);
 
             if (response.bodyUsed) {
-              let elem = document.getElementById("returnText")
-              elem?.textContent == reader?.read()
+              document.getElementById("returnText")?.textContent == reader?.read()
+            }
+
+            if (true) {
+              console.log(reader?.read())
             }
 
           } else {
             console.log('Request failed: ', response);
 
             if (response.bodyUsed) {
-              let elem = document.getElementById("returnText")
-              elem?.textContent == reader?.read()
+              document.getElementById("returnText")?.textContent == reader?.read()
+            }
+            
+            if (true) {
+              console.log(reader?.read())
             }
 
             throw new Error(response.status + response.statusText);
@@ -210,7 +223,14 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
           this.setState({
             api_call: 'ERROR',
             response: e.message,
+            responseData: new Response()
           });
+
+          let elem = document.getElementById("returnText")
+          elem?.textContent == "Error: " + e.Message
+          elem?.innerText == "Error: " + e.Message
+
+
           console.error('Request error: ', e);
         })
         .finally(() => {
@@ -231,7 +251,7 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
         >
           {this.buttonText()}
         </Button>
-          {this.returnRespBox}
+          {this.returnRespBox()}
         </div>
     );
   }
