@@ -23,7 +23,7 @@
     align-items: right,
 }
 
-.returnText {
+.returnBody {
     width: 95%;
     word-wrap: anywhere;
     display: flex;
@@ -37,4 +37,13 @@
     font-size: small;
     padding: 5px;
     position: absolute;
+}
+
+.returnHeaders {
+    width: 95%;
+    float: left;
+}
+
+.returnStatus {
+    float: left;
 }

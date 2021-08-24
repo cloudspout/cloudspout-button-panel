@@ -12,7 +12,7 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
     this.state = {
       api_call: 'READY',
       response: '',
-      responseData: new Response,
+      // responseData: new Response,
     };
   }
 
@@ -137,31 +137,29 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
   }
 
   returnRespBox() {
-    // const { options } = this.props;
-    let test: boolean = true
-
-    if (test === true) {
-      // Inject paragraph for adding API response
-      if (this.props.options.printResponse === true) {
-        return (
-          <div className="panel-content">
-            <p className="returnText"> </p>
-          </div>
-        );
-      } else {
-        return (
-          <div className="panel-content">
-            <p className="returnText"> </p>
-          </div>
-        );
-      }
-
-    } else {
+    // Inject API response elements to be mutated over time
       return (
         <div className="panel-content">
-          <p className="returnText"> </p>
+          <h3 className="returnStatus" id="returnStatus"> </h3>
+          <table className="returnHeaders" id="returnHeaders"></table>
+          <p className="returnBody" id="returnBody"> </p>
         </div>
       );
+  }
+
+  injectHeaders(value: string, key: string, parent: Headers) {
+
+    let headers = document.getElementById("returnHeaders")
+    if (headers != null) {
+      let row = headers.getElementsByTagName("tbody")[0].insertRow()
+      let k = row.insertCell(0)
+      let v = row.insertCell(1)
+
+      k.innerText = key
+      v.innerText = value
+
+      parent.set("", "")
+
     }
 
   }
@@ -179,9 +177,7 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
 
       fetch(url.toString(), fetchOpts)
         .then((response) => {
-          
-          const reader = response.body?.getReader();
-          
+
           if (response.type === 'opaque') {
             // CORS prevents us from knowing what's up - so be it
             this.setState({
@@ -193,27 +189,32 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
             this.setState({
               api_call: 'SUCCESS',
               response: response.statusText,
-              responseData: response
+              // responseData: response
             });
             console.log('Request successful: ', response);
 
-            if (response.bodyUsed) {
-              document.getElementById("returnText")?.textContent == reader?.read()
-            }
+            if (options.printResponse) {
+              if (response.bodyUsed) {
+                let body = response.json()
+                let text = JSON.stringify(body)
+                document.getElementById("returnText")?.innerText == text
+              }
 
-            if (true) {
-              console.log(reader?.read())
+              response.headers.forEach(this.injectHeaders)
+
             }
 
           } else {
             console.log('Request failed: ', response);
 
-            if (response.bodyUsed) {
-              document.getElementById("returnText")?.textContent == reader?.read()
-            }
-            
-            if (true) {
-              console.log(reader?.read())
+            if (options.printResponse && response.bodyUsed) {
+              if (response.bodyUsed) {
+                let body = response.json()
+                let text = JSON.stringify(body)
+                document.getElementById("returnText")?.innerText == text
+              }
+              response.headers.forEach(this.injectHeaders)
+
             }
 
             throw new Error(response.status + response.statusText);
@@ -223,7 +224,7 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
           this.setState({
             api_call: 'ERROR',
             response: e.message,
-            responseData: new Response()
+            // responseData: new Response()
           });
 
           let elem = document.getElementById("returnText")
@@ -251,8 +252,8 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
         >
           {this.buttonText()}
         </Button>
-          {this.returnRespBox()}
-        </div>
+        {this.returnRespBox()}
+      </div>
     );
   }
 }
