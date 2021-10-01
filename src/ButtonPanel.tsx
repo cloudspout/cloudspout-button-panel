@@ -141,26 +141,62 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
       return (
         <div className="panel-content">
           <h3 className="returnStatus" id="returnStatus"> </h3>
-          <table className="returnHeaders" id="returnHeaders"></table>
+          <h4 className="returnMsg" id="returnMsg"> </h4>
+          <table className="returnHeaders" id="returnHeaders"> </table>
           <p className="returnBody" id="returnBody"> </p>
         </div>
       );
   }
 
-  injectHeaders(value: string, key: string, parent: Headers) {
+  renderResponse(response: Response) {
+    // this.injectHeaders(response.headers);
 
-    let headers = document.getElementById("returnHeaders")
-    if (headers != null) {
-      let row = headers.getElementsByTagName("tbody")[0].insertRow()
-      let k = row.insertCell(0)
-      let v = row.insertCell(1)
-
-      k.innerText = key
-      v.innerText = value
-
-      parent.set("", "")
-
+    var retStatus = document.getElementById("returnStatus");
+    if (retStatus != null) {
+      retStatus.innerText = response.status.toString();
+    } else {
+      console.log("Response status element not found.");
     }
+
+    var retMsg = document.getElementById("returnMsg");
+    if (retMsg != null) {
+      retMsg.innerText = response.statusText;
+      console.log("Updated status code.");
+    } else {
+      console.log("Response message element not found.");
+    }
+
+    response.text().then((data) => {
+      var retBody = document.getElementById("returnBody");
+      if (retBody != null) {
+        retBody.innerText = data;
+        console.log("Updated response text.");
+      } else {
+        console.log("Response body element not found.");
+      }
+    });
+
+    
+  }
+
+  injectHeaders(parent: Headers) {
+      parent.forEach(function(value: String, key: String, parent: Headers) {
+        let headers = document.getElementById("returnHeaders");
+        if (headers != null) {
+          let row = headers.getElementsByTagName("tbody")[0].insertRow();
+          let k = row.insertCell(0);
+          let v = row.insertCell(1);
+          k.innerText == key;
+          v.innerText == value;
+
+          headers?.appendChild(k);
+          headers?.appendChild(v);
+
+          parent.set("", "");
+        }
+      })
+
+      console.log("Added headers to response.")
 
   }
 
@@ -192,30 +228,11 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
               // responseData: response
             });
             console.log('Request successful: ', response);
-
-            if (options.printResponse) {
-              if (response.bodyUsed) {
-                let body = response.json()
-                let text = JSON.stringify(body)
-                document.getElementById("returnText")?.innerText == text
-              }
-
-              response.headers.forEach(this.injectHeaders)
-
-            }
+            this.renderResponse(response);
 
           } else {
             console.log('Request failed: ', response);
-
-            if (options.printResponse && response.bodyUsed) {
-              if (response.bodyUsed) {
-                let body = response.json()
-                let text = JSON.stringify(body)
-                document.getElementById("returnText")?.innerText == text
-              }
-              response.headers.forEach(this.injectHeaders)
-
-            }
+            this.renderResponse(response);
 
             throw new Error(response.status + response.statusText);
           }
@@ -227,10 +244,8 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
             // responseData: new Response()
           });
 
-          let elem = document.getElementById("returnText")
-          elem?.textContent == "Error: " + e.Message
-          elem?.innerText == "Error: " + e.Message
-
+          let elem = document.getElementById("returnText");
+          elem?.innerText == "Error: " + e.Message;
 
           console.error('Request error: ', e);
         })

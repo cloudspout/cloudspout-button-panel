@@ -3453,26 +3453,65 @@ function (_super) {
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h3", {
       className: "returnStatus",
       id: "returnStatus"
+    }, " "), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h4", {
+      className: "returnMsg",
+      id: "returnMsg"
     }, " "), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("table", {
       className: "returnHeaders",
       id: "returnHeaders"
-    }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+    }, " "), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
       className: "returnBody",
       id: "returnBody"
     }, " "));
   };
 
-  ButtonPanel.prototype.injectHeaders = function (value, key, parent) {
-    var headers = document.getElementById("returnHeaders");
+  ButtonPanel.prototype.renderResponse = function (response) {
+    // this.injectHeaders(response.headers);
+    var retStatus = document.getElementById("returnStatus");
 
-    if (headers != null) {
-      var row = headers.getElementsByTagName("tbody")[0].insertRow();
-      var k = row.insertCell(0);
-      var v = row.insertCell(1);
-      k.innerText = key;
-      v.innerText = value;
-      parent.set("", "");
+    if (retStatus != null) {
+      retStatus.innerText = response.status.toString();
+    } else {
+      console.log("Response status element not found.");
     }
+
+    var retMsg = document.getElementById("returnMsg");
+
+    if (retMsg != null) {
+      retMsg.innerText = response.statusText;
+      console.log("Updated status code.");
+    } else {
+      console.log("Response message element not found.");
+    }
+
+    response.text().then(function (data) {
+      var retBody = document.getElementById("returnBody");
+
+      if (retBody != null) {
+        retBody.innerText = data;
+        console.log("Updated response text.");
+      } else {
+        console.log("Response body element not found.");
+      }
+    });
+  };
+
+  ButtonPanel.prototype.injectHeaders = function (parent) {
+    parent.forEach(function (value, key, parent) {
+      var headers = document.getElementById("returnHeaders");
+
+      if (headers != null) {
+        var row = headers.getElementsByTagName("tbody")[0].insertRow();
+        var k = row.insertCell(0);
+        var v = row.insertCell(1);
+        k.innerText == key;
+        v.innerText == value;
+        headers === null || headers === void 0 ? void 0 : headers.appendChild(k);
+        headers === null || headers === void 0 ? void 0 : headers.appendChild(v);
+        parent.set("", "");
+      }
+    });
+    console.log("Added headers to response.");
   };
 
   ButtonPanel.prototype.render = function () {
@@ -3491,8 +3530,6 @@ function (_super) {
       var fetchOpts = _this.prepareFetchOpts(url);
 
       fetch(url.toString(), fetchOpts).then(function (response) {
-        var _a, _b;
-
         if (response.type === 'opaque') {
           // CORS prevents us from knowing what's up - so be it
           _this.setState({
@@ -3507,27 +3544,11 @@ function (_super) {
 
           console.log('Request successful: ', response);
 
-          if (options.printResponse) {
-            if (response.bodyUsed) {
-              var body = response.json();
-              var text = JSON.stringify(body);
-              ((_a = document.getElementById("returnText")) === null || _a === void 0 ? void 0 : _a.innerText) == text;
-            }
-
-            response.headers.forEach(_this.injectHeaders);
-          }
+          _this.renderResponse(response);
         } else {
           console.log('Request failed: ', response);
 
-          if (options.printResponse && response.bodyUsed) {
-            if (response.bodyUsed) {
-              var body = response.json();
-              var text = JSON.stringify(body);
-              ((_b = document.getElementById("returnText")) === null || _b === void 0 ? void 0 : _b.innerText) == text;
-            }
-
-            response.headers.forEach(_this.injectHeaders);
-          }
+          _this.renderResponse(response);
 
           throw new Error(response.status + response.statusText);
         }
@@ -3538,7 +3559,6 @@ function (_super) {
         });
 
         var elem = document.getElementById("returnText");
-        (elem === null || elem === void 0 ? void 0 : elem.textContent) == "Error: " + e.Message;
         (elem === null || elem === void 0 ? void 0 : elem.innerText) == "Error: " + e.Message;
         console.error('Request error: ', e);
       })["finally"](function () {
