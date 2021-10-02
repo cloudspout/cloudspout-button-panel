@@ -138,27 +138,29 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
 
   returnRespBox() {
     // Inject API response elements to be mutated over time
-      return (
-        <div className="panel-content">
-          <h3 className="returnStatus" id="returnStatus"> </h3>
-          <h4 className="returnMsg" id="returnMsg"> </h4>
-          <table className="returnHeaders" id="returnHeaders"> </table>
-          <p className="returnBody" id="returnBody"> </p>
+    return (
+      <div className="panel-content">
+        <div className="returnContent" id={this.props.options.text + "-returnContent"}>
+          <h3 className="returnStatus" id={this.props.options.text + "-returnStatus"}> </h3>
+          <h3 className="returnMsg" id={this.props.options.text + "-returnMsg"}> </h3>
         </div>
-      );
+        <table className="returnHeaders" id={this.props.options.text + "-returnHeaders"}> </table>
+        <p className="returnBody" id={this.props.options.text + "-returnBody"}> </p>
+      </div>
+    );
   }
 
   renderResponse(response: Response) {
     // this.injectHeaders(response.headers);
 
-    var retStatus = document.getElementById("returnStatus");
+    var retStatus = document.getElementById(this.props.options.text + "-returnStatus");
     if (retStatus != null) {
       retStatus.innerText = response.status.toString();
     } else {
       console.log("Response status element not found.");
     }
 
-    var retMsg = document.getElementById("returnMsg");
+    var retMsg = document.getElementById(this.props.options.text + "-returnMsg");
     if (retMsg != null) {
       retMsg.innerText = response.statusText;
       console.log("Updated status code.");
@@ -167,7 +169,7 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
     }
 
     response.text().then((data) => {
-      var retBody = document.getElementById("returnBody");
+      var retBody = document.getElementById(this.props.options.text + "-returnBody");
       if (retBody != null) {
         retBody.innerText = data;
         console.log("Updated response text.");

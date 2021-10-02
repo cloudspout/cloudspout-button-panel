@@ -1349,7 +1349,7 @@ function noop() {}
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "../node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(true);
 // Module
-exports.push([module.i, "@-webkit-keyframes spin {\n  from {\n    transform: scale(1) rotate(0deg);\n  }\n  to {\n    transform: scale(1) rotate(360deg);\n  }\n}\n@keyframes spin {\n  from {\n    transform: scale(1) rotate(0deg);\n  }\n  to {\n    transform: scale(1) rotate(360deg);\n  }\n}\n.spinning > * > *:first-child {\n  -webkit-animation: spin 1s infinite linear;\n          animation: spin 1s infinite linear;\n}\n\n.center {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  flex-direction: column;\n}\n\n.left {\n  float: left;\n  flex-direction: column;\n  align-items: left;\n}\n\n.right {\n  float: right;\n  flex-direction: column;\n  align-items: right;\n}\n\n.returnBody {\n  width: 95%;\n  word-wrap: anywhere;\n  display: flex;\n  background-color: black;\n  border-radius: 5px;\n  color: honeydew;\n  overflow-x: inherit;\n  overflow-y: scroll;\n  height: calc(100% - 100px);\n  font-style: italic;\n  font-size: small;\n  padding: 5px;\n  position: absolute;\n}\n\n.returnHeaders {\n  width: 95%;\n  float: left;\n}\n\n.returnStatus {\n  float: left;\n}", "",{"version":3,"sources":["button-panel.css"],"names":[],"mappings":"AAAA;EACE;IACE,gCAAgC;EAClC;EACA;IACE,kCAAkC;EACpC;AACF;AACA;EACE;IACE,gCAAgC;EAClC;EACA;IACE,kCAAkC;EACpC;AACF;AACA;EACE,0CAA0C;UAClC,kCAAkC;AAC5C;;AAEA;EACE,aAAa;EACb,mBAAmB;EACnB,uBAAuB;EACvB,sBAAsB;AACxB;;AAEA;EACE,WAAW;EACX,sBAAsB;EACtB,iBAAiB;AACnB;;AAEA;EACE,YAAY;EACZ,sBAAsB;EACtB,kBAAkB;AACpB;;AAEA;EACE,UAAU;EACV,mBAAmB;EACnB,aAAa;EACb,uBAAuB;EACvB,kBAAkB;EAClB,eAAe;EACf,mBAAmB;EACnB,kBAAkB;EAClB,0BAA0B;EAC1B,kBAAkB;EAClB,gBAAgB;EAChB,YAAY;EACZ,kBAAkB;AACpB;;AAEA;EACE,UAAU;EACV,WAAW;AACb;;AAEA;EACE,WAAW;AACb","file":"button-panel.css","sourcesContent":["@-webkit-keyframes spin {\n  from {\n    transform: scale(1) rotate(0deg);\n  }\n  to {\n    transform: scale(1) rotate(360deg);\n  }\n}\n@keyframes spin {\n  from {\n    transform: scale(1) rotate(0deg);\n  }\n  to {\n    transform: scale(1) rotate(360deg);\n  }\n}\n.spinning > * > *:first-child {\n  -webkit-animation: spin 1s infinite linear;\n          animation: spin 1s infinite linear;\n}\n\n.center {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  flex-direction: column;\n}\n\n.left {\n  float: left;\n  flex-direction: column;\n  align-items: left;\n}\n\n.right {\n  float: right;\n  flex-direction: column;\n  align-items: right;\n}\n\n.returnBody {\n  width: 95%;\n  word-wrap: anywhere;\n  display: flex;\n  background-color: black;\n  border-radius: 5px;\n  color: honeydew;\n  overflow-x: inherit;\n  overflow-y: scroll;\n  height: calc(100% - 100px);\n  font-style: italic;\n  font-size: small;\n  padding: 5px;\n  position: absolute;\n}\n\n.returnHeaders {\n  width: 95%;\n  float: left;\n}\n\n.returnStatus {\n  float: left;\n}"]}]);
+exports.push([module.i, "@-webkit-keyframes spin {\n  from {\n    transform: scale(1) rotate(0deg);\n  }\n  to {\n    transform: scale(1) rotate(360deg);\n  }\n}\n@keyframes spin {\n  from {\n    transform: scale(1) rotate(0deg);\n  }\n  to {\n    transform: scale(1) rotate(360deg);\n  }\n}\n.spinning > * > *:first-child {\n  -webkit-animation: spin 1s infinite linear;\n          animation: spin 1s infinite linear;\n}\n\n.center {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  flex-direction: column;\n}\n\n.left {\n  float: left;\n  flex-direction: column;\n  align-items: left;\n}\n\n.right {\n  float: right;\n  flex-direction: column;\n  align-items: right;\n}\n\n.returnBody {\n  width: calc(100% - 35px);\n  word-wrap: anywhere;\n  display: flex;\n  background-color: black;\n  border-radius: 5px;\n  color: honeydew;\n  overflow-y: scroll;\n  height: calc(100% - 140px);\n  font-style: italic;\n  font-size: small;\n  padding: 5px;\n  position: absolute;\n  align-content: center;\n}\n\n.returnHeaders {\n  font-size: medium;\n  width: 95%;\n  float: left;\n}\n\n.returnStatus {\n  display: inline;\n  width: 160px;\n  height: 160px;\n}\n\n.good {\n  background: green;\n  color: white;\n}\n\n.bad {\n  background: crimson;\n  color: white;\n}\n\n.returnMsg {\n  font-size: 20px;\n  float: right;\n}", "",{"version":3,"sources":["button-panel.css"],"names":[],"mappings":"AAAA;EACE;IACE,gCAAgC;EAClC;EACA;IACE,kCAAkC;EACpC;AACF;AACA;EACE;IACE,gCAAgC;EAClC;EACA;IACE,kCAAkC;EACpC;AACF;AACA;EACE,0CAA0C;UAClC,kCAAkC;AAC5C;;AAEA;EACE,aAAa;EACb,mBAAmB;EACnB,uBAAuB;EACvB,sBAAsB;AACxB;;AAEA;EACE,WAAW;EACX,sBAAsB;EACtB,iBAAiB;AACnB;;AAEA;EACE,YAAY;EACZ,sBAAsB;EACtB,kBAAkB;AACpB;;AAEA;EACE,wBAAwB;EACxB,mBAAmB;EACnB,aAAa;EACb,uBAAuB;EACvB,kBAAkB;EAClB,eAAe;EACf,kBAAkB;EAClB,0BAA0B;EAC1B,kBAAkB;EAClB,gBAAgB;EAChB,YAAY;EACZ,kBAAkB;EAClB,qBAAqB;AACvB;;AAEA;EACE,iBAAiB;EACjB,UAAU;EACV,WAAW;AACb;;AAEA;EACE,eAAe;EACf,YAAY;EACZ,aAAa;AACf;;AAEA;EACE,iBAAiB;EACjB,YAAY;AACd;;AAEA;EACE,mBAAmB;EACnB,YAAY;AACd;;AAEA;EACE,eAAe;EACf,YAAY;AACd","file":"button-panel.css","sourcesContent":["@-webkit-keyframes spin {\n  from {\n    transform: scale(1) rotate(0deg);\n  }\n  to {\n    transform: scale(1) rotate(360deg);\n  }\n}\n@keyframes spin {\n  from {\n    transform: scale(1) rotate(0deg);\n  }\n  to {\n    transform: scale(1) rotate(360deg);\n  }\n}\n.spinning > * > *:first-child {\n  -webkit-animation: spin 1s infinite linear;\n          animation: spin 1s infinite linear;\n}\n\n.center {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  flex-direction: column;\n}\n\n.left {\n  float: left;\n  flex-direction: column;\n  align-items: left;\n}\n\n.right {\n  float: right;\n  flex-direction: column;\n  align-items: right;\n}\n\n.returnBody {\n  width: calc(100% - 35px);\n  word-wrap: anywhere;\n  display: flex;\n  background-color: black;\n  border-radius: 5px;\n  color: honeydew;\n  overflow-y: scroll;\n  height: calc(100% - 140px);\n  font-style: italic;\n  font-size: small;\n  padding: 5px;\n  position: absolute;\n  align-content: center;\n}\n\n.returnHeaders {\n  font-size: medium;\n  width: 95%;\n  float: left;\n}\n\n.returnStatus {\n  display: inline;\n  width: 160px;\n  height: 160px;\n}\n\n.good {\n  background: green;\n  color: white;\n}\n\n.bad {\n  background: crimson;\n  color: white;\n}\n\n.returnMsg {\n  font-size: 20px;\n  float: right;\n}"]}]);
 // Exports
 module.exports = exports;
 
@@ -3450,24 +3450,29 @@ function (_super) {
     // Inject API response elements to be mutated over time
     return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
       className: "panel-content"
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      className: "returnContent",
+      id: this.props.options.text + "-returnContent"
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h3", {
       className: "returnStatus",
-      id: "returnStatus"
-    }, " "), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h4", {
+      id: this.props.options.text + "-returnStatus"
+    }, " "), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h3", {
       className: "returnMsg",
-      id: "returnMsg"
-    }, " "), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("table", {
+      id: this.props.options.text + "-returnMsg"
+    }, " ")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("table", {
       className: "returnHeaders",
-      id: "returnHeaders"
+      id: this.props.options.text + "-returnHeaders"
     }, " "), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
       className: "returnBody",
-      id: "returnBody"
+      id: this.props.options.text + "-returnBody"
     }, " "));
   };
 
   ButtonPanel.prototype.renderResponse = function (response) {
     // this.injectHeaders(response.headers);
-    var retStatus = document.getElementById("returnStatus");
+    var _this = this;
+
+    var retStatus = document.getElementById(this.props.options.text + "-returnStatus");
 
     if (retStatus != null) {
       retStatus.innerText = response.status.toString();
@@ -3475,7 +3480,7 @@ function (_super) {
       console.log("Response status element not found.");
     }
 
-    var retMsg = document.getElementById("returnMsg");
+    var retMsg = document.getElementById(this.props.options.text + "-returnMsg");
 
     if (retMsg != null) {
       retMsg.innerText = response.statusText;
@@ -3485,7 +3490,7 @@ function (_super) {
     }
 
     response.text().then(function (data) {
-      var retBody = document.getElementById("returnBody");
+      var retBody = document.getElementById(_this.props.options.text + "-returnBody");
 
       if (retBody != null) {
         retBody.innerText = data;

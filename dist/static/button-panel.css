@@ -24,26 +24,44 @@
 }
 
 .returnBody {
-    width: 95%;
+    width: calc(100% - 35px);
     word-wrap: anywhere;
     display: flex;
     background-color: black;
     border-radius: 5px;
     color: honeydew;
-    overflow-x: inherit;
     overflow-y: scroll;
-    height: calc(100% - 100px);
+    height: calc(100% - 140px);
     font-style: italic;
     font-size: small;
     padding: 5px;
     position: absolute;
+    align-content: center;
 }
 
 .returnHeaders {
+    font-size: medium;
     width: 95%;
     float: left;
 }
 
 .returnStatus {
-    float: left;
+    display: inline;
+    width: 160px;
+    height: 160px;
+}
+
+.good {
+    background: green;
+    color: white;
+}
+
+.bad {
+    background: crimson;
+    color: white;
+}
+
+.returnMsg {
+    font-size: 20px;
+    float: right;
 }
