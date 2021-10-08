@@ -12,6 +12,8 @@ class TestProps {
     variant: 'primary',
     orientation: '',
     printResponse: true,
+    askForAuth: true,
+    apiKeyHeader: 'Authentication',
     response: 'test response',
   };
 }

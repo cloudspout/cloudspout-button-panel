@@ -1349,7 +1349,7 @@ function noop() {}
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "../node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(true);
 // Module
-exports.push([module.i, "@-webkit-keyframes spin {\n  from {\n    transform: scale(1) rotate(0deg);\n  }\n  to {\n    transform: scale(1) rotate(360deg);\n  }\n}\n@keyframes spin {\n  from {\n    transform: scale(1) rotate(0deg);\n  }\n  to {\n    transform: scale(1) rotate(360deg);\n  }\n}\n.spinning > * > *:first-child {\n  -webkit-animation: spin 1s infinite linear;\n          animation: spin 1s infinite linear;\n}\n\n.center {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  flex-direction: column;\n}\n\n.left {\n  float: left;\n  flex-direction: column;\n  align-items: left;\n}\n\n.right {\n  float: right;\n  flex-direction: column;\n  align-items: right;\n}\n\n.returnBody {\n  width: calc(100% - 35px);\n  word-wrap: anywhere;\n  display: flex;\n  background-color: black;\n  border-radius: 5px;\n  color: honeydew;\n  overflow-y: scroll;\n  height: calc(100% - 140px);\n  font-style: italic;\n  font-size: small;\n  padding: 5px;\n  position: absolute;\n  align-content: center;\n}\n\n.returnHeaders {\n  font-size: medium;\n  width: 95%;\n  float: left;\n}\n\n.returnStatus {\n  display: inline;\n  width: 160px;\n  height: 160px;\n}\n\n.good {\n  background: green;\n  color: white;\n}\n\n.bad {\n  background: crimson;\n  color: white;\n}\n\n.returnMsg {\n  font-size: 20px;\n  float: right;\n}", "",{"version":3,"sources":["button-panel.css"],"names":[],"mappings":"AAAA;EACE;IACE,gCAAgC;EAClC;EACA;IACE,kCAAkC;EACpC;AACF;AACA;EACE;IACE,gCAAgC;EAClC;EACA;IACE,kCAAkC;EACpC;AACF;AACA;EACE,0CAA0C;UAClC,kCAAkC;AAC5C;;AAEA;EACE,aAAa;EACb,mBAAmB;EACnB,uBAAuB;EACvB,sBAAsB;AACxB;;AAEA;EACE,WAAW;EACX,sBAAsB;EACtB,iBAAiB;AACnB;;AAEA;EACE,YAAY;EACZ,sBAAsB;EACtB,kBAAkB;AACpB;;AAEA;EACE,wBAAwB;EACxB,mBAAmB;EACnB,aAAa;EACb,uBAAuB;EACvB,kBAAkB;EAClB,eAAe;EACf,kBAAkB;EAClB,0BAA0B;EAC1B,kBAAkB;EAClB,gBAAgB;EAChB,YAAY;EACZ,kBAAkB;EAClB,qBAAqB;AACvB;;AAEA;EACE,iBAAiB;EACjB,UAAU;EACV,WAAW;AACb;;AAEA;EACE,eAAe;EACf,YAAY;EACZ,aAAa;AACf;;AAEA;EACE,iBAAiB;EACjB,YAAY;AACd;;AAEA;EACE,mBAAmB;EACnB,YAAY;AACd;;AAEA;EACE,eAAe;EACf,YAAY;AACd","file":"button-panel.css","sourcesContent":["@-webkit-keyframes spin {\n  from {\n    transform: scale(1) rotate(0deg);\n  }\n  to {\n    transform: scale(1) rotate(360deg);\n  }\n}\n@keyframes spin {\n  from {\n    transform: scale(1) rotate(0deg);\n  }\n  to {\n    transform: scale(1) rotate(360deg);\n  }\n}\n.spinning > * > *:first-child {\n  -webkit-animation: spin 1s infinite linear;\n          animation: spin 1s infinite linear;\n}\n\n.center {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  flex-direction: column;\n}\n\n.left {\n  float: left;\n  flex-direction: column;\n  align-items: left;\n}\n\n.right {\n  float: right;\n  flex-direction: column;\n  align-items: right;\n}\n\n.returnBody {\n  width: calc(100% - 35px);\n  word-wrap: anywhere;\n  display: flex;\n  background-color: black;\n  border-radius: 5px;\n  color: honeydew;\n  overflow-y: scroll;\n  height: calc(100% - 140px);\n  font-style: italic;\n  font-size: small;\n  padding: 5px;\n  position: absolute;\n  align-content: center;\n}\n\n.returnHeaders {\n  font-size: medium;\n  width: 95%;\n  float: left;\n}\n\n.returnStatus {\n  display: inline;\n  width: 160px;\n  height: 160px;\n}\n\n.good {\n  background: green;\n  color: white;\n}\n\n.bad {\n  background: crimson;\n  color: white;\n}\n\n.returnMsg {\n  font-size: 20px;\n  float: right;\n}"]}]);
+exports.push([module.i, "@-webkit-keyframes spin {\n  from {\n    transform: scale(1) rotate(0deg);\n  }\n  to {\n    transform: scale(1) rotate(360deg);\n  }\n}\n@keyframes spin {\n  from {\n    transform: scale(1) rotate(0deg);\n  }\n  to {\n    transform: scale(1) rotate(360deg);\n  }\n}\n.spinning > * > *:first-child {\n  -webkit-animation: spin 1s infinite linear;\n          animation: spin 1s infinite linear;\n}\n\n.center {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  flex-direction: column;\n}\n\n.left {\n  float: left;\n  flex-direction: column;\n  align-items: left;\n}\n\n.right {\n  float: right;\n  flex-direction: column;\n  align-items: right;\n}\n\n.returnBody {\n  width: calc(100% - 35px);\n  word-wrap: anywhere;\n  display: flex;\n  background-color: black;\n  border-radius: 5px;\n  color: honeydew;\n  overflow-y: scroll;\n  height: calc(100% - 140px);\n  font-style: italic;\n  font-size: small;\n  padding: 5px;\n  position: absolute;\n  align-content: center;\n}\n\n.returnHeaders {\n  font-size: small;\n  width: 95%;\n  float: left;\n}\n\n.returnContent {\n  font-style: inherit;\n  font-size: small;\n  border-radius: 2px;\n  align-content: center;\n  text-align: center;\n}\n\n.good {\n  background: green;\n  color: white;\n}\n\n.bad {\n  background: crimson;\n  color: white;\n}", "",{"version":3,"sources":["button-panel.css"],"names":[],"mappings":"AAAA;EACE;IACE,gCAAgC;EAClC;EACA;IACE,kCAAkC;EACpC;AACF;AACA;EACE;IACE,gCAAgC;EAClC;EACA;IACE,kCAAkC;EACpC;AACF;AACA;EACE,0CAA0C;UAClC,kCAAkC;AAC5C;;AAEA;EACE,aAAa;EACb,mBAAmB;EACnB,uBAAuB;EACvB,sBAAsB;AACxB;;AAEA;EACE,WAAW;EACX,sBAAsB;EACtB,iBAAiB;AACnB;;AAEA;EACE,YAAY;EACZ,sBAAsB;EACtB,kBAAkB;AACpB;;AAEA;EACE,wBAAwB;EACxB,mBAAmB;EACnB,aAAa;EACb,uBAAuB;EACvB,kBAAkB;EAClB,eAAe;EACf,kBAAkB;EAClB,0BAA0B;EAC1B,kBAAkB;EAClB,gBAAgB;EAChB,YAAY;EACZ,kBAAkB;EAClB,qBAAqB;AACvB;;AAEA;EACE,gBAAgB;EAChB,UAAU;EACV,WAAW;AACb;;AAEA;EACE,mBAAmB;EACnB,gBAAgB;EAChB,kBAAkB;EAClB,qBAAqB;EACrB,kBAAkB;AACpB;;AAEA;EACE,iBAAiB;EACjB,YAAY;AACd;;AAEA;EACE,mBAAmB;EACnB,YAAY;AACd","file":"button-panel.css","sourcesContent":["@-webkit-keyframes spin {\n  from {\n    transform: scale(1) rotate(0deg);\n  }\n  to {\n    transform: scale(1) rotate(360deg);\n  }\n}\n@keyframes spin {\n  from {\n    transform: scale(1) rotate(0deg);\n  }\n  to {\n    transform: scale(1) rotate(360deg);\n  }\n}\n.spinning > * > *:first-child {\n  -webkit-animation: spin 1s infinite linear;\n          animation: spin 1s infinite linear;\n}\n\n.center {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  flex-direction: column;\n}\n\n.left {\n  float: left;\n  flex-direction: column;\n  align-items: left;\n}\n\n.right {\n  float: right;\n  flex-direction: column;\n  align-items: right;\n}\n\n.returnBody {\n  width: calc(100% - 35px);\n  word-wrap: anywhere;\n  display: flex;\n  background-color: black;\n  border-radius: 5px;\n  color: honeydew;\n  overflow-y: scroll;\n  height: calc(100% - 140px);\n  font-style: italic;\n  font-size: small;\n  padding: 5px;\n  position: absolute;\n  align-content: center;\n}\n\n.returnHeaders {\n  font-size: small;\n  width: 95%;\n  float: left;\n}\n\n.returnContent {\n  font-style: inherit;\n  font-size: small;\n  border-radius: 2px;\n  align-content: center;\n  text-align: center;\n}\n\n.good {\n  background: green;\n  color: white;\n}\n\n.bad {\n  background: crimson;\n  color: white;\n}"]}]);
 // Exports
 module.exports = exports;
 
@@ -3429,6 +3429,16 @@ function (_super) {
       requestHeaders.set('Authorization', 'Basic ' + btoa(options.username + ':' + options.password));
     }
 
+    if (options.askForAuth) {
+      // Get APIKey/password from user and set as the specified header.
+      var pass = prompt("Enter API Key/Token you want to use to authenticate with remote API.", "");
+
+      if (pass != null) {
+        requestHeaders.set(options.apiKeyHeader, pass);
+        pass == null; // Reset the password to get rid of it from memory.
+      }
+    }
+
     if (options.params) {
       if (options.type === 'header') {
         options.params.forEach(function (e) {
@@ -3453,10 +3463,7 @@ function (_super) {
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
       className: "returnContent",
       id: this.props.options.text + "-returnContent"
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h3", {
-      className: "returnStatus",
-      id: this.props.options.text + "-returnStatus"
-    }, " "), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h3", {
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h4", {
       className: "returnMsg",
       id: this.props.options.text + "-returnMsg"
     }, " ")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("table", {
@@ -3470,31 +3477,37 @@ function (_super) {
 
   ButtonPanel.prototype.renderResponse = function (response) {
     // this.injectHeaders(response.headers);
-    var _this = this;
+    var retBody = document.getElementById(this.props.options.text + "-returnBody");
+    var RetContent = document.getElementById(this.props.options.text + "-returnContent");
 
-    var retStatus = document.getElementById(this.props.options.text + "-returnStatus");
+    if (response.ok) {
+      RetContent === null || RetContent === void 0 ? void 0 : RetContent.style.setProperty("background-color", "green");
+      RetContent === null || RetContent === void 0 ? void 0 : RetContent.style.setProperty("border", "1px groove lightgreen");
+      retBody === null || retBody === void 0 ? void 0 : retBody.style.setProperty("border", "1px inset darkseagreen");
+    } else if (!response.ok) {
+      RetContent === null || RetContent === void 0 ? void 0 : RetContent.style.setProperty("background-color", "red");
+      RetContent === null || RetContent === void 0 ? void 0 : RetContent.style.setProperty("border", "1px groove lightsalmon");
+      retBody === null || retBody === void 0 ? void 0 : retBody.style.setProperty("border", "1px inset darkred");
+    } // var retStatus = document.getElementById(this.props.options.text + "-returnStatus");
+    // if (retStatus != null) {
+    //   retStatus.innerText = "Code: " + response.status.toString();
+    // } else {
+    //   console.log("Response status element not found.");
+    // }
 
-    if (retStatus != null) {
-      retStatus.innerText = response.status.toString();
-    } else {
-      console.log("Response status element not found.");
-    }
 
     var retMsg = document.getElementById(this.props.options.text + "-returnMsg");
 
     if (retMsg != null) {
-      retMsg.innerText = response.statusText;
-      console.log("Updated status code.");
+      retMsg.innerText = "Code: " + response.status.toString() + " Message: " + response.statusText;
+      retMsg.style.setProperty("align-content", "center"); // console.log("Updated status code.");
     } else {
       console.log("Response message element not found.");
     }
 
     response.text().then(function (data) {
-      var retBody = document.getElementById(_this.props.options.text + "-returnBody");
-
       if (retBody != null) {
-        retBody.innerText = data;
-        console.log("Updated response text.");
+        retBody.innerText = data; // console.log("Updated response text.");
       } else {
         console.log("Response body element not found.");
       }
@@ -3549,11 +3562,15 @@ function (_super) {
 
           console.log('Request successful: ', response);
 
-          _this.renderResponse(response);
+          if (options.printResponse) {
+            _this.renderResponse(response);
+          }
         } else {
           console.log('Request failed: ', response);
 
-          _this.renderResponse(response);
+          if (options.printResponse) {
+            _this.renderResponse(response);
+          }
 
           throw new Error(response.status + response.statusText);
         }
@@ -4043,8 +4060,21 @@ var plugin = new _grafana_data__WEBPACK_IMPORTED_MODULE_0__["PanelPlugin"](_Butt
       return config.isAuth;
     }
   }).addBooleanSwitch({
-    path: 'showResponse',
-    name: 'Show Response',
+    path: 'askForAuth',
+    name: 'Ask for authentication token',
+    description: 'Use this to toggle whether to ask for an authentication token to be sent with each request. Use for better security with API endpoints.',
+    defaultValue: true
+  }).addTextInput({
+    path: 'apiKeyHeader',
+    name: 'API Key Header',
+    description: 'Use this specify the type of Authentication header to use with your API key you will input with each request.',
+    defaultValue: 'Authentication',
+    showIf: function showIf(config) {
+      return config.askForAuth;
+    }
+  }).addBooleanSwitch({
+    path: 'printResponse',
+    name: 'Print Response',
     description: "Use this to toggle showing API response below the button.",
     defaultValue: true
   });

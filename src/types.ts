@@ -15,6 +15,9 @@ export interface ButtonPanelOptions {
   username?: string;
   password?: string;
 
+  askForAuth: boolean;
+  apiKeyHeader: string;
+
   printResponse: boolean;
   response: string;
 

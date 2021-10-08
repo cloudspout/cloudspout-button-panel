@@ -40,15 +40,17 @@
 }
 
 .returnHeaders {
-    font-size: medium;
+    font-size: small;
     width: 95%;
     float: left;
 }
 
-.returnStatus {
-    display: inline;
-    width: 160px;
-    height: 160px;
+.returnContent {
+    font-style: inherit;
+    font-size: small;
+    border-radius: 2px;
+    align-content: center;
+    text-align: center;
 }
 
 .good {
@@ -61,7 +63,3 @@
     color: white;
 }
 
-.returnMsg {
-    font-size: 20px;
-    float: right;
-}

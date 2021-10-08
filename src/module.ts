@@ -220,8 +220,21 @@ export const plugin = new PanelPlugin<ButtonPanelOptions>(ButtonPanel).setPanelO
       showIf: (config) => config.isAuth,
     })
     .addBooleanSwitch({
-      path: 'showResponse',
-      name: 'Show Response',
+      path: 'askForAuth',
+      name: 'Ask for authentication token',
+      description: 'Use this to toggle whether to ask for an authentication token to be sent with each request. Use for better security with API endpoints.',
+      defaultValue: true,
+    })
+    .addTextInput({
+      path: 'apiKeyHeader',
+      name: 'API Key Header',
+      description: 'Use this specify the type of Authentication header to use with your API key you will input with each request.',
+      defaultValue: 'Authentication',
+      showIf: (config) => config.askForAuth,
+    })
+    .addBooleanSwitch({
+      path: 'printResponse',
+      name: 'Print Response',
       description: "Use this to toggle showing API response below the button.", 
       defaultValue: true, 
     })

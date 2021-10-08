@@ -119,6 +119,15 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
       requestHeaders.set('Authorization', 'Basic ' + btoa(options.username + ':' + options.password));
     }
 
+    if (options.askForAuth) {
+      // Get APIKey/password from user and set as the specified header.
+      var pass = prompt("Enter API Key/Token you want to use to authenticate with remote API.", "");
+      if (pass != null) {
+        requestHeaders.set(options.apiKeyHeader, pass)
+        pass == null; // Reset the password to get rid of it from memory.
+      }
+    }
+
     if (options.params) {
       if (options.type === 'header') {
         options.params.forEach((e) => {
@@ -141,8 +150,7 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
     return (
       <div className="panel-content">
         <div className="returnContent" id={this.props.options.text + "-returnContent"}>
-          <h3 className="returnStatus" id={this.props.options.text + "-returnStatus"}> </h3>
-          <h3 className="returnMsg" id={this.props.options.text + "-returnMsg"}> </h3>
+          <h4 className="returnMsg" id={this.props.options.text + "-returnMsg"}> </h4>
         </div>
         <table className="returnHeaders" id={this.props.options.text + "-returnHeaders"}> </table>
         <p className="returnBody" id={this.props.options.text + "-returnBody"}> </p>
@@ -153,26 +161,39 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
   renderResponse(response: Response) {
     // this.injectHeaders(response.headers);
 
-    var retStatus = document.getElementById(this.props.options.text + "-returnStatus");
-    if (retStatus != null) {
-      retStatus.innerText = response.status.toString();
-    } else {
-      console.log("Response status element not found.");
+    var retBody = document.getElementById(this.props.options.text + "-returnBody");
+
+    var RetContent = document.getElementById(this.props.options.text + "-returnContent");
+    if (response.ok) {
+      RetContent?.style.setProperty("background-color", "green");
+      RetContent?.style.setProperty("border", "1px groove lightgreen");
+      retBody?.style.setProperty("border", "1px inset darkseagreen");
+    } else if (!response.ok) {
+      RetContent?.style.setProperty("background-color", "red");
+      RetContent?.style.setProperty("border", "1px groove lightsalmon");
+      retBody?.style.setProperty("border", "1px inset darkred")
     }
+
+    // var retStatus = document.getElementById(this.props.options.text + "-returnStatus");
+    // if (retStatus != null) {
+    //   retStatus.innerText = "Code: " + response.status.toString();
+    // } else {
+    //   console.log("Response status element not found.");
+    // }
 
     var retMsg = document.getElementById(this.props.options.text + "-returnMsg");
     if (retMsg != null) {
-      retMsg.innerText = response.statusText;
-      console.log("Updated status code.");
+      retMsg.innerText = "Code: " + response.status.toString() + " Message: " + response.statusText;
+      retMsg.style.setProperty("align-content", "center");
+      // console.log("Updated status code.");
     } else {
       console.log("Response message element not found.");
     }
 
     response.text().then((data) => {
-      var retBody = document.getElementById(this.props.options.text + "-returnBody");
       if (retBody != null) {
         retBody.innerText = data;
-        console.log("Updated response text.");
+        // console.log("Updated response text.");
       } else {
         console.log("Response body element not found.");
       }
@@ -230,11 +251,15 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
               // responseData: response
             });
             console.log('Request successful: ', response);
-            this.renderResponse(response);
+            if (options.printResponse) {
+              this.renderResponse(response);
+            }
 
           } else {
             console.log('Request failed: ', response);
-            this.renderResponse(response);
+            if (options.printResponse) {
+              this.renderResponse(response);
+            }
 
             throw new Error(response.status + response.statusText);
           }
