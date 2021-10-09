@@ -10,10 +10,63 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 }
 .left {
     float: left;
+    flex-direction: column;
+    align-items: left,
 }
 .right {
     float: right;
+    flex-direction: column;
+    align-items: right,
 }
+
+.returnBody {
+    width: calc(100% - 32px);
+    word-wrap: anywhere;
+    display: flex;
+    background-color: black;
+    border-radius: 5px;
+    color: honeydew;
+    overflow-y: scroll;
+    height: calc(100% - 140px);
+    font-style: italic;
+    font-size: small;
+    padding: 5px;
+    position: absolute;
+    align-content: center;
+    scrollbar-width: none;
+    float: none;
+}
+
+.returnBody::-webkit-scrollbar {
+    background: transparent;
+    width: 0px;
+}
+
+.returnHeaders {
+    font-size: small;
+    width: 95%;
+    float: left;
+}
+
+.returnContent {
+    font-style: inherit;
+    font-size: small;
+    border-radius: 2px;
+    align-content: center;
+    text-align: center;
+}
+
+.good {
+    background: green;
+    color: white;
+}
+
+.bad {
+    background: crimson;
+    color: white;
+}
+

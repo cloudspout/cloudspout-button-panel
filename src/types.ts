@@ -15,6 +15,12 @@ export interface ButtonPanelOptions {
   username?: string;
   password?: string;
 
+  askForAuth: boolean;
+  apiKeyHeader: string;
+
+  printResponse: boolean;
+  response: string;
+
   params: Array<[string, string]>;
 
   text: string;
@@ -28,4 +34,5 @@ export interface ButtonPanelOptions {
 export type ButtonPanelState = {
   api_call: 'READY' | 'IN_PROGRESS' | 'SUCCESS' | 'ERROR';
   response: string;
+  // responseData: Response;
 };

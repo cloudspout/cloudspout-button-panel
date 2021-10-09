@@ -33,7 +33,6 @@
     "copy-webpack-plugin": "^6.3.2"
   },
   "engines": {
-    "node": ">=12 <13"
   },
   "release-it": {
     "github": {
@@ -52,6 +51,7 @@
     }
   },
   "dependencies": {
-    "archiver": "^5.2.0"
+    "archiver": "^5.2.0",
+    "react": "^17.0.2"
   }
 }
