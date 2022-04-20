@@ -25,6 +25,14 @@ export const plugin = new PanelPlugin<ButtonPanelOptions>(ButtonPanel).setPanelO
             label: 'POST',
           },
           {
+            value: 'PUT',
+            label: 'PUT',
+          },
+          {
+            value: 'PATCH',
+            label: 'PATCH',
+          },
+          {
             value: 'DELETE',
             label: 'DELETE',
           },
@@ -82,7 +90,7 @@ export const plugin = new PanelPlugin<ButtonPanelOptions>(ButtonPanel).setPanelO
           { label: 'text/plain', value: 'text/plain' },
         ],
       },
-      showIf: (config) => config.method === 'POST',
+      showIf: (config) => (config.method === 'POST' || config.method == 'PUT' || config.method == 'PATCH'),
     })
     .addCustomEditor({
       id: 'payload',
@@ -103,7 +111,7 @@ export const plugin = new PanelPlugin<ButtonPanelOptions>(ButtonPanel).setPanelO
           }
         },
       },
-      showIf: (config) => config.method === 'POST',
+      showIf: (config) => (config.method === 'POST' || config.method == 'PUT' || config.method == 'PATCH'),
       editor: ButtonPayloadEditor,
     })
     .addSelect({
