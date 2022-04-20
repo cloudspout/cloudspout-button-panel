@@ -106,7 +106,7 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
       //referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
     };
 
-    if (options.method === 'POST') {
+    if (options.method === 'POST' || options.method == 'PUT' || options.method == 'PATCH') {
       requestHeaders.set('Content-Type', options.contentType);
       if (options.payload) {
         fetchOpts.body = this.interpolateVariables(options.payload);
