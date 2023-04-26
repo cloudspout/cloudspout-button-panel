@@ -99,7 +99,7 @@ export class ButtonPanel extends PureComponent<Props, ButtonPanelState> {
 
     let fetchOpts: RequestInit = {
       method: options.method, // *GET, POST, PUT, DELETE, etc.
-      mode: 'cors', // no-cors, *cors, same-origin
+      mode: 'no-cors', // no-cors, *cors, same-origin
       cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
       headers: requestHeaders,
       redirect: 'follow', // manual, *follow, error
