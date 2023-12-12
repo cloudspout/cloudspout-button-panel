@@ -138,7 +138,7 @@ export const plugin = new PanelPlugin<ButtonPanelOptions>(ButtonPanel).setPanelO
     })
     .addColorPicker({
       path: 'foregroundColor',
-      name: 'Fackground Color',
+      name: 'Foreground Color',
       description: 'Foreground color of the button',
       settings: {
         disableNamedColors: true,
